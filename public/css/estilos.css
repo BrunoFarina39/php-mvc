@@ -1,0 +1,111 @@
+*{
+	margin:0 auto;
+}
+/* formulario login*/
+#form_autenticacao{
+	border: 1px solid black;	
+	width: 40%;
+	height: 50%;
+}
+#form_autenticacao ul{
+	list-style-type:none;
+	padding-left: 0px;	
+}
+#form_autenticacao ul li label{
+	padding-left: 48px;
+}
+#form_autenticacao ul li > input{
+	width: 70%;
+	margin: 0 auto;
+}
+#form_autenticacao ul li div{
+	text-align: center;
+}
+#form_autenticacao ul li h1{
+text-align: center;
+}
+/*--------------------------------------*/
+h1,h2{
+	text-align: center;
+}
+section{
+	width: 800px;
+}
+.obrigatorio{
+	color:red;
+}
+
+.number{
+	width: 60px;
+}
+.number-long{
+    width: 100px;
+}
+.scrollbars{
+	overflow:scroll;
+	width:100%;
+	height:400px;
+}
+
+.footer{
+	text-align: center;	
+	width: 100%;
+	border:1px solid #B0C4DE;
+	height:40px;
+	background-color: #D3D3D3;
+}
+.senha{
+    width:300px;
+}
+#content_senha{
+	width:450px;
+	height:420px; 
+	margin-left:0;
+	padding-left:30px;
+}
+.erroPag{
+	font-size: 50px; 
+}
+@-webkit-keyframes spinning {
+    from {transform: rotate(0deg);}
+    to   {transform: rotate(180deg);}
+}
+@keyframes spinning {
+    from {transform: rotate(0deg);}
+    to   {transform: rotate(180deg);}
+}
+.load {
+    width: 200px;
+    height: 200px;
+    border-width: 15px;
+    border-style: solid;
+    border-color: #999 #ccc;
+    border-radius: 200px;
+    -webkit-animation: spinning 0.75s infinite linear;
+    animation: spinning 0.75s infinite linear;
+    background: transparent;
+    z-index: 10;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top:-100px;
+    margin-left:-100px;
+}
+
+.load-visualize {
+    width: 100px;
+    height: 100px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: #999 #ccc;
+    border-radius: 100px;
+    -webkit-animation: spinning 0.75s infinite linear;
+    animation: spinning 0.75s infinite linear;
+    background: transparent;
+    z-index: 10;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top:-50px;
+    margin-left:-50px;
+}
