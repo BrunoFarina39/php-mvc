@@ -54,9 +54,7 @@
 				}
 			}else{
 				try{
-					$fornecedores = $this->fornecedorDao->buscaAvancada($id);
-					if(isset($fornecedores[0]))
-						$this->fornecedor = $fornecedores[0];
+					$this->fornecedor = $this->fornecedorDao->bindFornecedor($id);
 					$fornecedorForm->bind($this->fornecedor);
 				}catch(\Exception $e){
 					$fornecedorForm->setMsgErro($e->getMessage());

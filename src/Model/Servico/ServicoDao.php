@@ -12,17 +12,17 @@
 		public function gravar(Servico $servico)
 		{
 			$stmt = $this->con->getStmt("insert into servico(descricao,preco)values(:descricao,:preco)");
-			$stmt->bindParam(":descricao",$servico->getDescricao(),\PDO::PARAM_STR);
-			$stmt->bindParam(":preco",$servico->getPreco(),\PDO::PARAM_STR);
+			$stmt->bindValue(":descricao",$servico->getDescricao(),\PDO::PARAM_STR);
+			$stmt->bindValue(":preco",$servico->getPreco(),\PDO::PARAM_STR);
 			return $stmt->execute();
 		}
 
 		public function editar(Servico $servico)
 		{
 			$stmt = $this->con->getStmt("update servico set descricao=:descricao,preco=:preco where id=:id");
-			$stmt->bindParam(":id",$servico->getId(),\PDO::PARAM_INT);
-			$stmt->bindParam(":descricao",$servico->getDescricao(),\PDO::PARAM_STR);
-			$stmt->bindParam(":preco",$servico->getPreco(),\PDO::PARAM_STR);
+			$stmt->bindValue(":id",$servico->getId(),\PDO::PARAM_INT);
+			$stmt->bindValue(":descricao",$servico->getDescricao(),\PDO::PARAM_STR);
+			$stmt->bindValue(":preco",$servico->getPreco(),\PDO::PARAM_STR);
 			return $stmt->execute();
 		}
 

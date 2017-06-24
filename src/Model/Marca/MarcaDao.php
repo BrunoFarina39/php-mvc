@@ -12,15 +12,15 @@
 		public function gravar(Marca $marca)
 		{
 			$stmt = $this->con->getStmt("insert into marca(nome)values(:nome)");
-			$stmt->bindParam(":nome",$marca->getNome(),\PDO::PARAM_STR);
+			$stmt->bindValue(":nome",$marca->getNome(),\PDO::PARAM_STR);
 			return $stmt->execute();
 		}
 
 		public function editar(Marca $marca)
 		{
 			$stmt = $this->con->getStmt("update marca set nome=:nome where id=:id");
-			$stmt->bindParam(":id",$marca->getId(),\PDO::PARAM_INT);
-			$stmt->bindParam(":nome",$marca->getNome(),\PDO::PARAM_STR);
+			$stmt->bindValue(":id",$marca->getId(),\PDO::PARAM_INT);
+			$stmt->bindValue(":nome",$marca->getNome(),\PDO::PARAM_STR);
 			return $stmt->execute();
 		}
 

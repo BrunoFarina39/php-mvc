@@ -112,7 +112,7 @@ $(document).ready(function(){
 //-------------------------------Fornecedor Fim------------------------------------------------------------------------  
 //-------------------------------Cliente e Fornecedor------------------------------------------------------------------
   $("#cep").mask("99.999-999");
-  $("#cliente_form #cpf_cnpj,#fornecedor_form #cpf_cnpj").on('focusin',function(){
+  $("#cpf_cnpj,#cpf").on('focusin',function(){
     var target = $(this);
     var val = target.val();
     target.unmask();
@@ -121,7 +121,7 @@ $(document).ready(function(){
     val = val.split("/").join("");
     target.val(val);
   });
-  $("#cliente_form #cpf_cnpj,#cpf_cnpj,#fornecedor_form #cpf_cnpj").on('focusout',function(){
+  $("#cpf_cnpj,#cpf").on('focusout',function(){
     var target = $(this);
     var val = target.val();
     var msgCpf = "<font color='red' font size='2px' font family='verdana'>CPF Inválido</font>";
@@ -132,8 +132,8 @@ $(document).ready(function(){
     if (val.length == 11) {
         target.mask("999.999.999-99");
         //target.val(val);
-        $("#cliente_form #cpf_cnpj,#fornecedor_form #cpf_cnpj") .rules ("remove");
-        $("#cliente_form #cpf_cnpj,#fornecedor_form #cpf_cnpj").rules( "add", {
+        $("#cpf_cnpj,#cpf") .rules ("remove");
+        $("#cpf_cnpj,#cpf").rules( "add", {
             cpf: true,
             messages: {
               cpf:msgCpf
@@ -142,24 +142,24 @@ $(document).ready(function(){
     }else if (val.length == 14) {
         target.mask("99.999.999/9999-99");
         //target.val(val);
-        $("#cliente_form #cpf_cnpj,#fornecedor_form #cpf_cnpj") .rules ("remove");
-        $("#cliente_form #cpf_cnpj,#fornecedor_form #cpf_cnpj").rules( "add", {
+        $("#cpf_cnpj,#cpf") .rules ("remove");
+        $("#cpf_cnpj,#cpf").rules( "add", {
             cnpj: true,
             messages: {
               cnpj:msgCnpj
             } 
         });
     }else if(val.length < 11) {
-        $("#cliente_form #cpf_cnpj,#fornecedor_form #cpf_cnpj") .rules ("remove");
-        $("#cliente_form #cpf_cnpj,#fornecedor_form #cpf_cnpj").rules( "add", {
+        $("#cpf_cnpj,#cpf") .rules ("remove");
+        $("#cpf_cnpj,#cpf").rules( "add", {
             cpf: true,
             messages: {
               cpf:msgCpf
             } 
         });
     }else if(val.length > 11 && val.length < 14 || val.length > 14){
-        $("#cliente_form #cpf_cnpj,#fornecedor_form #cpf_cnpj") .rules ("remove");
-        $("#cliente_form #cpf_cnpj,#fornecedor_form #cpf_cnpj").rules( "add", {
+        $("#cpf_cnpj,#cpf") .rules ("remove");
+        $("#cpf_cnpj,#cpf").rules( "add", {
             cnpj: true,
             messages: {
               cnpj:msgCnpj
@@ -448,6 +448,57 @@ function visualizaDadosProduto(id){
               $("#dialog > table").append("<tr><td><label>Preço Compra:</label></td><td>"+formataMoeda(dados.preco_compra)+"</td></tr>");
               $("#dialog > table").append("<tr><td><label>Preço Venda:</label></td><td>"+formataMoeda(dados.preco_venda)+"</td></tr>");
               $("#dialog > table").append("<tr><td><label>Qtde. Est.:</label></td><td>"+dados.qtde_est+"</td></tr>");
+              $("#dialog > table").append("<tfoot><tr><td><button class='btn btn-default'>Imprimir</button></td><td>"
+                +"<button class='btn btn-default'>Gerar PDF</button></td></tr></tfoot>");
+              $("#load-visualize").removeClass("load-visualize");
+          },"json");
+        }
+    });
+  });
+}
+
+function visualizaDadosFuncionario(id){
+  $(function(){
+    $("#load-visualize").addClass("load-visualize");
+    $("#dialog").dialog({
+      modal:true,
+      height: 560,
+      width: 500,
+      title:"Dados de funcionário",
+      open:function(){
+            $("#dialog > table").html("");
+            $.get("http://localhost/funcionario/visualizaFuncionarioPorId/"+id,
+            function(dados){                    
+              if(dados.rg==null)
+                dados.rg="";
+              if(dados.cpf==null)
+                dados.cpf="";
+              if(dados.pis==null)
+                dados.pis="";
+              if(dados.endereco==null)
+                dados.endereco="";
+              if(dados.numero==null)
+                dados.numero="";
+              if(dados.bairro==null)
+                dados.bairro="";
+              if(dados.cep==null)
+                dados.cep="";
+              if(dados.fone==null)
+                dados.fone="";
+              if(dados.salario==null)
+                dados.salario="";
+              $("#dialog > table").append("<thead><tr><td width='20%'><label>Código:</label></td><td>"+dados.id+"</td></tr>");
+              $("#dialog > table").append("<tr><td><label>Nome:</label></td><td>"+dados.nome+"</td></tr>");
+              $("#dialog > table").append("<tr><td><label>Rg:</label></td><td>"+dados.rg+"</td></tr>");
+              $("#dialog > table").append("<tr><td><label>CPF:</label></td><td>"+formataCpfCnpj(dados.cpf)+"</td></tr>");
+              $("#dialog > table").append("<tr><td><label>Pis:</label></td><td>"+dados.pis+"</td></tr>");
+              $("#dialog > table").append("<tr><td><label>Endereço:</label></td><td>"+dados.endereco+"</td></tr>");
+              $("#dialog > table").append("<tr><td><label>Número:</label></td><td>"+dados.numero+"</td></tr>");
+              $("#dialog > table").append("<tr><td><label>Bairro:</label></td><td>"+dados.bairro+"</td></tr>");
+              $("#dialog > table").append("<tr><td><label>CEP:</label></td><td>"+formataCep(dados.cep)+"</td></tr>");
+              $("#dialog > table").append("<tr><td><label>Cidade:</label></td><td>"+dados.cid_nome+"-"+dados.est_uf+"</td></tr>");
+              $("#dialog > table").append("<tr><td><label>Fone:</label></td><td>"+formataFone(dados.fone)+"</td></tr>");
+              $("#dialog > table").append("<tr><td><label>Salario:</label></td><td>"+formataMoeda(dados.salario)+"</td></tr>");
               $("#dialog > table").append("<tfoot><tr><td><button class='btn btn-default'>Imprimir</button></td><td>"
                 +"<button class='btn btn-default'>Gerar PDF</button></td></tr></tfoot>");
               $("#load-visualize").removeClass("load-visualize");

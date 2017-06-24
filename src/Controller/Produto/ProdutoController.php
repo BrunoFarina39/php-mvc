@@ -49,9 +49,7 @@
 				}
 			}else{
 				try{
-					$produtos = $this->produtoDao->buscaAvancada($id);
-					if(isset($produtos[0]))
-						$this->produto = $produtos[0];
+					$this->produto = $this->produtoDao->bindProduto($id);
 					$produtoForm->bind($this->produto);
 				}catch(\Exception $e){
 					$produtoForm->setMsgErro($e->getMessage());

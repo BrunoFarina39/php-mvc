@@ -5,7 +5,6 @@
 	use View\Cliente\ClienteListaForm;
 	use Model\Cliente\Cliente;
 	use Model\Cliente\ClienteDao;
-	
 	class ClienteController extends AbstractController{
 		private $cliente,$clienteDao;
 		
@@ -54,9 +53,7 @@
 				}
 			}else{
 				try{
-					$clientes = $this->clienteDao->buscaAvancada($id);
-					if(isset($clientes[0]))
-						$this->cliente = $clientes[0];
+					$this->cliente = $this->clienteDao->bindCliente($id);
 					$clienteForm->bind($this->cliente);
 				}catch(\Exception $e){
 					$clienteForm->setMsgErro($e->getMessage());

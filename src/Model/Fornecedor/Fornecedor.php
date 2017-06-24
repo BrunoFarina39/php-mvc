@@ -30,7 +30,7 @@
 			$this->nomeFantasia = $nomeFantasia;
 		}
 
-		public function &getNomeFantasia()
+		public function getNomeFantasia()
 		{
 			return $this->nomeFantasia;
 		}
@@ -40,7 +40,7 @@
 			$this->razaoSocial = $razaoSocial;
 		}
 
-		public function &getRazaoSocial(){
+		public function getRazaoSocial(){
 			return $this->razaoSocial;
 		}
 
@@ -49,7 +49,7 @@
 			$this->rgIe = $rgIe;
 		}
 
-		public function &getRgIe()
+		public function getRgIe()
 		{
 			return $this->rgIe;
 		}
@@ -59,7 +59,7 @@
 			$this->cpfCnpj = $cpfCnpj;	
 		}
 
-		public function &getCpfCnpj()
+		public function getCpfCnpj()
 		{
 			$this->cpfCnpj = join("", explode(".",$this->cpfCnpj));
 		   	$this->cpfCnpj = join("", explode("-",$this->cpfCnpj));
@@ -72,7 +72,7 @@
 			$this->endereco = $endereco;
 		}
 
-		public function &getEndereco()
+		public function getEndereco()
 		{
 			return $this->endereco;
 		}
@@ -82,7 +82,7 @@
 			$this->numero = $numero;
 		}
 
-		public function &getNumero()
+		public function getNumero()
 		{
 			return $this->numero;
 		}
@@ -92,7 +92,7 @@
 			$this->bairro = $bairro;
 		}
 
-		public function &getBairro()
+		public function getBairro()
 		{
 			return $this->bairro;
 		}
@@ -102,7 +102,7 @@
 			$this->cep = $cep;
 		}
 
-		public function &getCep()
+		public function getCep()
 		{
 			$this->cep = join("", explode(".",$this->cep));
 			$this->cep = join("", explode("-",$this->cep));
@@ -114,7 +114,7 @@
 			$this->cidade = $cidade;
 		}
 
-		public function &getCidade()
+		public function getCidade()
 		{
 			return $this->cidade;
 		}
@@ -124,7 +124,7 @@
 			$this->fone = $fone;
 		}
 
-		public function &getFone()
+		public function getFone()
 		{
 			$this->fone = join("", explode("(",$this->fone));
 			$this->fone = join("", explode(")",$this->fone));
@@ -137,7 +137,7 @@
 			$this->fone2 = $fone2;
 		}
 
-		public function &getFone2()
+		public function getFone2()
 		{
 			$this->fone2 = join("", explode("(",$this->fone2));
 			$this->fone2 = join("", explode(")",$this->fone2));
@@ -150,7 +150,7 @@
 			$this->email = $email;
 		}
 
-		public function &getEmail()
+		public function getEmail()
 		{
 			return $this->email;
 		}
@@ -160,7 +160,7 @@
 			$this->homePage = $homePage;
 		}
 
-		public function &getHomePage()
+		public function getHomePage()
 		{
 			return $this->homePage;
 		}
@@ -170,7 +170,7 @@
 			$this->obs = $obs;
 		}
 
-		function &getObs()
+		function getObs()
 		{
 			return $this->obs;
 		}

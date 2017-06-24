@@ -22,7 +22,7 @@
 			$this->codBarra = $codBarra;
 		}
 
-		public function &getCodBarra()
+		public function getCodBarra()
 		{
 			return $this->codBarra;
 		}
@@ -32,7 +32,7 @@
 			$this->descricao = $descricao;
 		}
 
-		public function &getDescricao()
+		public function getDescricao()
 		{
 			return $this->descricao;
 		}
@@ -42,7 +42,7 @@
 			$this->marca = $marca;
 		}
 
-		public function &getMarca()
+		public function getMarca()
 		{
 			return $this->marca;
 		}
@@ -52,7 +52,7 @@
 			$this->precoCompra = $precoCompra;
 		}
 
-		public function &getPrecoCompra()
+		public function getPrecoCompra()
 		{
 			$this->precoCompra = join("", explode("R$",$this->precoCompra));
 			$this->precoCompra = join("", explode(".",$this->precoCompra));
@@ -68,7 +68,7 @@
 			$this->precoVenda = $precoVenda;
 		}
 
-		public function &getPrecoVenda()
+		public function getPrecoVenda()
 		{
 			$this->precoVenda = join("", explode("R$",$this->precoVenda));
 			$this->precoVenda = join("", explode(".",$this->precoVenda));
@@ -84,7 +84,7 @@
 			$this->qtdEst = $qtdEst;
 		}
 
-		public function &getQtdeEst()
+		public function getQtdeEst()
 		{
 			return $this->qtdEst;
 		}

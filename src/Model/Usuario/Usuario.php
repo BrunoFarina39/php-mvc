@@ -23,7 +23,7 @@
 		
 		}
 
-		public function &getLogin()
+		public function getLogin()
 		{
 			return $this->login;
 		}
@@ -36,7 +36,7 @@
 				$this->senha = md5($senha."enceladus");
 		}
 
-		public function &getSenha()
+		public function getSenha()
 		{
 			return $this->senha;
 		}
@@ -46,7 +46,7 @@
 			$this->nome = $nome;
 		}
 
-		public function &getNome()
+		public function getNome()
 		{
 			return $this->nome;
 		}
@@ -56,7 +56,7 @@
 			$this->ultimoAcesso = $ultimoAcesso;
 		}
 
-		public function &getUltimoAcesso()
+		public function getUltimoAcesso()
 		{
 			return $this->ultimoAcesso;
 		}
@@ -67,7 +67,7 @@
 
 		}
 
-		public function &getNivelAcesso()
+		public function getNivelAcesso()
 		{
 			return $this->nivelAcesso;
 		}

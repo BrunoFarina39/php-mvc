@@ -16,7 +16,7 @@
 			$this->descricao = $descricao;
 		}
 
-		public function &getDescricao()
+		public function getDescricao()
 		{
 			return $this->descricao;
 		}
@@ -26,7 +26,7 @@
 			$this->preco = $preco;
 		}
 
-		public function &getPreco()
+		public function getPreco()
 		{
 			$this->preco = join("", explode("R$",$this->preco));
 			$this->preco = join("", explode(".",$this->preco));

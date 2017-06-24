@@ -2,7 +2,6 @@
 	namespace Model\Cliente;
 	use Library\AbstractModel;
 	use Model\Validation\ValidaCliente;
-	use Library\ValidaCpfCnpj;
 	use Model\Cidade\Cidade;
 	class Cliente extends AbstractModel{
 		private $nome;
@@ -27,7 +26,7 @@
 			$this->nome = $nome;
 		}
 
-		function &getNome()
+		function getNome()
 		{
 			return $this->nome;
 		}
@@ -37,7 +36,7 @@
 			$this->rgIe = $rgIe;
 		}
 
-		function &getRgIe()
+		function getRgIe()
 		{
 			return $this->rgIe;
 		}
@@ -47,7 +46,7 @@
 			$this->cpfCnpj = $cpfCnpj;	
 		}
 
-		function &getCpfCnpj()
+		function getCpfCnpj()
 		{
 			$this->cpfCnpj = join("", explode(".",$this->cpfCnpj));
 		   	$this->cpfCnpj = join("", explode("-",$this->cpfCnpj));
@@ -60,7 +59,7 @@
 			$this->endereco = $endereco;
 		}
 
-		function &getEndereco()
+		function getEndereco()
 		{
 			return $this->endereco;
 		}
@@ -70,7 +69,7 @@
 			$this->numero = $numero;
 		}
 
-		function &getNumero()
+		function getNumero()
 		{
 			return $this->numero;
 		}
@@ -80,7 +79,7 @@
 			$this->bairro = $bairro;
 		}
 
-		function &getBairro()
+		function getBairro()
 		{
 			return $this->bairro;
 		}
@@ -90,7 +89,7 @@
 			$this->cep = $cep;
 		}
 
-		function &getCep()
+		function getCep()
 		{
 			$this->cep = join("", explode(".",$this->cep));
 			$this->cep = join("", explode("-",$this->cep));
@@ -102,7 +101,7 @@
 			$this->cidade = $cidade;
 		}
 
-		function &getCidade()
+		function getCidade()
 		{
 			return $this->cidade;
 		}
@@ -112,7 +111,7 @@
 			$this->fone = $fone;
 		}
 
-		function &getFone()
+		function getFone()
 		{
 			$this->fone = join("", explode("(",$this->fone));
 			$this->fone = join("", explode(")",$this->fone));
@@ -125,7 +124,7 @@
 			$this->fone2 = $fone2;
 		}
 
-		function &getFone2()
+		function getFone2()
 		{
 			$this->fone2 = join("", explode("(",$this->fone2));
 			$this->fone2 = join("", explode(")",$this->fone2));
@@ -138,7 +137,7 @@
 			$this->obs = $obs;
 		}
 
-		function &getObs()
+		function getObs()
 		{
 			return $this->obs;
 		}

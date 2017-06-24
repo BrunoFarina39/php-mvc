@@ -13,12 +13,12 @@
 		{
 			$stmt = $this->con->getStmt("insert into produto(cod_barra,descricao,marca_id,preco_compra,preco_venda,qtde_est)values(:cod_barra,:descricao,
 				:marca_id,:preco_compra,:preco_venda,:qtde_est)");
-			$stmt->bindParam(":cod_barra",$produto->getCodBarra(),empty($produto->getCodBarra()) ? \PDO::PARAM_NULL : \PDO::PARAM_STR);
-			$stmt->bindParam(":descricao",$produto->getDescricao(),\PDO::PARAM_STR);
-			$stmt->bindParam(":marca_id",$produto->getMarca()->getId(),\PDO::PARAM_INT);
-			$stmt->bindParam(":preco_compra",$produto->getPrecoCompra(),\PDO::PARAM_STR);
-			$stmt->bindParam(":preco_venda",$produto->getPrecoVenda(),\PDO::PARAM_STR);
-			$stmt->bindParam(":qtde_est",$produto->getQtdeEst(),\PDO::PARAM_INT);
+			$stmt->bindValue(":cod_barra",$produto->getCodBarra(),empty($produto->getCodBarra()) ? \PDO::PARAM_NULL : \PDO::PARAM_STR);
+			$stmt->bindValue(":descricao",$produto->getDescricao(),\PDO::PARAM_STR);
+			$stmt->bindValue(":marca_id",$produto->getMarca()->getId(),\PDO::PARAM_INT);
+			$stmt->bindValue(":preco_compra",$produto->getPrecoCompra(),\PDO::PARAM_STR);
+			$stmt->bindValue(":preco_venda",$produto->getPrecoVenda(),\PDO::PARAM_STR);
+			$stmt->bindValue(":qtde_est",$produto->getQtdeEst(),\PDO::PARAM_INT);
 			return $stmt->execute();
 		}
 
@@ -26,12 +26,12 @@
 		{
 			$stmt = $this->con->getStmt("update produto set cod_barra=:cod_barra,descricao=:descricao,marca_id=:marca_id,preco_compra=:preco_compra,
 				preco_venda=:preco_venda where id=:id");
-			$stmt->bindParam(":id",$produto->getId(),\PDO::PARAM_INT);
-			$stmt->bindParam(":cod_barra",$produto->getCodBarra(),empty($produto->getCodBarra()) ? \PDO::PARAM_NULL : \PDO::PARAM_STR);
-			$stmt->bindParam(":descricao",$produto->getDescricao(),\PDO::PARAM_STR);
-			$stmt->bindParam(":marca_id",$produto->getMarca()->getId(),\PDO::PARAM_INT);
-			$stmt->bindParam(":preco_compra",$produto->getPrecoCompra(),\PDO::PARAM_STR);
-			$stmt->bindParam(":preco_venda",$produto->getPrecoVenda(),\PDO::PARAM_STR);
+			$stmt->bindValue(":id",$produto->getId(),\PDO::PARAM_INT);
+			$stmt->bindValue(":cod_barra",$produto->getCodBarra(),empty($produto->getCodBarra()) ? \PDO::PARAM_NULL : \PDO::PARAM_STR);
+			$stmt->bindValue(":descricao",$produto->getDescricao(),\PDO::PARAM_STR);
+			$stmt->bindValue(":marca_id",$produto->getMarca()->getId(),\PDO::PARAM_INT);
+			$stmt->bindValue(":preco_compra",$produto->getPrecoCompra(),\PDO::PARAM_STR);
+			$stmt->bindValue(":preco_venda",$produto->getPrecoVenda(),\PDO::PARAM_STR);
 			return $stmt->execute();
 		}
 
@@ -66,32 +66,30 @@
 			return parent:: excluirRegistro($id,"produto");
 		}
 
-		public function buscaAvancada($id)
+		public function bindProduto($id)
 		{
-			$produtos = array();
+			$produto = new Produto();
 			$sql = "select produto.id,produto.cod_barra,produto.descricao,produto.marca_id,marca.nome,produto.preco_compra,produto.preco_venda,
 				produto.qtde_est from produto inner join marca on (produto.marca_id=marca.id) where produto.id=:id";
-			$i = 0;
 			$stmt = $this->con->getStmt($sql);
 			$stmt->bindParam(":id",$id,\PDO::PARAM_INT);
 		
 			if($stmt->execute()){
-				while($reg = $stmt->fetchObject()){
-					$produtos[$i] = new Produto();
-					$produtos[$i]->setId($reg->id);
-					$produtos[$i]->setCodBarra($reg->cod_barra);
-					$produtos[$i]->setDescricao($reg->descricao);
-					$produtos[$i]->getMarca()->setId($reg->marca_id);
-					$produtos[$i]->getMarca()->setNome($reg->nome);
-					$produtos[$i]->setPrecoCompra($reg->preco_compra);
-					$produtos[$i]->setPrecoVenda($reg->preco_venda);
-					$produtos[$i]->setQtdeEst($reg->qtde_est);
-					$i++;
+				if($reg = $stmt->fetchObject()){
+					$produto = new Produto();
+					$produto->setId($reg->id);
+					$produto->setCodBarra($reg->cod_barra);
+					$produto->setDescricao($reg->descricao);
+					$produto->getMarca()->setId($reg->marca_id);
+					$produto->getMarca()->setNome($reg->nome);
+					$produto->setPrecoCompra($reg->preco_compra);
+					$produto->setPrecoVenda($reg->preco_venda);
+					$produto->setQtdeEst($reg->qtde_est);
 				}
 			}else{
 				throw new \Exception("Erro ao buscar produto!");
 			}
-			return $produtos;
+			return $produto;
 		}
 
 		public function listarMarcas()

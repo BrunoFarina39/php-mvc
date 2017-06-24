@@ -13,28 +13,28 @@
 		public function gravar(Usuario $usuario)
 		{
 			$stmt = $this->con->getStmt("insert into usuario (login,senha,nome,nivel_acesso)values(:login,:senha,:nome,:nivel_acesso)");
-			$stmt->bindParam(":login",$usuario->getLogin(),\PDO::PARAM_STR);
-			$stmt->bindParam(":senha",$usuario->getSenha(),\PDO::PARAM_STR);
-			$stmt->bindParam(":nome",$usuario->getNome(),\PDO::PARAM_STR);
-			$stmt->bindParam(":nivel_acesso",$usuario->getNivelAcesso(),\PDO::PARAM_INT);	
+			$stmt->bindValue(":login",$usuario->getLogin(),\PDO::PARAM_STR);
+			$stmt->bindValue(":senha",$usuario->getSenha(),\PDO::PARAM_STR);
+			$stmt->bindValue(":nome",$usuario->getNome(),\PDO::PARAM_STR);
+			$stmt->bindValue(":nivel_acesso",$usuario->getNivelAcesso(),\PDO::PARAM_INT);	
 			return $stmt->execute();
 		}	
 		
 		public function editar(Usuario $usuario)
 		{
 			$stmt = $this->con->getStmt("update usuario set login=:login,nome=:nome,nivel_acesso=:nivel_acesso where id=:id");
-			$stmt->bindParam(":id",$usuario->getId(),\PDO::PARAM_INT);
-			$stmt->bindParam(":login",$usuario->getLogin(),\PDO::PARAM_STR);
-			$stmt->bindParam(":nome",$usuario->getNome(),\PDO::PARAM_STR);
-			$stmt->bindParam(":nivel_acesso",$usuario->getNivelAcesso(),\PDO::PARAM_INT);
+			$stmt->bindValue(":id",$usuario->getId(),\PDO::PARAM_INT);
+			$stmt->bindValue(":login",$usuario->getLogin(),\PDO::PARAM_STR);
+			$stmt->bindValue(":nome",$usuario->getNome(),\PDO::PARAM_STR);
+			$stmt->bindValue(":nivel_acesso",$usuario->getNivelAcesso(),\PDO::PARAM_INT);
 			return $stmt->execute();
 		}
 
 		public function editarSenha(Usuario $usuario)
 		{
 			$stmt = $this->con->getStmt("update usuario set senha=:senha where id=:id");
-			$stmt->bindParam(":id",$usuario->getId(),\PDO::PARAM_INT);
-			$stmt->bindParam(":senha",$usuario->getSenha(),\PDO::PARAM_STR);
+			$stmt->bindValue(":id",$usuario->getId(),\PDO::PARAM_INT);
+			$stmt->bindValue(":senha",$usuario->getSenha(),\PDO::PARAM_STR);
 			$a = $stmt->execute();
 			return $stmt->execute();
 		}

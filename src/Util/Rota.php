@@ -7,6 +7,7 @@
 	use Controller\Marca\MarcaController;
 	use Controller\Produto\ProdutoController;
 	use Controller\Servico\ServicoController;
+	use Controller\Funcionario\FuncionarioController;
 	class Rota{
 		public function __construct($param)
 		{
@@ -41,6 +42,7 @@
 						case 'marca':$this->marca($param);break;
 						case 'produto':$this->produto($param);break;
 						case 'servico':$this->servico($param);break;
+						case 'funcionario':$this->funcionario($param);break;
 						case 'home': $home = new HomeController();
 					}
 				}else{
@@ -198,6 +200,33 @@
 					$servicoController = new ServicoController();
 					$servicoController->actionList($_POST,@$param[2]);break;
 			}
+		}
+
+		private function funcionario($param)
+		{
+			switch ($param[1]){	
+				case 'index':
+					$funcionarioController = new FuncionarioController();
+					$funcionarioController->actionIndex();break;
+				case 'add':
+					$funcionarioController = new FuncionarioController();
+					$funcionarioController->actionAdd($_POST);break;
+				case 'edit':
+					$funcionarioController = new FuncionarioController();
+					$funcionarioController->actionEdit(@$param[2],$_POST,@$param[3],@$param[4]);break;
+				case 'delete':
+					$funcionarioController = new FuncionarioController();
+					$funcionarioController->actionDelete(@$param[2],@$param[3],@$param[4]);break;	
+				case 'list':
+					$funcionarioController = new FuncionarioController();
+					$funcionarioController->actionList($_POST,@$param[2],@$param[3]);break;
+				case 'listarCidades':
+					$funcionarioController = new FuncionarioController();
+					$funcionarioController->listarCidades(@$param[2]);break;
+				case 'visualizaFuncionarioPorId':
+					$funcionarioController = new FuncionarioController();
+					$funcionarioController->visualizaFuncionarioPorId(@$param[2]);break;	
+			}	
 		}
 	}	
 ?>

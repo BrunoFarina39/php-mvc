@@ -14,7 +14,7 @@
 			$this->nome = $nome;		
 		}
 
-		public function &getNome()
+		public function getNome()
 		{
 			return $this->nome;
 		}
