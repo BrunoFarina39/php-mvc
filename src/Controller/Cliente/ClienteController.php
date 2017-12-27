@@ -5,10 +5,11 @@
 	use View\Cliente\ClienteListaForm;
 	use Model\Cliente\Cliente;
 	use Model\Cliente\ClienteDao;
+	
 	class ClienteController extends AbstractController{
 		private $cliente,$clienteDao;
 		
-		function __construct()
+		public function __construct()
 		{
 			$this->cliente = new Cliente();
 			$this->clienteDao = new ClienteDao();

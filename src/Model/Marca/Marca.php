@@ -2,6 +2,7 @@
 	namespace Model\Marca;
 	use Library\AbstractModel;
 	use Model\Validation\ValidaMarca;
+	
 	class Marca extends AbstractModel{
 		private $nome;
 		

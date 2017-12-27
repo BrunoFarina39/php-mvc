@@ -4,6 +4,7 @@
 	use Library\InputFilter;
 	use Model\Servico\Servico;
 	use Util\MasterView;
+	
 	class ServicoForm extends AbstractForm{
 		private $acao;
 		private $campos;
@@ -61,6 +62,5 @@
 			 	include 'src/View/Layout/servico/edit.php';
 			}			
 		}
-
 	}
 ?>

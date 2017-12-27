@@ -2,6 +2,7 @@
 	namespace View\Fornecedor;
 	use Library\AbstractForm;
 	use Util\MasterView;
+	
 	class FornecedorListaForm extends AbstractForm{
 		private $fornecedores,$checkedId,$checkedNomeFantasia,$checkedCpfCnpj;
 		

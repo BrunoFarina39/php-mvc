@@ -2,6 +2,7 @@
 	namespace View\Cliente;
 	use Library\AbstractForm;
 	use Util\MasterView;
+	
 	class ClienteListaForm extends AbstractForm{
 		private $clientes,$checkedId,$checkedNome,$checkedCpfCnpj;
 		

@@ -5,12 +5,13 @@
 	use Model\Fornecedor\Fornecedor;
 	use Model\Cidade\Cidade;
 	use Util\MasterView;
+	
 	class FornecedorForm extends AbstractForm{
 		private $acao;
 		private $campos;
 		private $estados;
 		
-		function __construct($acao)
+		public function __construct($acao)
 		{
 			parent::__construct();
 			$this->acao = $acao;
@@ -115,5 +116,4 @@
 			}			
 		}
 	}
-
 ?>

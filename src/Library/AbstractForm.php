@@ -1,7 +1,9 @@
 <?php 
 	namespace Library;
+	
 	class AbstractForm{
 		protected $msgSucesso,$msgErro,$chavePesq,$campoPesq,$inputFilter;
+		
 		public function __construct()
 		{
 			$this->msgSucesso = "";
@@ -17,7 +19,6 @@
 		{
 			$this->msgSucesso = "<div class='alert alert-success'>$msgSucesso</div>";
 		}
-
 
 		public function setMsgErro($msgErro)
 		{
@@ -66,7 +67,7 @@
 			}
 		}
 
-		function formataCpfCnpj($insc)
+		public function formataCpfCnpj($insc)
 		{	   	
 		   	$insc = join("", explode(".",$insc));
 		   	$insc = join("", explode("-",$insc));
@@ -90,7 +91,7 @@
 		    }
   		}
   
-  		function formataCep($cep)
+  		public function formataCep($cep)
   		{
   			$cep = $this->remCaracEspecial($cep);
   			$tamanho = strlen($cep);
@@ -104,7 +105,7 @@
   			}
   		}
 
-  		function formataFone($fone)
+  		public function formataFone($fone)
   		{
 			$fone = $this->remCaracEspecial($fone);
 			$tamanho = strlen($fone);
@@ -125,7 +126,7 @@
 			}
 		}
 
-		function formataMoeda($valor)
+		public function formataMoeda($valor)
 		{
 			if(empty($valor))
 				return "";
@@ -153,7 +154,7 @@
 			return "R$".$part;
 		}
 
-		function remCaracEspecial($str)
+		public function remCaracEspecial($str)
 		{
 		    $str = join("", explode(".",$str));
 		    $str = join("", explode(",",$str));

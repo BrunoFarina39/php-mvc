@@ -1,5 +1,6 @@
 <?php 
 	namespace Util;
+	
 	class MasterView{
 		CONST RENDER_ALL = 0;
 		CONST RENDER_JSCSS = 1;
@@ -22,5 +23,4 @@
 			include "src/View/Layout/master/footer.html";
 		}
 	} 
-
 ?>

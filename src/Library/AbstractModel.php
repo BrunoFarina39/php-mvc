@@ -1,5 +1,6 @@
 <?php 
 	namespace Library;
+	
 	class AbstractModel{
 		protected $id;
 
@@ -14,6 +15,5 @@
 		public function getId(){
 			return $this->id;
 		}
-
 	}
 ?>

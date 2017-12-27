@@ -5,6 +5,7 @@
 	use View\Marca\MarcaListaForm;
 	use Model\Marca\Marca;
 	use Model\Marca\MarcaDao;
+	
 	class MarcaController extends AbstractController{
 		private $marca,$marcaDao;
 

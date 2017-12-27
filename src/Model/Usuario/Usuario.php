@@ -3,6 +3,7 @@
 	use Library\AbstractModel;
 	use Model\Validation\ValidaUsuario;
 	use Util\Conexao;
+	
 	class Usuario extends AbstractModel{	
 		private $login;
 		private $senha;
@@ -101,7 +102,7 @@
 
 		public function limpaCampos()
 		{
-			$this->id = "";;
+			$this->id = null;
 			$this->login = "";
 			$this->senha = "";
 			$this->nome = "";

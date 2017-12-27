@@ -2,6 +2,7 @@
 	namespace Model\Funcionario;
 	use Util\Conexao;
 	use Library\AbstractDao;
+	
 	class FuncionarioDao extends AbstractDao{
 
 		public function __construct()

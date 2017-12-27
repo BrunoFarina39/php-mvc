@@ -2,6 +2,7 @@
 	namespace Model\Servico;
 	use Util\Conexao;
 	use Library\AbstractDao;
+	
 	class ServicoDao extends AbstractDao{
 
 		public function __construct()
@@ -25,7 +26,6 @@
 			$stmt->bindValue(":preco",$servico->getPreco(),\PDO::PARAM_STR);
 			return $stmt->execute();
 		}
-
 
 		public function buscarPorcampo($campo,$pesquisa){
 			$servicos = array();

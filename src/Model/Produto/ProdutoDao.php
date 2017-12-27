@@ -2,6 +2,7 @@
 	namespace Model\Produto;
 	use Util\Conexao;
 	use Library\AbstractDao;
+	
 	class ProdutoDao extends AbstractDao{
 
 		public function __construct()
@@ -34,7 +35,6 @@
 			$stmt->bindValue(":preco_venda",$produto->getPrecoVenda(),\PDO::PARAM_STR);
 			return $stmt->execute();
 		}
-
 
 		public function buscarPorcampo($campo,$pesquisa)
 		{

@@ -1,31 +1,37 @@
 <?php 
 	namespace Model\Estado;
 	use Library\AbstractModel;
+	
 	class Estado extends AbstractModel{
 		private $nome;
 		private $uf;
 
-		function setNome($nome)
+		public function __construct()
+		{
+			
+		}
+
+		public function setNome($nome)
 		{
 			$this->nome = $nome;
 		}
 
-		function getNome()
+		public function getNome()
 		{
 			return $this->nome;
 		}
 
-		function setUf($uf)
+		public function setUf($uf)
 		{
 			$this->uf = $uf;
 		}
 
-		function getUf()
+		public function getUf()
 		{
 			return $this->uf;
 		}
 
-		function limpaCampos(){
+		public function limpaCampos(){
 			$this->id = null;
 			$this->nome = "";
 			$this->uf = "";

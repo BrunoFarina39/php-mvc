@@ -2,6 +2,7 @@
 	namespace View\Produto;
 	use Library\AbstractForm;
 	use Util\MasterView;
+	
 	class ProdutoListaForm extends AbstractForm{
 		private $produtos,$checkedId,$checkedDescricao;
 		

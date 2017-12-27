@@ -5,6 +5,7 @@
 	use View\Produto\ProdutoListaForm;
 	use Model\Produto\Produto;
 	use Model\Produto\ProdutoDao;
+	
 	class ProdutoController extends AbstractController{
 		private $produto,$produtoDao;
 

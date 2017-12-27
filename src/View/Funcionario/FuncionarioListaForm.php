@@ -2,6 +2,7 @@
 	namespace View\Funcionario;
 	use Library\AbstractForm;
 	use Util\MasterView;
+	
 	class FuncionarioListaForm extends AbstractForm{
 		private $funcionarios,$checkedId,$checkedNome;
 		

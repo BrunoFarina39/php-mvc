@@ -1,11 +1,12 @@
 <?php 
 	namespace Library;
+	
 	class InputFilter{		
 		private $validation;
 		private $data;
 		private $msg;
 
-		function __construct(){
+		public function __construct(){
 			
 		}
 
@@ -14,8 +15,8 @@
 		}
 
 		public function isValid($post){
-			$v = &$this->validacao;
-			return $v($post);
+			$val = &$this->validacao;
+			return $val($post);
 		}
 
 		public function setMessage(String $index,String $valor){

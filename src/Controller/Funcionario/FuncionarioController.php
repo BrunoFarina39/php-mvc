@@ -5,6 +5,7 @@
 	use View\Funcionario\FuncionarioListaForm;
 	use Model\Funcionario\Funcionario;
 	use Model\Funcionario\FuncionarioDao;
+	
 	class FuncionarioController extends AbstractController{
 		private $funcionario,$funcionarioDao;
 
@@ -99,5 +100,4 @@
 			echo json_encode($this->funcionarioDao->visualizaFuncionarioPorId($id));
 		}
 	}
-
 ?>

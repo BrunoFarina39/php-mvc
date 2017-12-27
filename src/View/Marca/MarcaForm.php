@@ -4,12 +4,13 @@
 	use Library\InputFilter;
 	use Model\Marca\Marca;
 	use Util\MasterView;
+	
 	class MarcaForm extends AbstractForm{
 		private $acao;
 		private $data;
 		private $campos;
 		
-		function __construct($acao)
+		public function __construct($acao)
 		{
 			parent::__construct();
 			$this->acao = $acao;
@@ -60,5 +61,4 @@
 			}			
 		}
 	}
-
 ?>

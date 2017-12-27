@@ -1,8 +1,10 @@
 <?php 
 	namespace Util;
+	
 	class Conexao{
 		public static $conexao;
 		public $dbh;
+		
 		public static function Singleton(){
 			if(self::$conexao === null){
 				$class = __CLASS__;

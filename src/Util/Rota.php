@@ -8,6 +8,7 @@
 	use Controller\Produto\ProdutoController;
 	use Controller\Servico\ServicoController;
 	use Controller\Funcionario\FuncionarioController;
+	
 	class Rota{
 		public function __construct($param)
 		{

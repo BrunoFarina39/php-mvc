@@ -1,5 +1,6 @@
 <?php 
 	namespace Library;
+	
 	trait Hydrator{
 		public function hidratar($data)
 		{

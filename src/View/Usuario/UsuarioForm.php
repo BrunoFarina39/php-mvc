@@ -4,9 +4,11 @@
 	use Library\InputFilter;
 	use Model\Usuario\Usuario;
 	use Util\MasterView;
+	
 	class UsuarioForm extends AbstractForm{
 		private $acao;
 		private $campos;
+		
 		public function __construct($acao)
 		{
 			parent::__construct();
@@ -33,7 +35,7 @@
 		
 		public function getData()
 		{
-			 return get_object_vars($this->campos);
+			return get_object_vars($this->campos);
 		}
 
 		public function bind(Usuario $usuario)

@@ -2,6 +2,7 @@
 	namespace Model\Marca;
 	use Util\Conexao;
 	use Library\AbstractDao;
+	
 	class MarcaDao extends AbstractDao{
 
 		public function __construct()
@@ -23,7 +24,6 @@
 			$stmt->bindValue(":nome",$marca->getNome(),\PDO::PARAM_STR);
 			return $stmt->execute();
 		}
-
 
 		public function buscarPorCampo($campo,$pesquisa){
 			$marcas = array();
@@ -69,5 +69,4 @@
     		}   		
 		}
 	}
-
 ?>

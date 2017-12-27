@@ -2,6 +2,7 @@
 	namespace View\Usuario;
 	use Library\AbstractForm;
 	use Util\MasterView;
+	
 	class UsuarioListaForm extends AbstractForm{
 		private $usuarios,$checkedId,$checkedNome;
 		

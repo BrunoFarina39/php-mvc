@@ -2,6 +2,7 @@
 	namespace Model\Usuario;
 	use Util\Conexao;
 	use Library\AbstractDao;
+	
 	class UsuarioDao extends AbstractDao{
 
 		public function __construct()
@@ -89,14 +90,16 @@
 			}
 		}
 
-		private function setUltimoAcesso($id){
+		private function setUltimoAcesso($id)
+		{
 			$stmt = $this->con->getStmt("update usuario set ultimo_acesso=:ultimo_acesso where id=:id");
 			$stmt->bindParam(":ultimo_acesso",date('Y-m-d H:i:s'));
 			$stmt->bindParam(":id",$id);
 			$stmt->execute();
 		}
 
-		public function buscarSenha($id){
+		public function buscarSenha($id)
+		{
 			try{
 				$usuarios = $this->buscarPorCampo("id",$id);
 				return $usuarios[0]->getSenha();

@@ -2,6 +2,7 @@
 	namespace Model\Cliente;
 	use Util\Conexao;
 	use Library\AbstractDao;
+	
 	class ClienteDao extends AbstractDao{
 		
 		public function __construct()
@@ -45,7 +46,6 @@
 			$stmt->bindValue(":obs",$cliente->getObs(),empty($cliente->getObs()) ? \PDO::PARAM_NULL : \PDO::PARAM_STR);
 			return $stmt->execute();
 		}
-
 
 		public function buscarPorCampo($campo,$pesquisa)
 		{
@@ -142,7 +142,6 @@
     		}
     		return $array;
 		}
-
 
 		public function visualizaClientePorId($id)
 		{

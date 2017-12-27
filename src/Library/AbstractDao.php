@@ -1,6 +1,7 @@
 <?php 
 	namespace Library;
 	use Util\Conexao;
+	
 	abstract class AbstractDao{
 		protected $con;
 		
@@ -9,7 +10,7 @@
 			$this->con = Conexao::Singleton();
 		}
 
-		public function buscaRegistro($tabela,$campo,$pesquisa)  //99820-1329 arildo
+		public function buscaRegistro($tabela,$campo,$pesquisa)
 		{
 			$i=0;
             $usuarios = array();

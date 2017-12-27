@@ -3,6 +3,7 @@
 	use Library\AbstractModel;
 	use Model\Validation\ValidaFornecedor;
 	use Model\Cidade\Cidade;
+	
 	class Fornecedor extends AbstractModel{
 		private $nomeFantasia;
 		private $razaoSocial;

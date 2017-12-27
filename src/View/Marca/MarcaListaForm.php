@@ -2,6 +2,7 @@
 	namespace View\Marca;
 	use Library\AbstractForm;
 	use Util\MasterView;
+	
 	class MarcaListaForm extends AbstractForm{
 		private $marcas;
 		

@@ -5,12 +5,13 @@
 	use Model\Produto\Produto;
 	use Model\Marca\Marca;
 	use Util\MasterView;
+	
 	class ProdutoForm extends AbstractForm{
 		private $acao;
 		private $campos;
 		private $estados;
 		
-		function __construct($acao)
+		public function __construct($acao)
 		{
 			parent::__construct();
 			$this->acao = $acao;
@@ -82,5 +83,4 @@
 			}			
 		}
 	}
-
 ?>

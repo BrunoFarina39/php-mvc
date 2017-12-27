@@ -2,6 +2,7 @@
 	namespace Model\Servico;
 	use Library\AbstractModel;
 	use Model\Validation\ValidaServico;
+	
 	class Servico extends AbstractModel{
 		private $descricao;
 		private $preco;

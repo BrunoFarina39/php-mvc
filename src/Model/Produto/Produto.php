@@ -3,6 +3,7 @@
 	use Library\AbstractModel;
 	use Model\Validation\ValidaProduto;
 	use Model\Marca\Marca;
+	
 	class Produto extends AbstractModel{
 		private $codBarra;
 		private $descricao;

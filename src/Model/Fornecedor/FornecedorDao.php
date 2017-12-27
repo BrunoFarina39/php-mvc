@@ -2,6 +2,7 @@
 	namespace Model\Fornecedor;
 	use Util\Conexao;
 	use Library\AbstractDao;
+	
 	class FornecedorDao extends AbstractDao{
 		
 		public function __construct()
@@ -153,7 +154,6 @@
     		}
     		return $array;
 		}
-
 
 		public function visualizaFornecedorPorId($id)
 		{

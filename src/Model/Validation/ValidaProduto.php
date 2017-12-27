@@ -2,6 +2,7 @@
 	namespace Model\Validation;
 	use Library\AbstractValidation;
 	use Model\Produto\ProdutoDao;
+	
 	class ValidaProduto extends AbstractValidation{
 
 		public function __construct()

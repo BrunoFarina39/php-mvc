@@ -2,6 +2,7 @@
 	namespace Model\Validation;
 	use Library\AbstractValidation;
 	use Model\Servico\ServicoDao;
+	
 	class ValidaServico extends AbstractValidation{
 
 		public function __construct()
@@ -61,5 +62,4 @@
 			}
 		}
 	}
-
 ?>
