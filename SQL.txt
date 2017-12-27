@@ -1,0 +1,99 @@
+create table estado(id serial not null primary key,
+nome varchar(50) not null,
+uf char(2) not null); 
+
+create table cidade(id serial not null primary key,
+nome varchar(50) not null,
+estado_id integer not null,
+foreign key(estado_id) references estado(id));
+
+create table cliente(id serial not null primary key,
+nome varchar(50) not null,
+rg_ie varchar(20),
+cpf_cnpj varchar(14) unique,
+endereco varchar(50),
+numero integer,
+bairro varchar(50),
+cep varchar(8),
+cidade_id integer not null,
+fone varchar(15),
+fone2 varchar(15),
+obs varchar(100),
+foreign key (cidade_id) references cidade(id));
+
+create table fornecedor(id serial not null primary key,
+nome_fantasia varchar(50) not null,
+razao_social varchar(50),
+rg_ie varchar(20),
+cpf_cnpj varchar(14) unique,
+endereco varchar(50),
+numero integer,
+bairro varchar(50),
+cep varchar(8),
+cidade_id integer not null,
+fone varchar(15),
+fone2 varchar(15),
+email varchar(30),
+home_page varchar(30),
+obs varchar(100),
+foreign key (cidade_id) references cidade(id));
+
+create table marca(id serial not null primary key,
+nome varchar(50)unique not null);
+
+create table produto(id serial not null primary key,
+cod_barra varchar(30),
+descricao varchar(50) unique not null,
+marca_id integer not null,
+preco_compra numeric(8,2) not null,
+preco_venda numeric(8,2) not null,
+qtde_est integer not null,
+foreign key(marca_id) references marca(id));
+
+create table servico(id serial not null primary key,
+descricao varchar(50) unique not null,
+preco numeric(8,2) not null);
+
+create table funcionario(id serial not null primary key,
+nome varchar(50) not null,
+rg varchar(20),
+cpf varchar(11),
+pis varchar(20),
+endereco varchar(50),
+numero integer,
+bairro varchar(50),
+cep varchar(8),
+cidade_id integer not null,
+fone varchar(15),
+salario numeric(8,2),
+foreign key(cidade_id) references cidade(id));
+
+create table usuario(id serial not null primary key,
+login varchar(30) unique not null,
+senha varchar(32) not null,
+nome varchar(50) not null,
+ultimo_acesso timestamp,
+nivel_acesso integer not null);
+
+
+c9e876208b9b5f131fd7308f1ce01b37 
+
+ /* $( "#cidade" ).autocomplete({
+      source: function(request,response){
+        $.ajax({
+             url: "../testjson.php",
+             type: "GET",
+             data: request,
+             dataType: "json",
+             success: function( data ) {
+            response( $.map( data, function( item ) {
+              return {
+                label: item.label,
+                value: item.value
+              }
+            }));
+          }
+         });
+      }
+    });*/
+https://github.com/galvao-eti/hidratacao-insercao-em-bd-BrunoFarina39
