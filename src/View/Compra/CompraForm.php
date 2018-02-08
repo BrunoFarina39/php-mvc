@@ -25,7 +25,7 @@
 			}else{
 				include 'src/View/Layout/compra/edit.php';
 			}							
-		}d
+		}
 	}
 
 ?>
