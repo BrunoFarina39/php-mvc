@@ -45,7 +45,7 @@
 						case 'produto':$this->produto($param);break;
 						case 'servico':$this->servico($param);break;
 						case 'funcionario':$this->funcionario($param);break;
-						case 'compra':$this->compra($param);break;
+						case 'compra':$this->compra($param); break;
 						case 'home': $home = new HomeController();
 					}
 				}else{
@@ -250,9 +250,9 @@
 				case 'list':
 					$compraController = new CompraController();
 					$compraController->actionList($_POST,@$param[2],@$param[3]);break;
-				case 'listarCidades':
+				case 'listarFornecedores':
 					$compraController = new CompraController();
-					$compraController->listarCidades(@$param[2]);break;
+					$compraController->listarFornecedores(@$param[2]);break;
 				case 'visualizaCompraPorId':
 					$compraController = new CompraController();
 					$compraController->visualizaCompraPorId(@$param[2]);break;	

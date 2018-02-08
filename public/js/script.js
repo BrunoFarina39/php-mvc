@@ -241,6 +241,22 @@ $(document).ready(function(){
       },"json");
   });
 
+  /*$.get("http://localhost/cliente/listarFornecedores/"+$("#estado").val(),
+    function(dados){                    
+      var fornecedorId;
+        $("#fornecedor").autocomplete({
+            source: dados,
+            minLength: 1,
+            disabled:false, //autocomplete habilitado
+            select: function(event, ui) {fornecedorId=ui.item.value;
+              ui.item.value=ui.item.label;
+              $("#fornecedor_id").val(fornecedorId);
+            }
+        });
+          $("#fornecedor").attr("disabled", false);
+        $("#carregar_fornecedor").html("");
+      },"json");*/
+
   $("#estado").change(function(){
     $("#cidade").val("");
   });
