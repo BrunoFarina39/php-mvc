@@ -41,7 +41,7 @@
 		public function actionEdit($id,$post,$chavePesq,$campoPesq)
 		{
 			$acao = "edit";
-			$clienteForm = new ClienteForm($this->cliente,$acao);
+			$clienteForm = new ClienteForm($acao);
 			$clienteForm->setEstados($this->clienteDao->listarEstados());
 			$clienteForm->setInputFilter($this->cliente->getInputFilter());
 			if($this->isPost()){

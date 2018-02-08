@@ -507,6 +507,13 @@ function visualizaDadosFuncionario(id){
     });
   });
 }
+/*  MOVIMENTAÇÃO  */
+
+function inserirProdutos(){
+  $("#tabela_compra").append("<tr><td width='20%'>"+$("#id").val()+"</td>"+"<td width='20%'>"+$("#produto").val()+"</td>"+
+    "<td width='20%'>"+$("#qtde").val()+"</td>"+"<td width='20%'>0,00</td>"+"<td width='20%'>"+$("#desconto").val()+"</td>"+
+    "<td width='20%'>0,00</td></tr>");
+}
 
 function formataCpfCnpj(insc){
   tamanho = insc.length;

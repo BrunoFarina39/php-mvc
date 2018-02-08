@@ -39,7 +39,7 @@
 		public function actionEdit($id,$post,$chavePesq,$campoPesq)
 		{
 			$acao = "edit";
-			$usuarioForm = new UsuarioForm($this->usuario,$acao);
+			$usuarioForm = new UsuarioForm($acao);
 			$usuarioForm->setInputFilter($this->usuario->getInputFilter());
 			if($this->isPost()){
 				$chavePesq = $post['chave_pesq'];

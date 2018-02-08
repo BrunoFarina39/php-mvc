@@ -27,7 +27,7 @@
 	                     	$value = join("", explode(".",$value));
 	                     	$value = join("", explode("-",$value));
 	                     	$value = join("", explode("/",$value));
-	                     	if(strlen($value) == 11 || strlen($value) == 14 || strlen($value) != 0){
+	                     	if(strlen($value) != 0){
 	                        	if($this->validaInsc($value)){
 	                           
 	                           		if(empty($campos->id)){

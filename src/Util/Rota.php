@@ -8,6 +8,7 @@
 	use Controller\Produto\ProdutoController;
 	use Controller\Servico\ServicoController;
 	use Controller\Funcionario\FuncionarioController;
+	use Controller\Compra\CompraController;
 	
 	class Rota{
 		public function __construct($param)
@@ -44,6 +45,7 @@
 						case 'produto':$this->produto($param);break;
 						case 'servico':$this->servico($param);break;
 						case 'funcionario':$this->funcionario($param);break;
+						case 'compra':$this->compra($param);break;
 						case 'home': $home = new HomeController();
 					}
 				}else{
@@ -227,6 +229,33 @@
 				case 'visualizaFuncionarioPorId':
 					$funcionarioController = new FuncionarioController();
 					$funcionarioController->visualizaFuncionarioPorId(@$param[2]);break;	
+			}	
+		}
+
+		private function compra($param)
+		{
+			switch ($param[1]){	
+				case 'index':
+					$compraController = new CompraController();
+					$compraController->actionIndex();break;
+				case 'add':
+					$compraController = new CompraController();
+					$compraController->actionAdd($_POST);break;
+				case 'edit':
+					$compraController = new CompraController();
+					$compraController->actionEdit(@$param[2],$_POST,@$param[3],@$param[4]);break;
+				case 'delete':
+					$compraController = new CompraController();
+					$compraController->actionDelete(@$param[2],@$param[3],@$param[4]);break;	
+				case 'list':
+					$compraController = new CompraController();
+					$compraController->actionList($_POST,@$param[2],@$param[3]);break;
+				case 'listarCidades':
+					$compraController = new CompraController();
+					$compraController->listarCidades(@$param[2]);break;
+				case 'visualizaCompraPorId':
+					$compraController = new CompraController();
+					$compraController->visualizaCompraPorId(@$param[2]);break;	
 			}	
 		}
 	}	
