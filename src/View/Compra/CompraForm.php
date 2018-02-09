@@ -13,7 +13,9 @@
 			$this->campos = new \stdClass();
 			$this->campos->id = null;
 			$this->campos->fornecedor = "";
+			$this->campos->fornecedor_id = null;
 			$this->campos->produto = "";
+			$this->campos->produto_id = null;
 			$this->campos->qtde = null;
 			$this->campos->desconto = 0;
 		}

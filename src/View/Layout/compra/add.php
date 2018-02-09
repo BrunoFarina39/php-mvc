@@ -5,17 +5,21 @@
     <div class="col-sm-10">
       <input type="text" class="form-control" id="id" name="id" value="<?php echo $this->campos->id ?>" />
     </div>
+    <span id="carregar_fornecedor"></span>
   </div>
   <div class="form-group">
     <label for="fornecedor" class="col-sm-2 control-label">Fornecedor:</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="fornecedor" name="fornecedor" value="<?php echo $this->campos->fornecedor ?>" />
+      <input type="hidden" id="fornecedor_id" name="fornecedor_id" value="<?php echo $this->campos->fornecedor_id; ?>" />
     </div>
+    <span id="carregar_produto"></span>
   </div>
   <div class="form-group">
     <label for="produto" class="col-sm-2 control-label">Produto:</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="produto" name="produto" value="<?php echo $this->campos->produto ?>" />
+      <input type="hidden" id="produto_id" name="produto_id" value="<?php echo $this->campos->produto_id; ?>" />
     </div>
   </div>
   <div class="form-group">

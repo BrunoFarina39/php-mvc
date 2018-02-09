@@ -236,12 +236,15 @@ $(document).ready(function(){
         });
         $("#estado").attr("disabled", false);
         $("#cidade").attr("disabled", false);
-         $("#cliente_form button,#fornecedor_form button").attr("disabled", false);
+        $("#cliente_form button,#fornecedor_form button").attr("disabled", false);
         $("#carregar_cidade").html("");
       },"json");
   });
 
-  /*$.get("http://localhost/cliente/listarFornecedores/"+$("#estado").val(),
+  $("#carregar_fornecedor").html("<img src='public/imagens/load.gif'/>&nbsp;<span>Carregando Fornecedores</span>");
+  $("#fornecedor").attr("disabled", true);
+  $("#compra_form button").attr("disabled", true);
+  $.get("http://localhost/compra/listarFornecedores",
     function(dados){                    
       var fornecedorId;
         $("#fornecedor").autocomplete({
@@ -251,16 +254,45 @@ $(document).ready(function(){
             select: function(event, ui) {fornecedorId=ui.item.value;
               ui.item.value=ui.item.label;
               $("#fornecedor_id").val(fornecedorId);
+              $("#fornecedor").click(function(){
+                  ui.item.value=fornecedorId;
+              });
             }
         });
           $("#fornecedor").attr("disabled", false);
-        $("#carregar_fornecedor").html("");
-      },"json");*/
+          $("#compra_form button").attr("disabled", false);
+          $("#carregar_fornecedor").html("");
+      },"json");
 
+  $("#carregar_produto").html("<img src='public/imagens/load.gif'/>&nbsp;<span>Carregando Produtos</span>");
+  $("#produto").attr("disabled", true);
+  $("#compra_form button").attr("disabled", true);
+  $.get("http://localhost/compra/listarProdutos",
+    function(dados){                    
+      var produtoId;
+        $("#produto").autocomplete({
+            source: dados,
+            minLength: 1,
+            disabled:false, //autocomplete habilitado
+            select: function(event, ui) {produtoId=ui.item.value;
+              ui.item.value=ui.item.label;
+              $("#produto_id").val(produtoId);  
+                    
+            }
+        });
+          $("#produto").attr("disabled", false);
+          $("#compra_form button").attr("disabled", false);
+          $("#carregar_produto").html("");
+      },"json");
+
+  $("#produto").click(function(){
+     $( "#produto" ).autocomplete( "instance" );    
+  });
   $("#estado").change(function(){
     $("#cidade").val("");
   });
   
+
   $("#cidade").click(function() {
     $(this).keypress(function(event){
       if(event.which == 8 || event.which == 0 ){
@@ -526,9 +558,12 @@ function visualizaDadosFuncionario(id){
 /*  MOVIMENTAÇÃO  */
 
 function inserirProdutos(){
-  $("#tabela_compra").append("<tr><td width='20%'>"+$("#id").val()+"</td>"+"<td width='20%'>"+$("#produto").val()+"</td>"+
-    "<td width='20%'>"+$("#qtde").val()+"</td>"+"<td width='20%'>0,00</td>"+"<td width='20%'>"+$("#desconto").val()+"</td>"+
-    "<td width='20%'>0,00</td></tr>");
+  $.get("http://localhost/compra/buscaPrecoCompra/"+$("#produto_id").val(),
+    function(dados){
+      $("#tabela_compra").append("<tr><td width='20%'>"+$("#id").val()+"</td>"+"<td width='20%'>"+$("#produto").val()+"</td>"+
+      "<td width='20%'>"+$("#qtde").val()+"</td>"+"<td width='20%'>"+formataMoeda(dados.preco)+"</td>"+"<td width='20%'>"+$("#desconto").val()+"</td>"+
+      "<td width='20%'>0,00</td></tr>"); 
+    },"json");
 }
 
 function formataCpfCnpj(insc){

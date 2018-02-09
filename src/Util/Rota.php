@@ -252,7 +252,13 @@
 					$compraController->actionList($_POST,@$param[2],@$param[3]);break;
 				case 'listarFornecedores':
 					$compraController = new CompraController();
-					$compraController->listarFornecedores(@$param[2]);break;
+					$compraController->listarFornecedores();break;
+				case 'listarProdutos':
+					$compraController = new CompraController();
+					$compraController->listarProdutos();break;
+				case 'buscaPrecoCompra':
+					$compraController = new CompraController();
+					$compraController->buscaPrecoCompra(@$param[2]);break;	
 				case 'visualizaCompraPorId':
 					$compraController = new CompraController();
 					$compraController->visualizaCompraPorId(@$param[2]);break;	
