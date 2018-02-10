@@ -232,10 +232,13 @@ $(document).ready(function(){
             source: dados,
             minLength: 1,
             disabled:false, //autocomplete habilitado
-            select: function(event, ui){
-              cidadeId=ui.item.value;
-              ui.item.value=ui.item.label;
-              $("#cidade_id").val(cidadeId);
+            select: function(event, ui) {
+              event.preventDefault()
+              $("#cidade_id").val(ui.item.value);  
+            },
+            focus: function(event, ui) {
+              event.preventDefault();
+              $("#cidade").val(ui.item.label);
             }
         });
         $("#estado").attr("disabled", false);
@@ -244,62 +247,6 @@ $(document).ready(function(){
         $("#carregar_cidade").html("");
       },"json");
   });
-
-  $("#carregar_fornecedor").html("<img src='public/imagens/load.gif'/>&nbsp;<span>Carregando Fornecedores</span>");
-  $("#fornecedor").attr("disabled", true);
-  $("#compra_form button").attr("disabled", true);
-  $.get("http://localhost/compra/listarFornecedores",
-    function(dados){                    
-      var fornecedorId;
-        $("#fornecedor").autocomplete({
-            source: dados,
-            minLength: 1,
-            disabled:false, //autocomplete habilitado
-            select: function(event, ui) {
-              event.preventDefault()
-              $("#fornecedor_id").val(ui.item.value);  
-            },
-            focus: function(event, ui) {
-              event.preventDefault();
-              $("#fornecedor").val(ui.item.label);
-            }
-        });
-          $("#fornecedor").attr("disabled", false);
-          $("#compra_form button").attr("disabled", false);
-          $("#carregar_fornecedor").html("");
-      },"json");
-
-  $("#carregar_produto").html("<img src='public/imagens/load.gif'/>&nbsp;<span>Carregando Produtos</span>");
-  $("#produto").attr("disabled", true);
-  $("#compra_form button").attr("disabled", true);
-  $.get("http://localhost/compra/listarProdutos",
-    function(dados){                    
-      var produtoId;
-        $("#produto").autocomplete({
-            source: dados,
-            minLength: 1,
-            disabled:false, //autocomplete habilitado
-            select: function(event, ui) {
-              event.preventDefault()
-              $("#produto_id").val(ui.item.value);  
-            },
-            focus: function(event, ui) {
-              event.preventDefault();
-              $("#produto").val(ui.item.label);
-            }
-        });
-          $("#produto").attr("disabled", false);
-          $("#compra_form button").attr("disabled", false);
-          $("#carregar_produto").html("");
-      },"json");
-
-  $("#produto").click(function(){
-     $( "#produto" ).autocomplete( "instance" );    
-  });
-  $("#estado").change(function(){
-    $("#cidade").val("");
-  });
-  
 
   $("#cidade").click(function() {
     $(this).keypress(function(event){
@@ -364,8 +311,85 @@ $(document).ready(function(){
       thousandsSeparator: '.'
     });
   });
-});
 //-------------------------------Produto Fim---------------------------------------------------------------------------
+//-------------------------------Movimentação de Compra----------------------------------------------------------------
+  $("#carregar_fornecedor").html("<img src='public/imagens/load.gif'/>&nbsp;<span>Carregando Fornecedores</span>");
+  $("#fornecedor").attr("disabled", true);
+  $("#compra_form button").attr("disabled", true);
+  $.get("http://localhost/compra/listarFornecedores",
+    function(dados){                    
+      var fornecedorId;
+        $("#fornecedor").autocomplete({
+            source: dados,
+            minLength: 1,
+            disabled:false, //autocomplete habilitado
+            select: function(event, ui) {
+              event.preventDefault()
+              $("#fornecedor_id").val(ui.item.value);  
+            },
+            focus: function(event, ui) {
+              event.preventDefault();
+              $("#fornecedor").val(ui.item.label);
+            }
+        });
+          $("#fornecedor").attr("disabled", false);
+          $("#compra_form button").attr("disabled", false);
+          $("#carregar_fornecedor").html("");
+      },"json");
+
+  $("#carregar_produto").html("<img src='public/imagens/load.gif'/>&nbsp;<span>Carregando Produtos</span>");
+  $("#produto").attr("disabled", true);
+  $("#compra_form button").attr("disabled", true);
+  $.get("http://localhost/compra/listarProdutos",
+    function(dados){                    
+      var produtoId;
+        $("#produto").autocomplete({
+            source: dados,
+            minLength: 1,
+            disabled:false, //autocomplete habilitado
+            select: function(event, ui) {
+              event.preventDefault()
+              $("#produto_id").val(ui.item.value);  
+            },
+            focus: function(event, ui) {
+              event.preventDefault();
+              $("#produto").val(ui.item.label);
+            }
+        });
+          $("#produto").attr("disabled", false);
+          $("#compra_form button").attr("disabled", false);
+          $("#carregar_produto").html("");
+      },"json");
+
+  $("#estado").change(function(){
+    $("#cidade").val("");
+  });
+
+  $("#produto").blur(function(){
+    $("#carregar_produto_preco").html("<img src='public/imagens/load.gif'/>&nbsp;<span>Carregando Produtos</span>");
+    $("#compra_form button").attr("disabled", true);
+    $.get("http://localhost/compra/buscaPrecoCompra/"+$("#produto_id").val(),
+      function(dados){
+        $("#preco_compra").val(formataMoeda(dados.preco));
+        $("#preco_sem_mascara").val(dados.preco);
+         $("#compra_form button").attr("disabled", false);
+         $("#carregar_produto_preco").html("");    
+    },"json");
+  });
+
+  $("#adicionar").click(function(){
+    var produto = $("#produto").val();
+    var produto_id = $("#produto_id").val();
+    var qtde = $("#qtde").val();
+    var preco = $("#preco_sem_mascara").val();
+    var desconto = $("#desconto").val();
+    var valorDesconto = ((qtde*preco)/100)*desconto;
+    var valor_total = parseFloat((qtde*preco)-valorDesconto).toFixed(2);
+  $("#tabela_compra").append("<tr><td>"+produto_id+"</td>"+"<td>"+produto+"</td>"+
+  "<td>"+$("#qtde").val()+"</td>"+"<td>"+$("#preco_compra").val()+"</td>"+"<td>"+desconto+"</td>"+
+  "<td>"+formataMoeda(valor_total)+"</td></tr>");
+  });
+});
 //-------------------------------Document Jquery Fim------------------------------------------------------------------- 
 $(window).load(function(){
   $(".load").fadeOut("slow")
@@ -566,23 +590,6 @@ function visualizaDadosFuncionario(id){
         }
     });
   });
-}
-/*  MOVIMENTAÇÃO  */
-
-function inserirProdutos(){
-  $.get("http://localhost/compra/buscaPrecoCompra/"+$("#produto_id").val(),
-    function(dados){
-      var produto = $("#produto").val();
-      var produto_id = $("#produto_id").val();
-      var qtde = $("#qtde").val();
-      var preco = dados.preco;
-      var desconto = $("#desconto").val();
-      var valorDesconto = ((qtde*dados.preco)/100)*desconto;
-      var valor_total = parseFloat((qtde*dados.preco)-valorDesconto).toFixed(2);
-      $("#tabela_compra").append("<tr><td>"+produto_id+"</td>"+"<td>"+produto+"</td>"+
-      "<td>"+$("#qtde").val()+"</td>"+"<td>"+formataMoeda(preco)+"</td>"+"<td>"+desconto+"</td>"+
-      "<td>"+formataMoeda(valor_total)+"</td></tr>");
-    },"json");
 }
 
 function formataCpfCnpj(insc){

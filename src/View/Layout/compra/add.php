@@ -21,6 +21,14 @@
       <input type="text" class="form-control" id="produto" name="produto" value="<?php echo $this->campos->produto ?>" />
       <input type="hidden" id="produto_id" name="produto_id" value="<?php echo $this->campos->produto_id; ?>" />
     </div>
+    <span id="carregar_produto_preco"></span>
+  </div>
+   <div class="form-group">
+    <label for="preco_compra" class="col-sm-2 control-label">Preço Compra:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="preco_compra" name="preco_compra" value="<?php echo $this->campos->preco_compra ?>" />
+      <input type="hidden" id="preco_sem_mascara" name="preco_sem_mascara" value="<?php echo $this->campos->preco_sem_mascara; ?>" />
+    </div>
   </div>
   <div class="form-group">
     <label for="qtde" class="col-sm-2 control-label">Qtde.:</label>
@@ -37,7 +45,7 @@
   <div class="form-group">
     <label for="id" class="col-sm-2 control-label"></label>
     <div class="col-sm-10">
-       <button onclick="inserirProdutos()" type="button" class="btn btn-default">Adicionar</button>
+       <button id="adicionar" name="adicionar" type="button" class="btn btn-default">Adicionar</button>
     </div>
   </div>
   <table class="table table-striped" class="display" id="tabela_compra" width="100%">

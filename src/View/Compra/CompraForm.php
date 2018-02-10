@@ -16,6 +16,8 @@
 			$this->campos->fornecedor_id = null;
 			$this->campos->produto = "";
 			$this->campos->produto_id = null;
+			$this->campos->preco_compra = null;
+			$this->campos->preco_sem_mascara = null;
 			$this->campos->qtde = null;
 			$this->campos->desconto = 0;
 		}
