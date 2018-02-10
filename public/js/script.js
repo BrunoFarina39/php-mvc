@@ -206,9 +206,13 @@ $(document).ready(function(){
             source: dados,
             minLength: 1,
             disabled:false, //autocomplete habilitado
-            select: function(event, ui) {cidadeId=ui.item.value;
-              ui.item.value=ui.item.label;
-              $("#cidade_id").val(cidadeId);
+            select: function(event, ui) {
+              event.preventDefault()
+              $("#cidade_id").val(ui.item.value);  
+            },
+            focus: function(event, ui) {
+              event.preventDefault();
+              $("#cidade").val(ui.item.label);
             }
         });
           $("#estado").attr("disabled", false);
@@ -251,12 +255,13 @@ $(document).ready(function(){
             source: dados,
             minLength: 1,
             disabled:false, //autocomplete habilitado
-            select: function(event, ui) {fornecedorId=ui.item.value;
-              ui.item.value=ui.item.label;
-              $("#fornecedor_id").val(fornecedorId);
-              $("#fornecedor").click(function(){
-                  ui.item.value=fornecedorId;
-              });
+            select: function(event, ui) {
+              event.preventDefault()
+              $("#fornecedor_id").val(ui.item.value);  
+            },
+            focus: function(event, ui) {
+              event.preventDefault();
+              $("#fornecedor").val(ui.item.label);
             }
         });
           $("#fornecedor").attr("disabled", false);
@@ -274,10 +279,13 @@ $(document).ready(function(){
             source: dados,
             minLength: 1,
             disabled:false, //autocomplete habilitado
-            select: function(event, ui) {produtoId=ui.item.value;
-              ui.item.value=ui.item.label;
-              $("#produto_id").val(produtoId);  
-                    
+            select: function(event, ui) {
+              event.preventDefault()
+              $("#produto_id").val(ui.item.value);  
+            },
+            focus: function(event, ui) {
+              event.preventDefault();
+              $("#produto").val(ui.item.label);
             }
         });
           $("#produto").attr("disabled", false);
@@ -327,9 +335,13 @@ $(document).ready(function(){
             source: dados,
             minLength: 1,
             disabled:false, //autocomplete habilitado
-            select: function(event, ui) {marcaId=ui.item.value;
-              ui.item.value=ui.item.label;
-              $("#marca_id").val(marcaId);
+            select: function(event, ui) {
+              event.preventDefault()
+              $("#marca_id").val(ui.item.value);  
+            },
+            focus: function(event, ui) {
+              event.preventDefault();
+              $("#marca").val(ui.item.label);
             }
         });
         $("#carregar_marca").html("");
@@ -560,9 +572,16 @@ function visualizaDadosFuncionario(id){
 function inserirProdutos(){
   $.get("http://localhost/compra/buscaPrecoCompra/"+$("#produto_id").val(),
     function(dados){
-      $("#tabela_compra").append("<tr><td width='20%'>"+$("#id").val()+"</td>"+"<td width='20%'>"+$("#produto").val()+"</td>"+
-      "<td width='20%'>"+$("#qtde").val()+"</td>"+"<td width='20%'>"+formataMoeda(dados.preco)+"</td>"+"<td width='20%'>"+$("#desconto").val()+"</td>"+
-      "<td width='20%'>0,00</td></tr>"); 
+      var produto = $("#produto").val();
+      var produto_id = $("#produto_id").val();
+      var qtde = $("#qtde").val();
+      var preco = dados.preco;
+      var desconto = $("#desconto").val();
+      var valorDesconto = ((qtde*dados.preco)/100)*desconto;
+      var valor_total = parseFloat((qtde*dados.preco)-valorDesconto).toFixed(2);
+      $("#tabela_compra").append("<tr><td>"+produto_id+"</td>"+"<td>"+produto+"</td>"+
+      "<td>"+$("#qtde").val()+"</td>"+"<td>"+formataMoeda(preco)+"</td>"+"<td>"+desconto+"</td>"+
+      "<td>"+formataMoeda(valor_total)+"</td></tr>");
     },"json");
 }
 
@@ -620,6 +639,9 @@ function formataMoeda(valor)
 {
   if(valor == "")
     return "";
+  if(typeof valor === 'number'){
+    valor=String(valor);
+  }
   valor = valor.split("R$").join("");
   valor = valor.split(".").join("");
   valor = valor.split(",").join("");

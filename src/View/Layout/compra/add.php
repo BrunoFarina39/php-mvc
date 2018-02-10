@@ -31,7 +31,7 @@
   <div class="form-group">
     <label for="desconto" class="col-sm-2 control-label">Desconto:</label>
     <div class="col-sm-10">
-      <input type="number" class="form-control" id="desconto" name="desconto" value="<?php echo $this->campos->desconto ?>" />
+      <input type="number" class="form-control" id="desconto" name="desconto" min="0" max="100" value="<?php echo $this->campos->desconto ?>" />
     </div>
   </div>
   <div class="form-group">
