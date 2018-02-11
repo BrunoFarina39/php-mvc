@@ -109,6 +109,22 @@ $(document).ready(function(){
           obs:{maxlength:"<span class='obrigatorio'>Obs. não pode ter mais de 100 caracteres</span>"}
         } 
     });*/
+    $("#compra_form").validate({
+      rules:{
+      fornecedor:"required",
+      produto:"required",
+      preco_compra:"required",
+      qtde:"required",
+      desconto:"required"
+      },
+      messages:{
+      fornecedor:"<span class='obrigatorio'>Digite o fornecedor</span>",
+      produto:"<span class='obrigatorio'>Digite o produto</span>",
+      preco_compra:"<span class='obrigatorio'>Digite o preço de compra</span>",
+      qtde:"<span class='obrigatorio'>Digite a qtde</span>",
+      desconto:"<span class='obrigatorio'>Digite o desconto caso não tenha deixe como zero</span>"
+      }
+    });
 //-------------------------------Fornecedor Fim------------------------------------------------------------------------  
 //-------------------------------Cliente e Fornecedor------------------------------------------------------------------
   $("#cep").mask("99.999-999");
@@ -378,16 +394,18 @@ $(document).ready(function(){
   });
 
   $("#adicionar").click(function(){
-    var produto = $("#produto").val();
-    var produto_id = $("#produto_id").val();
-    var qtde = $("#qtde").val();
-    var preco = $("#preco_sem_mascara").val();
-    var desconto = $("#desconto").val();
-    var valorDesconto = ((qtde*preco)/100)*desconto;
-    var valor_total = parseFloat((qtde*preco)-valorDesconto).toFixed(2);
-  $("#tabela_compra").append("<tr><td>"+produto_id+"</td>"+"<td>"+produto+"</td>"+
-  "<td>"+$("#qtde").val()+"</td>"+"<td>"+$("#preco_compra").val()+"</td>"+"<td>"+desconto+"</td>"+
-  "<td>"+formataMoeda(valor_total)+"</td></tr>");
+    if($("#compra_form").valid()){
+      var produto = $("#produto").val();
+      var produto_id = $("#produto_id").val();
+      var qtde = $("#qtde").val();
+      var preco = $("#preco_sem_mascara").val();
+      var desconto = $("#desconto").val();
+      var valorDesconto = ((qtde*preco)/100)*desconto;
+      var valor_total = parseFloat((qtde*preco)-valorDesconto).toFixed(2);
+      $("#tabela_compra").append("<tr><td>"+produto_id+"</td>"+"<td>"+produto+"</td>"+
+      "<td>"+$("#qtde").val()+"</td>"+"<td>"+$("#preco_compra").val()+"</td>"+"<td>"+desconto+"</td>"+
+      "<td>"+formataMoeda(valor_total)+"</td></tr>");
+     }
   });
 });
 //-------------------------------Document Jquery Fim------------------------------------------------------------------- 
