@@ -1,5 +1,5 @@
 <h1>Compras</h1>
-<form class="form-horizontal" id="compra_form" method="post" action="compra/add" novalidate>
+<form class="form-horizontal" id="compra_form" method="post" action="compra/add">
   <div class="form-group">
     <label for="id" class="col-sm-2 control-label">Código:</label>
     <div class="col-sm-10">
@@ -26,14 +26,14 @@
    <div class="form-group">
     <label for="preco_compra" class="col-sm-2 control-label">Preço Compra:</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="preco_compra" name="preco_compra" value="<?php echo $this->campos->preco_compra ?>" />
+      <input type="text" class="form-control" id="preco_compra" name="preco_compra" disabled="true" value="<?php echo $this->campos->preco_compra ?>" />
       <input type="hidden" id="preco_sem_mascara" name="preco_sem_mascara" value="<?php echo $this->campos->preco_sem_mascara; ?>" />
     </div>
   </div>
   <div class="form-group">
     <label for="qtde" class="col-sm-2 control-label">Qtde.:</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="qtde" name="qtde" value="<?php echo $this->campos->qtde ?>" />
+      <input type="number" class="form-control" id="qtde" name="qtde" value="<?php echo $this->campos->qtde ?>" />
     </div>
   </div>
   <div class="form-group">
@@ -46,6 +46,8 @@
     <label for="id" class="col-sm-2 control-label"></label>
     <div class="col-sm-10">
        <button id="adicionar" name="adicionar" type="button" class="btn btn-default">Adicionar</button>
+       <button type="button" class="btn btn-default">Orçamento</button>
+       <button type="submit" id="avancar" name="avancar" class="btn btn-default">Avançar</button>
     </div>
   </div>
   <table class="table table-striped" class="display" id="tabela_compra" width="100%">
@@ -55,9 +57,8 @@
   		<th>Qtde.</th>
   		<th>Valor Unitário</th>
   		<th>Valor Desconto</th>
+      <th>Excluir</th>
   		<th>Valor Total</th>
   	</tbody>
   </table>
-  <button type="button" class="btn btn-default">Orçamento</button>
-  <button type="button" class="btn btn-default">Avançar</button>
 </form>

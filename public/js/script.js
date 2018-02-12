@@ -114,15 +114,15 @@ $(document).ready(function(){
       fornecedor:"required",
       produto:"required",
       preco_compra:"required",
-      qtde:"required",
-      desconto:"required"
+      qtde:{required:true,number:true},
+      desconto:{required:true,number:true},
       },
       messages:{
       fornecedor:"<span class='obrigatorio'>Digite o fornecedor</span>",
       produto:"<span class='obrigatorio'>Digite o produto</span>",
       preco_compra:"<span class='obrigatorio'>Digite o preço de compra</span>",
-      qtde:"<span class='obrigatorio'>Digite a qtde</span>",
-      desconto:"<span class='obrigatorio'>Digite o desconto caso não tenha deixe como zero</span>"
+      qtde:{required:"<span class='obrigatorio'>Digite a qtde</span>",number:"<span class='obrigatorio'>Digite apenas números</span>"},
+      desconto:{required:"<span class='obrigatorio'>Digite a porcentagem de desconto</span>",number:"<span class='obrigatorio'>Digite apenas números</span>"},
       }
     });
 //-------------------------------Fornecedor Fim------------------------------------------------------------------------  
@@ -218,24 +218,24 @@ $(document).ready(function(){
   $.get("http://localhost/cliente/listarCidades/"+$("#estado").val(),
     function(dados){                    
       var cidadeId;
-        $("#cidade").autocomplete({
-            source: dados,
-            minLength: 1,
-            disabled:false, //autocomplete habilitado
-            select: function(event, ui) {
-              event.preventDefault()
-              $("#cidade_id").val(ui.item.value);  
-            },
-            focus: function(event, ui) {
-              event.preventDefault();
-              $("#cidade").val(ui.item.label);
-            }
-        });
-          $("#estado").attr("disabled", false);
-          $("#cidade").attr("disabled", false);
-          $("#cliente_form button,#fornecedor_form button").attr("disabled", false);
-        $("#carregar_cidade").html("");
-      },"json");
+      $("#cidade").autocomplete({
+        source: dados,
+        minLength: 1,
+        disabled:false, //autocomplete habilitado
+        select: function(event, ui) {
+          event.preventDefault()
+          $("#cidade_id").val(ui.item.value);  
+        },
+        focus: function(event, ui) {
+          event.preventDefault();
+          $("#cidade").val(ui.item.label);
+        }
+      });
+      $("#estado").attr("disabled", false);
+      $("#cidade").attr("disabled", false);
+      $("#cliente_form button,#fornecedor_form button").attr("disabled", false);
+      $("#carregar_cidade").html("");
+  },"json");
   $("#estado").change(function(){
     $("#carregar_cidade").html("<img src='public/imagens/load.gif'/>&nbsp;<span>Carregando cidade</span>");
     $("#estado").attr("disabled", true);
@@ -294,23 +294,23 @@ $(document).ready(function(){
   $.get("http://localhost/produto/listarMarcas",
     function(dados){                    
       var marcaId;
-        $("#marca").autocomplete({
-            source: dados,
-            minLength: 1,
-            disabled:false, //autocomplete habilitado
-            select: function(event, ui) {
-              event.preventDefault()
-              $("#marca_id").val(ui.item.value);  
-            },
-            focus: function(event, ui) {
-              event.preventDefault();
-              $("#marca").val(ui.item.label);
-            }
-        });
-        $("#carregar_marca").html("");
-        $("#marca").attr("disabled", false);
-        $("#produto_form button").attr("disabled", false);
- },"json");
+      $("#marca").autocomplete({
+          source: dados,
+          minLength: 1,
+          disabled:false, //autocomplete habilitado
+          select: function(event, ui) {
+            event.preventDefault()
+            $("#marca_id").val(ui.item.value);  
+          },
+          focus: function(event, ui) {
+            event.preventDefault();
+            $("#marca").val(ui.item.label);
+          }
+      });
+      $("#carregar_marca").html("");
+      $("#marca").attr("disabled", false);
+      $("#produto_form button").attr("disabled", false);
+  },"json");
 
   $("#marca").click(function() {
     $(this).keypress(function(event){
@@ -335,47 +335,47 @@ $(document).ready(function(){
   $.get("http://localhost/compra/listarFornecedores",
     function(dados){                    
       var fornecedorId;
-        $("#fornecedor").autocomplete({
-            source: dados,
-            minLength: 1,
-            disabled:false, //autocomplete habilitado
-            select: function(event, ui) {
-              event.preventDefault()
-              $("#fornecedor_id").val(ui.item.value);  
-            },
-            focus: function(event, ui) {
-              event.preventDefault();
-              $("#fornecedor").val(ui.item.label);
-            }
-        });
-          $("#fornecedor").attr("disabled", false);
-          $("#compra_form button").attr("disabled", false);
-          $("#carregar_fornecedor").html("");
-      },"json");
+      $("#fornecedor").autocomplete({
+          source: dados,
+          minLength: 1,
+          disabled:false, //autocomplete habilitado
+          select: function(event, ui) {
+            event.preventDefault()
+            $("#fornecedor_id").val(ui.item.value);  
+          },
+          focus: function(event, ui) {
+            event.preventDefault();
+            $("#fornecedor").val(ui.item.label);
+          }
+      });
+      $("#fornecedor").attr("disabled", false);
+      $("#compra_form button").attr("disabled", false);
+      $("#carregar_fornecedor").html("");
+    },"json");
 
   $("#carregar_produto").html("<img src='public/imagens/load.gif'/>&nbsp;<span>Carregando Produtos</span>");
   $("#produto").attr("disabled", true);
   $("#compra_form button").attr("disabled", true);
   $.get("http://localhost/compra/listarProdutos",
     function(dados){                    
-      var produtoId;
-        $("#produto").autocomplete({
-            source: dados,
-            minLength: 1,
-            disabled:false, //autocomplete habilitado
-            select: function(event, ui) {
-              event.preventDefault()
-              $("#produto_id").val(ui.item.value);  
-            },
-            focus: function(event, ui) {
-              event.preventDefault();
-              $("#produto").val(ui.item.label);
-            }
-        });
-          $("#produto").attr("disabled", false);
-          $("#compra_form button").attr("disabled", false);
-          $("#carregar_produto").html("");
-      },"json");
+    var produtoId;
+      $("#produto").autocomplete({
+          source: dados,
+          minLength: 1,
+          disabled:false, //autocomplete habilitado
+          select: function(event, ui) {
+            event.preventDefault()
+            $("#produto_id").val(ui.item.value);  
+          },
+          focus: function(event, ui) {
+            event.preventDefault();
+            $("#produto").val(ui.item.label);
+          }
+      });
+      $("#produto").attr("disabled", false);
+      $("#compra_form button").attr("disabled", false);
+      $("#carregar_produto").html("");
+    },"json");
 
   $("#estado").change(function(){
     $("#cidade").val("");
@@ -388,9 +388,10 @@ $(document).ready(function(){
       function(dados){
         $("#preco_compra").val(formataMoeda(dados.preco));
         $("#preco_sem_mascara").val(dados.preco);
-         $("#compra_form button").attr("disabled", false);
-         $("#carregar_produto_preco").html("");    
+        $("#compra_form button").attr("disabled", false);
+        $("#carregar_produto_preco").html("");    
     },"json");
+    $("#preco_compra").attr("disabled", false);
   });
 
   $("#adicionar").click(function(){
@@ -403,15 +404,40 @@ $(document).ready(function(){
       var valorDesconto = ((qtde*preco)/100)*desconto;
       var valor_total = parseFloat((qtde*preco)-valorDesconto).toFixed(2);
       $("#tabela_compra").append("<tr><td>"+produto_id+"</td>"+"<td>"+produto+"</td>"+
-      "<td>"+$("#qtde").val()+"</td>"+"<td>"+$("#preco_compra").val()+"</td>"+"<td>"+desconto+"</td>"+
+      "<td>"+$("#qtde").val()+"</td>"+"<td>"+$("#preco_compra").val()+"</td>"+
+      "<td>"+desconto+"</td>"+"<td><a onclick='excluirProd(this)' href='javascript:void(0)'><span class='glyphicon glyphicon-trash'></span></a></td>"+
       "<td>"+formataMoeda(valor_total)+"</td></tr>");
      }
+     $("#qtde").val(1);
+     $("#produto").val("");
+     $("#preco_compra").val("");
+  });
+  $("#avancar").click(function(){
+    var i;
+    $("#compra_form").unbind("submit");
+    $("#tabela_compra").find('tr').each(function(indice){
+      i=+indice;
+      $(this).find('td').each(function(indice,value){
+        alert(value.headers);
+      });
+    });
+    
+    if(i==0){
+      alert("Por Favor adicione pelo menos um produto");
+      $("#compra_form").submit(function(){
+        return false;
+      });
+    }
   });
 });
 //-------------------------------Document Jquery Fim------------------------------------------------------------------- 
 $(window).load(function(){
   $(".load").fadeOut("slow")
 });
+
+function excluirProd(linha){
+  linha.closest('tr').remove();
+}
 
 function excluir(url){
  	if(confirm("Deseja realmente excluir este registro?"))
