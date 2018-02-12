@@ -415,10 +415,10 @@ $(document).ready(function(){
   $("#avancar").click(function(){
     var i;
     $("#compra_form").unbind("submit");
-    $("#tabela_compra").find('tr').each(function(indice){
-      i=+indice;
-      $(this).find('td').each(function(indice,value){
-        alert(value.headers);
+    $("#tabela_compra").find('tr').each(function(indicex){
+      i=+indicex;
+      $(this).find('td').each(function(indicey){
+        alert($(this).text());
       });
     });
     
