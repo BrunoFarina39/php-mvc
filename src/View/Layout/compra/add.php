@@ -59,6 +59,7 @@
   		<th>Valor Desconto</th>
       <th>Excluir</th>
   		<th>Valor Total</th>
-  	</tbody>
+     </thead>
   </table>
+  <input type="hidden" id="produtos" name="produtos" />
 </form>

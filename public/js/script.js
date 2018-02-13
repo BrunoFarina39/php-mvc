@@ -403,10 +403,10 @@ $(document).ready(function(){
       var desconto = $("#desconto").val();
       var valorDesconto = ((qtde*preco)/100)*desconto;
       var valor_total = parseFloat((qtde*preco)-valorDesconto).toFixed(2);
-      $("#tabela_compra").append("<tr><td>"+produto_id+"</td>"+"<td>"+produto+"</td>"+
-      "<td>"+$("#qtde").val()+"</td>"+"<td>"+$("#preco_compra").val()+"</td>"+
-      "<td>"+desconto+"</td>"+"<td><a onclick='excluirProd(this)' href='javascript:void(0)'><span class='glyphicon glyphicon-trash'></span></a></td>"+
-      "<td>"+formataMoeda(valor_total)+"</td></tr>");
+      $("#tabela_compra").append("<tbody><tr><td class='id'>"+produto_id+"</td>"+"<td class='produto'>"+produto+"</td>"+
+      "<td class='qtde'>"+$("#qtde").val()+"</td>"+"<td class='preco_compra'>"+$("#preco_compra").val()+"</td>"+
+      "<td class='desconto'>"+desconto+"</td>"+"<td><a onclick='excluirProd(this)' href='javascript:void(0)'><span class='glyphicon glyphicon-trash'></span></a></td>"+
+      "<td class='valor_total'>"+formataMoeda(valor_total)+"</td></tr></tbody>");
      }
      $("#qtde").val(1);
      $("#produto").val("");
@@ -414,14 +414,19 @@ $(document).ready(function(){
   });
   $("#avancar").click(function(){
     var i;
+    var produtos = new String();
     $("#compra_form").unbind("submit");
-    $("#tabela_compra").find('tr').each(function(indicex){
-      i=+indicex;
+    $("#tabela_compra > tbody").find('tr').each(function(indicex){
+      i=+indicex+1;
       $(this).find('td').each(function(indicey){
-        alert($(this).text());
+        if(indicey != 5)
+          produtos+=$(this).text()+"-";
       });
+      produtos=produtos.substr(0,produtos.length-1)+"/";
     });
-    
+    //retita o ultimo / da string
+    produtos=produtos.substr(0,produtos.length-1)
+    $("#produtos").val(produtos);
     if(i==0){
       alert("Por Favor adicione pelo menos um produto");
       $("#compra_form").submit(function(){
