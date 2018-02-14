@@ -387,7 +387,6 @@ $(document).ready(function(){
     $.get("http://localhost/compra/buscaPrecoCompra/"+$("#produto_id").val(),
       function(dados){
         $("#preco_compra").val(formataMoeda(dados.preco));
-        $("#preco_sem_mascara").val(dados.preco);
         $("#compra_form button").attr("disabled", false);
         $("#carregar_produto_preco").html("");    
     },"json");
@@ -399,21 +398,22 @@ $(document).ready(function(){
       var produto = $("#produto").val();
       var produto_id = $("#produto_id").val();
       var qtde = $("#qtde").val();
-      var preco = $("#preco_sem_mascara").val();
+      var preco = formataMoedaBD($("#preco_compra").val());
       var desconto = $("#desconto").val();
       var valorDesconto = ((qtde*preco)/100)*desconto;
       var valor_total = parseFloat((qtde*preco)-valorDesconto).toFixed(2);
-      $("#tabela_compra").append("<tbody><tr><td class='id'>"+produto_id+"</td>"+"<td class='produto'>"+produto+"</td>"+
-      "<td class='qtde'>"+$("#qtde").val()+"</td>"+"<td class='preco_compra'>"+$("#preco_compra").val()+"</td>"+
-      "<td class='desconto'>"+desconto+"</td>"+"<td><a onclick='excluirProd(this)' href='javascript:void(0)'><span class='glyphicon glyphicon-trash'></span></a></td>"+
-      "<td class='valor_total'>"+formataMoeda(valor_total)+"</td></tr></tbody>");
+      
+      $("#tabela_compra").append("<tbody><tr><td>"+produto_id+"</td>"+"<td>"+produto+"</td>"+
+      "<td>"+$("#qtde").val()+"</td>"+"<td>"+$("#preco_compra").val()+"</td>"+
+      "<td>"+desconto+"</td>"+"<td><a onclick='excluirProd(this)' href='javascript:void(0)'><span class='glyphicon glyphicon-trash'></span></a></td>"+
+      "<td>"+formataMoeda(valor_total)+"</td></tr></tbody>");
      }
      $("#qtde").val(1);
      $("#produto").val("");
      $("#preco_compra").val("");
   });
   $("#avancar").click(function(){
-    var i;
+    var i=0;
     var produtos = new String();
     $("#compra_form").unbind("submit");
     $("#tabela_compra > tbody").find('tr').each(function(indicex){
@@ -424,14 +424,16 @@ $(document).ready(function(){
       });
       produtos=produtos.substr(0,produtos.length-1)+"/";
     });
-    //retita o ultimo / da string
-    produtos=produtos.substr(0,produtos.length-1)
-    $("#produtos").val(produtos);
+  
     if(i==0){
       alert("Por Favor adicione pelo menos um produto");
       $("#compra_form").submit(function(){
         return false;
       });
+    }else{
+      //retira o ultimo / da string
+      produtos=produtos.substr(0,produtos.length-1)
+      $("#produtos").val(produtos);
     }
   });
 });
@@ -720,6 +722,16 @@ function formataMoeda(valor)
     default : part = moeda;       
   }
   return "R$ "+part;
+}
+
+function formataMoedaBD(valor){
+  valor = valor.split("R$").join("");
+  valor = valor.split(" ").join("");
+  valor = valor.split(".").join("");
+  valor = valor.split(",").join("");
+  moeda = valor.substr(0,valor.length-2)+".";
+  moeda += valor.substr(valor.length-2);
+  return moeda;
 }
 
 function setaRodape(){

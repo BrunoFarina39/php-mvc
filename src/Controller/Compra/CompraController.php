@@ -2,6 +2,7 @@
 	namespace Controller\Compra;
 	use Library\AbstractController;
 	use View\Compra\CompraForm;
+	use View\Compra\compraFormPag;
 	use Model\Compra\Compra;
 	use Model\Compra\CompraDao;
 
@@ -19,7 +20,11 @@
 		}
 
 		public function ActionAdd($post){
-			echo $post['produtos'];
+			$compraFormPag = new compraFormPag();
+			//if(isPost()){
+				//echo $post['produtos'];
+			//}
+			
 		}
 
 		public function listarFornecedores(){
