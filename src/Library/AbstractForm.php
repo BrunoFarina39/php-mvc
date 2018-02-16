@@ -131,9 +131,10 @@
 			if(empty($valor))
 				return "";
 			$valor = join("", explode("R$",$valor));
-			$valor = join("", explode(".",$valor));
-			$valor = join("", explode(",",$valor));
-			$moeda = substr($valor, 0,-2).",";
+			$valor = join("",explode(" ", $valor));
+			//$valor = str_replace(".", ",", $valor);
+			//$valor = join("",explode(".", $valor));
+			/*$moeda = substr($valor, 0,-2).",";
 			$moeda .= substr($valor, -2,2);
 			$array= explode(",", $moeda);
 			switch (strlen($array[0])) {
@@ -150,8 +151,17 @@
 					$part .= substr($moeda, 3);
 					break;
 				default : $part = $moeda;							
-			}
-			return "R$".$part;
+			}*/
+			echo $valor;
+			return "R$ ".number_format(floatval($valor),2,",",".");
+		}	
+		public function formataMoedaBD($valor){
+		  $valor = join("",explode("R$", $valor));
+		  $valor = join("",explode(" ", $valor));
+		  $valor = join("",explode(".", $valor));  
+		  $valor = str_replace(",", ".", $valor);
+		  $valor = floatval($valor);
+		  return number_format($valor,2,".","");
 		}
 
 		public function remCaracEspecial($str)

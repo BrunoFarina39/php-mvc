@@ -21,9 +21,9 @@
 
 		public function ActionAdd($post){
 			$compraFormPag = new compraFormPag();
-			//if(isPost()){
-				//echo $post['produtos'];
-			//}
+			if($this->isPost()){
+				$compraFormPag->setData($post);
+			}
 			
 		}
 

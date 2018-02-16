@@ -320,13 +320,7 @@ $(document).ready(function(){
       }
     });
   });
-  $(function(){
-    $('#preco_compra,#preco_venda,#preco').priceFormat({
-      prefix: 'R$ ',
-      centsSeparator: ',',
-      thousandsSeparator: '.'
-    });
-  });
+  
 //-------------------------------Produto Fim---------------------------------------------------------------------------
 //-------------------------------Movimentação de Compra----------------------------------------------------------------
   $("#carregar_fornecedor").html("<img src='public/imagens/load.gif'/>&nbsp;<span>Carregando Fornecedores</span>");
@@ -434,6 +428,13 @@ $(document).ready(function(){
       //retira o ultimo / da string
       produtos=produtos.substr(0,produtos.length-1)
       $("#produtos").val(produtos);
+    }
+  });
+  $("#forma_pag").click(function(){
+    if($(this).val()==1){
+      $("#parcelas").attr("disabled",true);
+    }else{
+      $("#parcelas").attr("disabled",false);
     }
   });
 });
