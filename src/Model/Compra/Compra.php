@@ -8,6 +8,7 @@
 		private $produto;
 		private $qtde;
 		private $desconto;
+		private $valorTotal;
 
 		public function __construct(){
 			$fornecedor = new Fornecedor();
@@ -51,6 +52,14 @@
 
 		public function getDesconto(){
 			return $this->desconto;
+		}
+
+		public function setValorTotal($valorTotal){
+			$this->valorTotal = $valorTotal;
+		}
+
+		public function getValorTotal(){
+			return $this->valorTotal;
 		}
 	}
 

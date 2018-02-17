@@ -132,8 +132,11 @@
 				return "";
 			$valor = join("", explode("R$",$valor));
 			$valor = join("",explode(" ", $valor));
-			//$valor = str_replace(".", ",", $valor);
-			//$valor = join("",explode(".", $valor));
+			if(strstr($valor, ",")){
+				$valor = join("",explode(".", $valor));
+				$valor = str_replace(",", ".", $valor);
+			}
+			
 			/*$moeda = substr($valor, 0,-2).",";
 			$moeda .= substr($valor, -2,2);
 			$array= explode(",", $moeda);
@@ -152,7 +155,7 @@
 					break;
 				default : $part = $moeda;							
 			}*/
-			echo $valor;
+			//echo $valor;
 			return "R$ ".number_format(floatval($valor),2,",",".");
 		}	
 		public function formataMoedaBD($valor){

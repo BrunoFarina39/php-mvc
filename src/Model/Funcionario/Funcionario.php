@@ -137,14 +137,14 @@
 
 		public function getSalario()
 		{
-			if(!empty($this->salario)){
+			//if(!empty($this->salario)){
 				$this->salario = join("", explode("R$",$this->salario));
 				$this->salario = join("", explode(".",$this->salario));
 				$this->salario = join("", explode(",",$this->salario));
 				$moeda = substr($this->salario, 0,-2).".";
 				$moeda .= substr($this->salario, -2,2);
 				$this->salario = $moeda;
-			}
+			//}
 			return $this->salario;
 		}
 

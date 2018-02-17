@@ -22,8 +22,8 @@
 			$this->campos->descricao = "";
 			$this->campos->marca = "";
 			$this->campos->marca_id = null;
-			$this->campos->preco_compra = null;
-			$this->campos->preco_venda = null;
+			$this->campos->preco_compra = 0;
+			$this->campos->preco_venda = 0;
 		}
 
 		public function isValid()
@@ -72,6 +72,7 @@
 		function __destruct()
 		{
 			$this->campos->preco_compra = $this->formataMoeda($this->campos->preco_compra);
+			echo $this->campos->preco_compra;
 			$this->campos->preco_venda = $this->formataMoeda($this->campos->preco_venda);
 			$masterView = new MasterView(MASTERVIEW::RENDER_ALL);
 			echo $this->msgSucesso;

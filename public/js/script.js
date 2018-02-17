@@ -273,14 +273,15 @@ $(document).ready(function(){
     });
   });
 //-------------------------------Cliente e Fornecedor Fim-------------------------------------------------------------
-/*$("#marca_form").validate({
+//----------------------------------------Marca-----------------------------------------------------------------------
+$("#marca_form").validate({
   rules:{
     nome:{required:true}
   },
   messages:{
     nome:{required:"<span class='obrigatorio'>Digite o nome</span>"}
   }
- }); */
+ }); 
  //--------------------------------Marca Fim--------------------------------------------------------------------------- 
   $(window).scroll(function(){   
     //setaRodape();
@@ -322,6 +323,8 @@ $(document).ready(function(){
   });
   
 //-------------------------------Produto Fim---------------------------------------------------------------------------
+//---------------------------------Serviço-----------------------------------------------------------------------------
+$("#preco").mask("R$");
 //-------------------------------Movimentação de Compra----------------------------------------------------------------
   $("#carregar_fornecedor").html("<img src='public/imagens/load.gif'/>&nbsp;<span>Carregando Fornecedores</span>");
   $("#fornecedor").attr("disabled", true);

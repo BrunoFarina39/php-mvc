@@ -15,7 +15,12 @@
 		public function __construct()
 		{
 			parent::__construct();
+			$this->codBarra=null;
+			$this->descricao="";
 			$this->marca = new Marca();
+			$this->precoCompra=0;
+			$this->precoVenda=0;
+			$this->qtdEst=0;
 		}
 
 		public function setCodBarra($codBarra)
