@@ -443,16 +443,21 @@ $("#preco").mask("R$");
       $("#produtos").val(produtos);
     }
   });
+  
   $("#forma_pag").click(function(){
     if($(this).val()==1){
-      $("#parcelas").attr("disabled",true);
+      $("#parcelas").val(1);
     }else{
-      $("#parcelas").attr("disabled",false);
+      $("#parcelas").val(2)
     }
   });
 
-  $("#parcelas").blur(function(){
-  	
+  $("#parcelas").click(function(){
+  	 if($(this).val()!=1){
+  	 	 $("#forma_pag").val(2);
+  	 }else{
+  	 	$("#forma_pag").val(1);
+  	 }
   });
 });
 //-------------------------------Document Jquery Fim------------------------------------------------------------------- 

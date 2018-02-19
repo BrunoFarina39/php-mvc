@@ -2,11 +2,10 @@
 <form class="form-horizontal" id="compra_form" method="post" action="compra/add">
   <input type="hidden" id="produtos" name="produtos" value="<?php echo $this->campos->produtosInput ?>"/>
   <input type="hidden" id="valor_total" name="valor_total" value="<?php echo $this->campos->valorTotal ?>"/>
-  <input type="hidden" id="forma_pag" name="forma_pag" value="<?php echo $this->formaPag ?>"/>
   <div class="form-group">
     <label for="forma_pag" class="col-sm-2 control-label">Forma de pagamento:</label>
     <div class="col-sm-10">
-      <select id="forma_pag" name="forma_Pag">
+      <select id="forma_pag" name="forma_pag">
         <?php 
           foreach ($this->campos->formaPag as $value) {
             if($this->formaPag == $value['id']){
@@ -25,7 +24,11 @@
       <select id="parcelas" name="parcelas">
         <?php 
           foreach ($this->campos->parcelas as $value) {
-            echo "<option value='".$value['id']."'>".$value['value']."</option>";
+            if($this->parcelas == $value["id"]){
+              echo "<option value='".$value['id']."' selected >".$value['value']."</option>";
+            }else{
+              echo "<option value='".$value['id']."'>".$value['value']."</option>";
+            }
           }
         ?>
       </select>
@@ -51,7 +54,7 @@
     </thead>
     <?php 
       foreach ($this->campos->pagamento as $value) {
-        echo "<tbody><tr><td>".$value["parcelas"]."</td><td>".$value["dataVenci"]."</td><td>".$value["valor"]."</td></tr></tbody>";
+        echo "<tbody><tr><td>".($value["parcelas"]-1)."</td><td>".$value["dataVenci"]."</td><td>".$this->formataMoeda($value["valor"])."</td></tr></tbody>";
       }
     ?>
   </table>

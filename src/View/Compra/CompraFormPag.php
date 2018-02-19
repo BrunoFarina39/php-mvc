@@ -25,7 +25,7 @@
 			$this->campos->meioPag[1]['value']="Cartão";
 			$this->campos->meioPag[2]['value']="Cheque";
 			$this->campos->meioPag[3]['value']="Dinheiro";
-			$this->campos->meioPag[4]['value']="Nota promissária";
+			$this->campos->meioPag[4]['value']="Nota promissória";
 			$this->campos->pagamento = array();
 		}
 
@@ -35,19 +35,25 @@
 			$this->campos->valorTotal=$post["valor_total"];
 			$this->formaPag=$post['forma_pag'];
 			$this->produtos = explode("/", $post['produtos']);
-			$parcelas=$post["parcelas"];
+			$this->parcelas=$post["parcelas"];
 			foreach ($this->produtos as $key => $value) {
 				$this->produtos[$key]= explode("-", $value);
 			}
 
 			$data = new \DateTime();
-			for($i=0; $i < $post["parcelas"];$i++){
-				 $data->modify('+1 month');
+			$valorParcela = round($this->campos->valorTotal/$this->parcelas,2);
+			$resto = $valorParcela * $this->parcelas;
+			$vUltimaParcela = $this->campos->valorTotal - $resto;
+			for($i=1; $i <= $post["parcelas"];$i++){
+				if($this->formaPag!=1)
+					$data->modify('+1 month');
 				$this->campos->pagamento[$i]["parcelas"]=$i+1;
-				$this->campos->pagamento[$i]["dataVenci"]=$data->format('d-m-Y');
-				$this->campos->pagamento[$i]["valor"]=$this->campos->valorTotal/$parcelas;
+				$this->campos->pagamento[$i]["dataVenci"]=$data->format('d/m/Y');
+				if($i==$this->parcelas)
+					$this->campos->pagamento[$i]["valor"]=$valorParcela+$vUltimaParcela;
+				else
+					$this->campos->pagamento[$i]["valor"]=$valorParcela;
 			}
-			print_r($post);
 		}
 
 		function __destruct(){
