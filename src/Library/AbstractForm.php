@@ -130,8 +130,10 @@
 		{
 			if(empty($valor))
 				return "";
+			
 			$valor = join("", explode("R$",$valor));
 			$valor = join("",explode(" ", $valor));
+			
 			if(strstr($valor, ",")){
 				$valor = join("",explode(".", $valor));
 				$valor = str_replace(",", ".", $valor);

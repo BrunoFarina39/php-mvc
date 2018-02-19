@@ -24,7 +24,21 @@
       </select>
     </div>
   </div>
-  <table class="table table-striped" class="display" id="tabela_compra" width="100%">
+  <table class="table table-striped" class="display" id="tabela_parcelas">
+    <thead>
+      <th>Parcela</th>
+      <th>Vencimento</th>
+      <th>Valor</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>11/11/2018</td>
+        <td><?php echo $this->formataMoeda($this->campos->valorTotal) ?></td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="table table-striped" class="display" id="tabela_compra">
     <thead>
       <th>Código</th>
       <th>Descrição</th>
@@ -37,14 +51,13 @@
         foreach ($this->produtos as $value) {
           echo "<tbody><tr><td>".$value[0]."</td><td>".$value[1]."</td><td>".$value[2]."</td><td>".$value[3].
           "</td><td>".$value[4]."</td><td>".$value[5]."</td></tbody>";
-          $this->campos->valorTotal+=$this->formataMoedaBD($value[5]);
         }
       ?>
   </table>
   <div class="form-group">
     <label for="valor_total" class="col-sm-2 control-label">Valor Total:</label>
     <div class="col-sm-10">
-     <label id="valor_total" name="valor_total"><?php echo "R$ ".number_format($this->campos->valorTotal, 2,",",".") ?></label>
+     <label id="valor_total" name="valor_total"><?php echo $this->formataMoeda($this->campos->valorTotal) ?></label>
     </div>
   </div>
 </form>

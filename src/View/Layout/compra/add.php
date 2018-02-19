@@ -47,6 +47,8 @@
        <button id="adicionar" name="adicionar" type="button" class="btn btn-default">Adicionar</button>
        <button type="button" class="btn btn-default">Orçamento</button>
        <button type="submit" id="avancar" name="avancar" class="btn btn-default">Avançar</button>
+       <input type="hidden" id="valor_total" name="valor_total" value="0"/>
+       <label id="lvtotal" name="lvtotal"></label>
     </div>
   </div>
   <table class="table table-striped" class="display" id="tabela_compra" width="100%">

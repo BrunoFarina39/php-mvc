@@ -24,6 +24,13 @@ $(document).ready(function(){
                 }
         	}
  	}); 
+  $(function(){
+    $('#preco_compra,#preco_venda,#preco,#salario').priceFormat({
+      prefix: 'R$ ',
+      centsSeparator: ',',
+      thousandsSeparator: '.'
+    });
+  }); 
   //-------------------------------Usuário---------------------------------------------------------------------------
   /*$("#usuario_form").validate({
  		rules:{
@@ -390,6 +397,7 @@ $("#preco").mask("R$");
     $("#preco_compra").attr("disabled", false);
   });
 
+  var vTotalCompa=0;
   $("#adicionar").click(function(){
     if($("#compra_form").valid()){
       var produto = $("#produto").val();
@@ -398,12 +406,14 @@ $("#preco").mask("R$");
       var preco = formataMoedaBD($("#preco_compra").val());
       var desconto = $("#desconto").val();
       var valorDesconto = ((qtde*preco)/100)*desconto;
-      var valor_total = parseFloat((qtde*preco)-valorDesconto).toFixed(2);
-      
+      var valorTotal = (qtde*preco)-valorDesconto;
+      vTotalCompa +=  valorTotal; 
+      $("#valor_total").val(vTotalCompa.toFixed(2));
+      $("#lvtotal").text(formataMoeda(vTotalCompa.toFixed(2)));
       $("#tabela_compra").append("<tbody><tr><td>"+produto_id+"</td>"+"<td>"+produto+"</td>"+
       "<td>"+$("#qtde").val()+"</td>"+"<td>"+$("#preco_compra").val()+"</td>"+
       "<td>"+desconto+"</td>"+"<td><a onclick='excluirProd(this)' href='javascript:void(0)'><span class='glyphicon glyphicon-trash'></span></a></td>"+
-      "<td>"+formataMoeda(valor_total)+"</td></tr></tbody>");
+      "<td>"+formataMoeda(valorTotal.toFixed(2))+"</td></tr></tbody>");
      }
      $("#qtde").val(1);
      $("#produto").val("");

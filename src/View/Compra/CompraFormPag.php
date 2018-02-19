@@ -27,6 +27,7 @@
 			foreach ($this->produtos as $key => $value) {
 				$this->produtos[$key]= explode("-", $value);
 			}
+			$this->campos->valorTotal=$data["valor_total"];
 		}
 
 		function __destruct(){
