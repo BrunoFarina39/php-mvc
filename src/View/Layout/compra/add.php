@@ -63,4 +63,6 @@
      </thead>
   </table>
   <input type="hidden" id="produtos" name="produtos" />
+  <input type="hidden" id="parcelas" name="parcelas" value="1" />
+  <input type="hidden" id="forma_pag" name="forma_pag" value="1" />
 </form>

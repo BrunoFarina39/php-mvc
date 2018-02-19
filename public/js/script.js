@@ -450,6 +450,10 @@ $("#preco").mask("R$");
       $("#parcelas").attr("disabled",false);
     }
   });
+
+  $("#parcelas").blur(function(){
+  	
+  });
 });
 //-------------------------------Document Jquery Fim------------------------------------------------------------------- 
 $(window).load(function(){

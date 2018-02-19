@@ -8,6 +8,8 @@
 		private $acao;
 		private $campos;
 		private $produtos;
+		private $produtosInput;
+		private $valorTotal;
 		function __construct(){
 			$this->campos = new \stdClass();
 			$this->campos->formaPag[0]['id']="1";
@@ -19,15 +21,33 @@
 				$this->campos->parcelas[$i]['id']=$i;
 				$this->campos->parcelas[$i]['value']=$i;
 			}
+			$this->campos->meioPag[0]['value']="Boleto";
+			$this->campos->meioPag[1]['value']="Cartão";
+			$this->campos->meioPag[2]['value']="Cheque";
+			$this->campos->meioPag[3]['value']="Dinheiro";
+			$this->campos->meioPag[4]['value']="Nota promissária";
+			$this->campos->pagamento = array();
 		}
 
-		public function setData($data)
+		public function setData($post)
 		{
-			$this->produtos = explode("/", $data['produtos']);
+			$this->campos->produtosInput = $post["produtos"];
+			$this->campos->valorTotal=$post["valor_total"];
+			$this->formaPag=$post['forma_pag'];
+			$this->produtos = explode("/", $post['produtos']);
+			$parcelas=$post["parcelas"];
 			foreach ($this->produtos as $key => $value) {
 				$this->produtos[$key]= explode("-", $value);
 			}
-			$this->campos->valorTotal=$data["valor_total"];
+
+			$data = new \DateTime();
+			for($i=0; $i < $post["parcelas"];$i++){
+				 $data->modify('+1 month');
+				$this->campos->pagamento[$i]["parcelas"]=$i+1;
+				$this->campos->pagamento[$i]["dataVenci"]=$data->format('d-m-Y');
+				$this->campos->pagamento[$i]["valor"]=$this->campos->valorTotal/$parcelas;
+			}
+			print_r($post);
 		}
 
 		function __destruct(){

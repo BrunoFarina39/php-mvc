@@ -1,12 +1,19 @@
 <h1>Concluir Compra</h1>
-<form class="form-horizontal" id="compra_form" method="post" action="compra/pagamento">
+<form class="form-horizontal" id="compra_form" method="post" action="compra/add">
+  <input type="hidden" id="produtos" name="produtos" value="<?php echo $this->campos->produtosInput ?>"/>
+  <input type="hidden" id="valor_total" name="valor_total" value="<?php echo $this->campos->valorTotal ?>"/>
+  <input type="hidden" id="forma_pag" name="forma_pag" value="<?php echo $this->formaPag ?>"/>
   <div class="form-group">
     <label for="forma_pag" class="col-sm-2 control-label">Forma de pagamento:</label>
     <div class="col-sm-10">
       <select id="forma_pag" name="forma_Pag">
         <?php 
           foreach ($this->campos->formaPag as $value) {
-            echo "<option value='".$value['id']."'>".$value['value']."</option>";
+            if($this->formaPag == $value['id']){
+              echo "<option value='".$value['id']."' selected >".$value['value']."</option>";
+            }else{
+              echo "<option value='".$value['id']."'>".$value['value']."</option>";
+            }
           }
         ?>
       </select>
@@ -15,9 +22,21 @@
   <div class="form-group">
     <label for="parcelas" class="col-sm-2 control-label">Número de Parcelas:</label>
     <div class="col-sm-10">
-      <select id="parcelas" name="parcelas" disabled="true">
+      <select id="parcelas" name="parcelas">
         <?php 
           foreach ($this->campos->parcelas as $value) {
+            echo "<option value='".$value['id']."'>".$value['value']."</option>";
+          }
+        ?>
+      </select>
+    </div>
+  </div>
+   <div class="form-group">
+    <label for="meio_pag" class="col-sm-2 control-label">Meio de Pagamento:</label>
+    <div class="col-sm-10">
+      <select id="meio_pag" name="meio_pag">
+        <?php 
+          foreach ($this->campos->meioPag as $value) {
             echo "<option value='".$value['id']."'>".$value['value']."</option>";
           }
         ?>
@@ -30,15 +49,14 @@
       <th>Vencimento</th>
       <th>Valor</th>
     </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>11/11/2018</td>
-        <td><?php echo $this->formataMoeda($this->campos->valorTotal) ?></td>
-      </tr>
-    </tbody>
+    <?php 
+      foreach ($this->campos->pagamento as $value) {
+        echo "<tbody><tr><td>".$value["parcelas"]."</td><td>".$value["dataVenci"]."</td><td>".$value["valor"]."</td></tr></tbody>";
+      }
+    ?>
   </table>
-  <table class="table table-striped" class="display" id="tabela_compra">
+  <input type="submit" id="btatualizar" name="btatualizar" value="atualizar parcelas">
+  <!--<table class="table table-striped" class="display" id="tabela_compra">
     <thead>
       <th>Código</th>
       <th>Descrição</th>
@@ -48,12 +66,12 @@
       <th>Valor Total</th>
      </thead>
       <?php
-        foreach ($this->produtos as $value) {
-          echo "<tbody><tr><td>".$value[0]."</td><td>".$value[1]."</td><td>".$value[2]."</td><td>".$value[3].
-          "</td><td>".$value[4]."</td><td>".$value[5]."</td></tbody>";
-        }
+       // foreach ($this->produtos as $value) {
+          //echo "<tbody><tr><td>".$value[0]."</td><td>".$value[1]."</td><td>".$value[2]."</td><td>".$value[3].
+          //"</td><td>".$value[4]."</td><td>".$value[5]."</td></tbody>";
+        //}
       ?>
-  </table>
+  </table>-->
   <div class="form-group">
     <label for="valor_total" class="col-sm-2 control-label">Valor Total:</label>
     <div class="col-sm-10">
