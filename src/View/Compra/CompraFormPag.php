@@ -9,6 +9,7 @@
 		private $campos;
 		private $formaPagPost;
 		private $parcelasPost;
+		private $meioPagPost;
 		private $produtos;
 		function __construct(){
 			$this->campos = new \stdClass();
@@ -21,10 +22,20 @@
 				$this->campos->parcelas[$i]['id']=$i;
 				$this->campos->parcelas[$i]['value']=$i;
 			}
+			
+			$this->campos->meioPag[0]['id']=1;
 			$this->campos->meioPag[0]['value']="Boleto";
+			
+			$this->campos->meioPag[1]['id']=2;
 			$this->campos->meioPag[1]['value']="Cartão";
+			
+			$this->campos->meioPag[2]['id']=3;
 			$this->campos->meioPag[2]['value']="Cheque";
+			
+			$this->campos->meioPag[3]['id']=4;	
 			$this->campos->meioPag[3]['value']="Dinheiro";
+			
+			$this->campos->meioPag[4]['id']=5;
 			$this->campos->meioPag[4]['value']="Nota promissória";
 			$this->campos->pagamento = array();
 		}
@@ -34,6 +45,7 @@
 			$this->campos->valorTotal=$post["valor_total"];
 			$this->formaPagPost=$post['forma_pag'];
 			$this->parcelasPost=$post["parcelas"];
+			$this->meioPagPost=$post["meio_pag"];
 			$this->produtos = explode("/", $post['produtos']);
 			foreach ($this->produtos as $key => $value) {
 				$this->produtos[$key]= explode("-", $value);

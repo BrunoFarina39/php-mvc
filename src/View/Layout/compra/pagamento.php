@@ -40,7 +40,11 @@
       <select id="meio_pag" name="meio_pag">
         <?php 
           foreach ($this->campos->meioPag as $value) {
-            echo "<option value='".$value['id']."'>".$value['value']."</option>";
+            if($this->meioPagPost == $value["id"]){
+              echo "<option value='".$value['id']."' selected>".$value['value']."</option>";
+            }else{
+              echo "<option value='".$value['id']."'>".$value['value']."</option>";
+            }
           }
         ?>
       </select>
