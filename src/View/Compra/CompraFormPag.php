@@ -7,9 +7,9 @@
 	class CompraFormPag extends AbstractForm{
 		private $acao;
 		private $campos;
+		private $formaPagPost;
+		private $parcelasPost;
 		private $produtos;
-		private $produtosInput;
-		private $valorTotal;
 		function __construct(){
 			$this->campos = new \stdClass();
 			$this->campos->formaPag[0]['id']="1";
@@ -31,28 +31,35 @@
 
 		public function setData($post)
 		{
-			$this->campos->produtosInput = $post["produtos"];
 			$this->campos->valorTotal=$post["valor_total"];
-			$this->formaPag=$post['forma_pag'];
+			$this->formaPagPost=$post['forma_pag'];
+			$this->parcelasPost=$post["parcelas"];
 			$this->produtos = explode("/", $post['produtos']);
-			$this->parcelas=$post["parcelas"];
 			foreach ($this->produtos as $key => $value) {
 				$this->produtos[$key]= explode("-", $value);
 			}
 
 			$data = new \DateTime();
-			$valorParcela = round($this->campos->valorTotal/$this->parcelas,2);
-			$resto = $valorParcela * $this->parcelas;
-			$vUltimaParcela = $this->campos->valorTotal - $resto;
-			for($i=1; $i <= $post["parcelas"];$i++){
-				if($this->formaPag!=1)
-					$data->modify('+1 month');
-				$this->campos->pagamento[$i]["parcelas"]=$i+1;
-				$this->campos->pagamento[$i]["dataVenci"]=$data->format('d/m/Y');
-				if($i==$this->parcelas)
-					$this->campos->pagamento[$i]["valor"]=$valorParcela+$vUltimaParcela;
-				else
+			$valorParcela = round($this->campos->valorTotal/$this->parcelasPost,2);
+			$resto = $this->campos->valorTotal - ($valorParcela * $this->parcelasPost);
+			
+			if($this->formaPagPost==1){
+				for($i=1; $i <= $post["parcelas"];$i++){
+					$this->campos->pagamento[$i]["parcelas"]=$i+1;
+					$this->campos->pagamento[$i]["dataVenci"]=$data->format('d/m/Y');
 					$this->campos->pagamento[$i]["valor"]=$valorParcela;
+				}
+			}else{
+				for($i=1; $i <= $post["parcelas"];$i++){
+					$data->modify('+1 month');
+					$this->campos->pagamento[$i]["parcelas"]=$i+1;
+					$this->campos->pagamento[$i]["dataVenci"]=$data->format('d/m/Y');
+					$this->campos->pagamento[$i]["valor"]=$valorParcela;
+					if($i==$this->parcelasPost)
+						$this->campos->pagamento[$i]["valor"]=$valorParcela+$resto;
+					else
+						$this->campos->pagamento[$i]["valor"]=$valorParcela;
+				}
 			}
 		}
 

@@ -20,9 +20,11 @@
 		}
 
 		public function ActionAdd($post){
-			$compraFormPag = new compraFormPag();
 			if($this->isPost()){
+				$compraFormPag = new compraFormPag();
 				$compraFormPag->setData($post);
+			}else{
+				$compraForm = new CompraForm("add");
 			}
 			
 		}

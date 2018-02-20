@@ -8,7 +8,7 @@
       <select id="forma_pag" name="forma_pag">
         <?php 
           foreach ($this->campos->formaPag as $value) {
-            if($this->formaPag == $value['id']){
+            if($this->formaPagPost == $value['id']){
               echo "<option value='".$value['id']."' selected >".$value['value']."</option>";
             }else{
               echo "<option value='".$value['id']."'>".$value['value']."</option>";
@@ -24,7 +24,7 @@
       <select id="parcelas" name="parcelas">
         <?php 
           foreach ($this->campos->parcelas as $value) {
-            if($this->parcelas == $value["id"]){
+            if($this->parcelasPost == $value["id"]){
               echo "<option value='".$value['id']."' selected >".$value['value']."</option>";
             }else{
               echo "<option value='".$value['id']."'>".$value['value']."</option>";
