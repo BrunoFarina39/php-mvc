@@ -95,5 +95,62 @@ c9e876208b9b5f131fd7308f1ce01b37
           }
          });
       }
+
+
+
+create table pedidocompra(id_pedidocompra serial not null primary key, 
+id_fornecedor integer not null, 
+datainclusao date not null, 
+databaixa date, 
+valorpedido numeric(9,2), 
+status varchar(9) not null, 
+foreign key(id_fornecedor)references fornecedor); 
+
+create table itenscompra(id_itens_compra serial not null primary key, 
+quantidade integer not null, 
+valorunitario numeric(9,2) not null, 
+valortotal numeric(9,2) not null, 
+datafabri date, 
+datavenc date,
+lote varchar(30),
+bonificacao boolean not null,
+id_pedidocompra integer not null, 
+id_produto integer not null, 
+foreign key(id_pedidocompra)references pedidocompra, 
+foreign key (id_produto)references produto); 
+
+create table contaspagar(id_contaspagar serial not null primary key, 
+id_pedidocompra integer, 
+id_fornecedor integer,
+datainclusao date not null, 
+status varchar(9) not null,
+foreign key(id_pedidocompra)references pedidocompra,
+foreign key(id_fornecedor)references fornecedor);
+
+create table formapagmt(id_formapagmt serial not null primary key,
+id_pedidocompra integer not null,
+id_contaspagar integer,
+fpagamento varchar(7) not null, 
+nparcelas integer not null,
+intervalo varchar(10),
+entrada numeric(9,2),
+carencia varchar(10), 
+foreign key (id_pedidocompra)references pedidocompra,
+foreign key (id_contaspagar)references contaspagar); 
+
+create table parcelaspagar(id_parcelaspagar serial not null primary key, 
+id_contaspagar integer not null, 
+datavenc date not null,  
+valorparcela numeric(9,2) not null, 
+status varchar(9) not null, 
+foreign key(id_contaspagar)references contaspagar);
+
+create table pagamento(id_pagamento serial not null primary key, 
+id_parcelas_pagar integer not null, 
+data_pagamento date not null, 
+valor_pagamento numeric(9,2) not null, 
+juros float not null,
+foreign key(id_parcelas_pagar)references parcelas_pagar); 
+
     });*/
 https://github.com/galvao-eti/hidratacao-insercao-em-bd-BrunoFarina39
