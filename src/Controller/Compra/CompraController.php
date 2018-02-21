@@ -21,12 +21,15 @@
 
 		public function ActionAdd($post){
 			if($this->isPost()){
-				$compraFormPag = new compraFormPag();
-				$compraFormPag->setData($post);
+				if($post["finalizar"]!=true){
+					$compraFormPag = new compraFormPag();
+					$compraFormPag->setData($post);
+				}else{
+					$compraForm = new CompraForm("add");
+				}
 			}else{
 				$compraForm = new CompraForm("add");
-			}
-			
+			}			
 		}
 
 		public function listarFornecedores(){

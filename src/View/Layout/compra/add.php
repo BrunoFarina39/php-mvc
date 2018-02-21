@@ -66,4 +66,5 @@
   <input type="hidden" id="parcelas" name="parcelas" value="1" />
   <input type="hidden" id="forma_pag" name="forma_pag" value="1" />
   <input type="hidden" id="meio_pag" name="meio_pag" value="4" />
+  <input type="hidden" id="finalizar" name="finalizar" />
 </form>

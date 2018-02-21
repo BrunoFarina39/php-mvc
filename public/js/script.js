@@ -444,20 +444,25 @@ $("#preco").mask("R$");
     }
   });
   
-  $("#forma_pag").click(function(){
+  $("#forma_pag").change(function(){
     if($(this).val()==1){
       $("#parcelas").val(1);
     }else{
       $("#parcelas").val(2)
     }
+    $("#compra_form").submit();
   });
 
-  $("#parcelas").click(function(){
-  	 if($(this).val()!=1){
-  	 	 $("#forma_pag").val(2);
-  	 }else{
-  	 	$("#forma_pag").val(1);
-  	 }
+  $("#parcelas").change(function(){
+    if($(this).val()!=1){
+       $("#forma_pag").val(2);
+     }else{
+      $("#forma_pag").val(1);
+     }
+    $("#compra_form").submit();
+  });
+  $("#concluir").click(function(){
+    $("#finalizar").val(true);
   });
 });
 //-------------------------------Document Jquery Fim------------------------------------------------------------------- 

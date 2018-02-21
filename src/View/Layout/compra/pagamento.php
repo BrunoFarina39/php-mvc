@@ -62,7 +62,8 @@
       }
     ?>
   </table>
-  <input type="submit" id="btatualizar" name="btatualizar" value="atualizar parcelas">
+  <input type="submit" id="concluir" name="concluir" value="Concluir" />
+  <input type="hidden" id="finalizar" name="finalizar" />
   <!--<table class="table table-striped" class="display" id="tabela_compra">
     <thead>
       <th>Código</th>
