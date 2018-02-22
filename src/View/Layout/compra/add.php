@@ -12,6 +12,7 @@
     <div class="col-sm-10">
       <input type="text" class="form-control" id="fornecedor" name="fornecedor" value="<?php echo $this->campos->fornecedor ?>" />
       <input type="hidden" id="fornecedor_id" name="fornecedor_id" value="<?php echo $this->campos->fornecedor_id; ?>" />
+      <span class="obrigatorio"><?php echo $this->inputFilter->getMessage("fornecedor"); ?></span>
     </div>
     <span id="carregar_produto"></span>
   </div>
@@ -20,6 +21,7 @@
     <div class="col-sm-10">
       <input type="text" class="form-control" id="produto" name="produto" value="<?php echo $this->campos->produto ?>" />
       <input type="hidden" id="produto_id" name="produto_id" value="<?php echo $this->campos->produto_id; ?>" />
+      <span class="obrigatorio"><?php echo $this->inputFilter->getMessage("produtos"); ?></span>
     </div>
     <span id="carregar_produto_preco"></span>
   </div>
@@ -47,7 +49,7 @@
        <button id="adicionar" name="adicionar" type="button" class="btn btn-default">Adicionar</button>
        <button type="button" class="btn btn-default">Orçamento</button>
        <button type="submit" id="avancar" name="avancar" class="btn btn-default">Avançar</button>
-       <input type="hidden" id="valor_total" name="valor_total" value="0"/>
+       <input type="hidden" id="valor_total" name="valor_total" value="<?php echo $this->campos->valor_total ?>"/>
        <label id="lvtotal" name="lvtotal"></label>
     </div>
   </div>
@@ -60,9 +62,17 @@
   		<th>Valor Desconto</th>
       <th>Excluir</th>
   		<th>Valor Total</th>
+     
      </thead>
+      <?php
+        foreach ($this->produtos as $value) {
+          echo "<tbody><tr><td>".$value[0]."</td><td>".$value[1]."</td><td>".$value[2]."</td><td>".$value[3].
+          "</td><td>".$value[4]."</td><td><a onclick='excluirProd(this)' href='javascript:void(0)'><span class='glyphicon glyphicon-trash'></span></a></td><td>".$value[5]."</td></tbody>";
+        }
+      ?>
   </table>
-  <input type="hidden" id="produtos" name="produtos" />
+  </table>
+  <input type="hidden" id="produtos" name="produtos" value="<?php echo $this->campos->produtos ?>" />
   <input type="hidden" id="parcelas" name="parcelas" value="1" />
   <input type="hidden" id="forma_pag" name="forma_pag" value="1" />
   <input type="hidden" id="meio_pag" name="meio_pag" value="4" />

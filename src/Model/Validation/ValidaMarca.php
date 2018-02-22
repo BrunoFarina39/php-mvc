@@ -1,7 +1,7 @@
 <?php 
 	namespace Model\Validation;
 	use Library\AbstractValidation;
-    use Model\Marca\MarcaDao;
+   use Model\Marca\MarcaDao;
 	
 	class ValidaMarca extends AbstractValidation{
 

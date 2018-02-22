@@ -2,6 +2,7 @@
 	namespace Model\Compra;
 	use Library\AbstractModel;
 	use Model\Fornecedor\Fornecedor;
+	use Model\Validation\ValidaCompra;
 
 	class Compra extends AbstractModel{
 		private $fornecedor;
@@ -60,6 +61,23 @@
 
 		public function getValorTotal(){
 			return $this->valorTotal;
+		}
+
+		use \Library\Hydrator;
+
+		public function getInputFilter()
+		{
+			$validator = new ValidaCompra();
+			return $validator->getInputCompra();
+		}
+
+		public function limpaCampos(){
+			$this->id = null;
+			$this->fornecedor;
+			$this->produto;
+			$this->qtde;
+			$this->desconto;
+			$this->valorTotal;
 		}
 	}
 

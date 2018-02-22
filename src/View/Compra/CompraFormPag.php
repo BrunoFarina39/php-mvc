@@ -17,7 +17,7 @@
 			$this->campos->formaPag[0]['value']="À vista";
 			$this->campos->formaPag[1]['id']="2";
 			$this->campos->formaPag[1]['value']="À prazo";
-			$this->campos->valorTotal=0;
+			$this->campos->valorTotal=0.00;
 			for($i=1; $i < 13; $i++){
 				$this->campos->parcelas[$i]['id']=$i;
 				$this->campos->parcelas[$i]['value']=$i;

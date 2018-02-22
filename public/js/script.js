@@ -116,7 +116,7 @@ $(document).ready(function(){
           obs:{maxlength:"<span class='obrigatorio'>Obs. não pode ter mais de 100 caracteres</span>"}
         } 
     });*/
-    $("#compra_form").validate({
+   /* $("#compra_form").validate({
       rules:{
       fornecedor:"required",
       produto:"required",
@@ -131,7 +131,7 @@ $(document).ready(function(){
       qtde:{required:"<span class='obrigatorio'>Digite a qtde</span>",number:"<span class='obrigatorio'>Digite apenas números</span>"},
       desconto:{required:"<span class='obrigatorio'>Digite a porcentagem de desconto</span>",number:"<span class='obrigatorio'>Digite apenas números</span>"},
       }
-    });
+    });*/
 //-------------------------------Fornecedor Fim------------------------------------------------------------------------  
 //-------------------------------Cliente e Fornecedor------------------------------------------------------------------
   $("#cep").mask("99.999-999");
@@ -464,8 +464,10 @@ $("#preco").mask("R$");
   $("#concluir").click(function(){
     $("#finalizar").val(true);
   });
+  $("#lvtotal").text(formataMoeda(parseFloat($("#valor_total").val()).toFixed(2)));
 });
 //-------------------------------Document Jquery Fim------------------------------------------------------------------- 
+
 $(window).load(function(){
   $(".load").fadeOut("slow")
 });

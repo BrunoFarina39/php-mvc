@@ -21,14 +21,20 @@
 
 		public function ActionAdd($post){
 			if($this->isPost()){
-				if($post["finalizar"]!=true){
+				if($post["finalizar"]!=true && $post["fornecedor"] != "" && $post["produtos"] != ""){
 					$compraFormPag = new compraFormPag();
 					$compraFormPag->setData($post);
 				}else{
 					$compraForm = new CompraForm("add");
+					$compraForm->setInputFilter($this->compra->getInputFilter());
+					$compraForm->setData($post);
+					if($compraForm->isValid()){
+
+					}
 				}
 			}else{
 				$compraForm = new CompraForm("add");
+				$compraForm->setInputFilter($this->compra->getInputFilter());
 			}			
 		}
 
