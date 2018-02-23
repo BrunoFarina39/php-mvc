@@ -1,10 +1,10 @@
 <?php 
 	namespace View\Compra;
-	use Library\AbstractForm;
+	//use Library\AbstractForm;
 	use Library\InputFilter;
 	use Util\MasterView;
 
-	class CompraForm extends AbstractForm{
+	class CompraForm extends CompraFormPai{
 		private $acao;
 		private $campos;
 		private $produtos;

@@ -2,6 +2,7 @@
 <form class="form-horizontal" id="compra_form" method="post" action="compra/add">
   <input type="hidden" id="produtos" name="produtos" value="<?php echo $this->produtosInput ?>"/>
   <input type="hidden" id="valor_total" name="valor_total" value="<?php echo $this->campos->valorTotal ?>"/>
+  <input type="hidden" id="form" name="form" value="pag" />
   <div class="form-group">
     <label for="forma_pag" class="col-sm-2 control-label">Forma de pagamento:</label>
     <div class="col-sm-10">

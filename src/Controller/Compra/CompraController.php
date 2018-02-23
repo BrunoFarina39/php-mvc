@@ -1,6 +1,7 @@
 <?php 
 	namespace Controller\Compra;
 	use Library\AbstractController;
+	use View\Compra\CompraFormPai;
 	use View\Compra\CompraForm;
 	use View\Compra\compraFormPag;
 	use Model\Compra\Compra;
@@ -20,22 +21,24 @@
 		}
 
 		public function ActionAdd($post){
+			
 			if($this->isPost()){
-				if($post["finalizar"]!=true && $post["fornecedor"] != "" && $post["produtos"] != ""){
-					$compraFormPag = new compraFormPag();
-					$compraFormPag->setData($post);
-				}else{
+				$compraFormPai = new CompraFormPai();
+				if($compraFormPai->getForm($post) == "add"){
 					$compraForm = new CompraForm("add");
 					$compraForm->setInputFilter($this->compra->getInputFilter());
 					$compraForm->setData($post);
 					if($compraForm->isValid()){
 
 					}
+				}else{
+					$compraFormPag = new CompraFormPag();
+					$compraFormPag->setInputFilter($this->compra->getInputFilter());
+					$compraFormPag->setData($post);
 				}
 			}else{
 				$compraForm = new CompraForm("add");
-				$compraForm->setInputFilter($this->compra->getInputFilter());
-			}			
+			}	
 		}
 
 		public function listarFornecedores(){

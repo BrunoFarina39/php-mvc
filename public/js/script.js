@@ -426,7 +426,7 @@ $("#preco").mask("R$");
     $("#tabela_compra > tbody").find('tr').each(function(indicex){
       i=+indicex+1;
       $(this).find('td').each(function(indicey){
-        if(indicey != 4)
+        if(indicey != 5)
           produtos+=$(this).text()+"-";
       });
       produtos=produtos.substr(0,produtos.length-1)+"/";
@@ -462,7 +462,7 @@ $("#preco").mask("R$");
     $("#compra_form").submit();
   });
   $("#concluir").click(function(){
-    $("#finalizar").val(true);
+    $("#form").val("add");
   });
   $("#lvtotal").text(formataMoeda(parseFloat($("#valor_total").val()).toFixed(2)));
 });
