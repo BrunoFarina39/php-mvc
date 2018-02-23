@@ -426,7 +426,7 @@ $("#preco").mask("R$");
     $("#tabela_compra > tbody").find('tr').each(function(indicex){
       i=+indicex+1;
       $(this).find('td').each(function(indicey){
-        if(indicey != 5)
+        if(indicey != 4)
           produtos+=$(this).text()+"-";
       });
       produtos=produtos.substr(0,produtos.length-1)+"/";

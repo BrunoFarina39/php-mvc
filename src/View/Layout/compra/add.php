@@ -28,7 +28,7 @@
    <div class="form-group">
     <label for="preco_compra" class="col-sm-2 control-label">Preço Compra:</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="preco_compra" name="preco_compra" disabled="true" value="<?php echo $this->campos->preco_compra ?>" />
+      <input type="text" class="form-control" id="preco_compra" name="preco_compra" disabled="true" />
     </div>
   </div>
   <div class="form-group">

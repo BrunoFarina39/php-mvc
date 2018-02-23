@@ -11,6 +11,7 @@
 		private $parcelasPost;
 		private $meioPagPost;
 		private $produtos;
+		private $produtosInput;
 		function __construct(){
 			$this->campos = new \stdClass();
 			$this->campos->formaPag[0]['id']="1";
@@ -47,6 +48,7 @@
 			$this->parcelasPost=$post["parcelas"];
 			$this->meioPagPost=$post["meio_pag"];
 			$this->produtos = explode("/", $post['produtos']);
+			$this->produtosInput = $post['produtos'];
 			foreach ($this->produtos as $key => $value) {
 				$this->produtos[$key]= explode("-", $value);
 			}

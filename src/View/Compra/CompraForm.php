@@ -18,7 +18,6 @@
 			$this->campos->fornecedor_id = null;
 			$this->campos->produto = "";
 			$this->campos->produto_id = null;
-			$this->campos->preco_compra = null;
 			$this->campos->qtde = 1;
 			$this->campos->desconto = 0;
 			$this->campos->produtos="";
