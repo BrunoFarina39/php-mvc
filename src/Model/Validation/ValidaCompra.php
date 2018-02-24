@@ -12,12 +12,12 @@
 		public function getInputCompra(){
 			$validation = function($campos){
 				$retorno = true;
-				if(empty($campos->id_fornecedor)){
+				if(empty($campos->fornecedor_id)){
 					$this->inputFilter->setMessage("fornecedor","Campo fornecedor obrigatório");
                		$retorno = false;
 				}
 
-				if(empty($campos->produtos)){
+				if(empty($campos->produtosInput)){
 					$this->inputFilter->setMessage("produtos","Por favor adicione pelo menos um produto");
                		$retorno = false;
 				}

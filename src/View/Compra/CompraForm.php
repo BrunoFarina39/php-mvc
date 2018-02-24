@@ -1,13 +1,14 @@
 <?php 
 	namespace View\Compra;
-	//use Library\AbstractForm;
+	use Library\AbstractForm;
 	use Library\InputFilter;
 	use Util\MasterView;
 
-	class CompraForm extends CompraFormPai{
+	class CompraForm extends AbstractForm{
 		private $acao;
 		private $campos;
 		private $produtos;
+		
 		function __construct($acao){
 			parent::__construct();
 			$this->acao = $acao;

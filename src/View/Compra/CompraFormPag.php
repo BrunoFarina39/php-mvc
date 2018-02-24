@@ -11,7 +11,7 @@
 		private $parcelasPost;
 		private $meioPagPost;
 		private $produtos;
-		private $produtosInput;
+		
 		function __construct(){
 			$this->campos = new \stdClass();
 			$this->campos->formaPag[0]['id']="1";
@@ -19,6 +19,9 @@
 			$this->campos->formaPag[1]['id']="2";
 			$this->campos->formaPag[1]['value']="À prazo";
 			$this->campos->valorTotal=0.00;
+			$this->campos->fornecedor=null;
+			$this->campos->fornecedor_id=null;
+			$this->campos->produtosInput=null;
 			for($i=1; $i < 13; $i++){
 				$this->campos->parcelas[$i]['id']=$i;
 				$this->campos->parcelas[$i]['value']=$i;
@@ -48,7 +51,7 @@
 			$this->parcelasPost=$post["parcelas"];
 			$this->meioPagPost=$post["meio_pag"];
 			$this->produtos = explode("/", $post['produtos']);
-			$this->produtosInput = $post['produtos'];
+			$this->campos->produtosInput = $post['produtos'];
 			foreach ($this->produtos as $key => $value) {
 				$this->produtos[$key]= explode("-", $value);
 			}
@@ -75,6 +78,13 @@
 						$this->campos->pagamento[$i]["valor"]=$valorParcela;
 				}
 			}
+			$this->campos->fornecedor=$post["fornecedor"];
+			$this->campos->fornecedor_id=$post["fornecedor_id"];
+		}
+
+		public function isValid()
+		{
+			return $this->inputFilter->isValid($this->campos);		 
 		}
 
 		function __destruct(){

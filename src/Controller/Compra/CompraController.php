@@ -21,24 +21,17 @@
 		}
 
 		public function ActionAdd($post){
-			
-			if($this->isPost()){
-				$compraFormPai = new CompraFormPai();
-				if($compraFormPai->getForm($post) == "add"){
-					$compraForm = new CompraForm("add");
-					$compraForm->setInputFilter($this->compra->getInputFilter());
-					$compraForm->setData($post);
-					if($compraForm->isValid()){
+			$this->compraFormPag = new CompraFormPag();
+			$this->compraFormPag->setInputFilter($this->compra->getInputFilter());
+			$this->compraFormPag->setData($post);
+			if($this->compraFormPag->isValid()){
 
-					}
-				}else{
-					$compraFormPag = new CompraFormPag();
-					$compraFormPag->setInputFilter($this->compra->getInputFilter());
-					$compraFormPag->setData($post);
-				}
 			}else{
 				$compraForm = new CompraForm("add");
-			}	
+				$compraForm->setInputFilter($this->compra->getInputFilter());
+				$compraForm->setData($post);
+				$compraForm->isValid();
+			}
 		}
 
 		public function listarFornecedores(){
