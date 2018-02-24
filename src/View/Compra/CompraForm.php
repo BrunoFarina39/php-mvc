@@ -34,7 +34,8 @@
 		public function setData($data)
 		{
 			$this->campos = (Object) $data;
-			$this->produtos = explode("/", $data['produtos']);
+			if(!empty($data["produtos"]))
+				$this->produtos = explode("/", $data['produtos']);
 			foreach ($this->produtos as $key => $value) {
 				$this->produtos[$key]= explode("-", $value);
 			}

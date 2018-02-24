@@ -19,7 +19,7 @@
   <div class="form-group">
     <label for="produto" class="col-sm-2 control-label">Produto:</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="produto" name="produto" value="<?php echo $this->campos->produto ?>" />
+      <input type="text" class="form-control" id="produto" name="produto" value="" />
       <input type="hidden" id="produto_id" name="produto_id" value="<?php echo $this->campos->produto_id; ?>" />
       <span class="obrigatorio"><?php echo $this->inputFilter->getMessage("produtos"); ?></span>
     </div>
@@ -76,5 +76,5 @@
   <input type="hidden" id="parcelas" name="parcelas" value="1" />
   <input type="hidden" id="forma_pag" name="forma_pag" value="1" />
   <input type="hidden" id="meio_pag" name="meio_pag" value="4" />
-  <input type="hidden" id="form" name="form" value="add" />
+  <input type="hidden" id="finalizar" name="finalizar" />
 </form>

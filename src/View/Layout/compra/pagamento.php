@@ -2,9 +2,8 @@
 <form class="form-horizontal" id="compra_form" method="post" action="compra/add">
   <input type="hidden" id="produtos" name="produtos" value="<?php echo $this->campos->produtosInput ?>"/>
   <input type="hidden" id="valor_total" name="valor_total" value="<?php echo $this->campos->valorTotal ?>"/>
-  <input type="hidden" id="fornecedor" name="fornecedor" value="<?php echo $this->campos->fornecedor ?>"/>
   <input type="hidden" id="fornecedor_id" name="fornecedor_id" value="<?php echo $this->campos->fornecedor_id ?>"/>
-  <input type="hidden" id="form" name="form" value="pag" />
+  <input type="hidden" id="finalizar" name="finalizar" />
   <div class="form-group">
     <label for="forma_pag" class="col-sm-2 control-label">Forma de pagamento:</label>
     <div class="col-sm-10">
@@ -66,7 +65,6 @@
     ?>
   </table>
   <input type="submit" id="concluir" name="concluir" value="Concluir" />
-  <input type="hidden" id="finalizar" name="finalizar" />
   <!--<table class="table table-striped" class="display" id="tabela_compra">
     <thead>
       <th>Código</th>

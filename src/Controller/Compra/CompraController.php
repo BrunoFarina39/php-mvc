@@ -25,7 +25,11 @@
 			$this->compraFormPag->setInputFilter($this->compra->getInputFilter());
 			$this->compraFormPag->setData($post);
 			if($this->compraFormPag->isValid()){
-
+				if($post['finalizar']){
+					$this->compraFormPag->renderConclusao(true);
+				}else{
+					$this->compraFormPag->renderPagamento();
+				}
 			}else{
 				$compraForm = new CompraForm("add");
 				$compraForm->setInputFilter($this->compra->getInputFilter());

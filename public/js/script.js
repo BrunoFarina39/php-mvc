@@ -433,10 +433,10 @@ $("#preco").mask("R$");
     });
   
     if(i==0){
-      alert("Por Favor adicione pelo menos um produto");
-      $("#compra_form").submit(function(){
-        return false;
-      });
+      //alert("Por Favor adicione pelo menos um produto");
+     // $("#compra_form").submit(function(){
+        //return false;
+      //});
     }else{
       //retira o ultimo / da string
       produtos=produtos.substr(0,produtos.length-1)
@@ -462,7 +462,7 @@ $("#preco").mask("R$");
     $("#compra_form").submit();
   });
   $("#concluir").click(function(){
-    $("#form").val("add");
+    $("#finalizar").val(true);
   });
   $("#lvtotal").text(formataMoeda(parseFloat($("#valor_total").val()).toFixed(2)));
 });

@@ -50,8 +50,9 @@
 			$this->formaPagPost=$post['forma_pag'];
 			$this->parcelasPost=$post["parcelas"];
 			$this->meioPagPost=$post["meio_pag"];
-			$this->produtos = explode("/", $post['produtos']);
+			$this->campos->fornecedor_id=$post["fornecedor_id"];
 			$this->campos->produtosInput = $post['produtos'];
+			$this->produtos = explode("/", $post['produtos']);
 			foreach ($this->produtos as $key => $value) {
 				$this->produtos[$key]= explode("-", $value);
 			}
@@ -78,8 +79,6 @@
 						$this->campos->pagamento[$i]["valor"]=$valorParcela;
 				}
 			}
-			$this->campos->fornecedor=$post["fornecedor"];
-			$this->campos->fornecedor_id=$post["fornecedor_id"];
 		}
 
 		public function isValid()
@@ -87,9 +86,24 @@
 			return $this->inputFilter->isValid($this->campos);		 
 		}
 
-		function __destruct(){
+		public function renderPagamento(){
 			$masterView = new MasterView(MASTERVIEW::RENDER_ALL);
-			include 'src/View/Layout/compra/pagamento.php';						
+			include 'src/View/Layout/compra/pagamento.php';		
+		}
+
+		public function renderConclusao($status)
+		{
+			$masterView = new MasterView(MASTERVIEW::RENDER_ALL);
+			if($status){
+				include 'src/View/Layout/compra/sucesso.php';	
+			}
+			else{
+				include 'src/View/Layout/compra/falha.php';	
+			}
+		}
+
+		function __destruct(){
+							
 		}
 	}
 
