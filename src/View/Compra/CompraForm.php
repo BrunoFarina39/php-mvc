@@ -17,7 +17,6 @@
 			$this->campos->id = null;
 			$this->campos->fornecedor = "";
 			$this->campos->fornecedor_id = null;
-			$this->campos->produto = "";
 			$this->campos->produto_id = null;
 			$this->campos->qtde = 1;
 			$this->campos->desconto = 0;
@@ -41,13 +40,17 @@
 			}
 		}
 
-		function __destruct(){
+		public function render(){
 			$masterView = new MasterView(MASTERVIEW::RENDER_ALL);
 			if($this->acao  == "add"){
 				include 'src/View/Layout/compra/add.php';
 			}else{
 				include 'src/View/Layout/compra/edit.php';
-			}							
+			}		
+		}
+
+		function __destruct(){
+								
 		}
 	}
 

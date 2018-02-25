@@ -240,7 +240,11 @@
 					$compraController->actionIndex();break;
 				case 'add':
 					$compraController = new CompraController();
-					$compraController->actionAdd($_POST);break;
+					if(isset($param[2]))
+						$compraController->actionAddPag($_POST);
+					else
+						$compraController->actionAdd($_POST);
+					break;
 				case 'edit':
 					$compraController = new CompraController();
 					$compraController->actionEdit(@$param[2],$_POST,@$param[3],@$param[4]);break;

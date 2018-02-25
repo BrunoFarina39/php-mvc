@@ -7,62 +7,70 @@
 	class CompraFormPag extends AbstractForm{
 		private $acao;
 		private $campos;
-		private $formaPagPost;
-		private $parcelasPost;
-		private $meioPagPost;
+		private $formaPag;
+		private $parcelas;
+		private $meioPag;
 		private $produtos;
 		
 		function __construct(){
 			$this->campos = new \stdClass();
-			$this->campos->formaPag[0]['id']="1";
-			$this->campos->formaPag[0]['value']="À vista";
-			$this->campos->formaPag[1]['id']="2";
-			$this->campos->formaPag[1]['value']="À prazo";
-			$this->campos->valorTotal=0.00;
-			$this->campos->fornecedor=null;
-			$this->campos->fornecedor_id=null;
-			$this->campos->produtosInput=null;
+			
+			$this->campos->formaPag=1;
+			$this->campos->parcelas=1;
+			$this->campos->meioPag=4;
+			
+			$this->formaPag[0]['id']="1";
+			$this->formaPag[0]['value']="À vista";
+			$this->formaPag[1]['id']="2";
+			$this->formaPag[1]['value']="À prazo";
+			
 			for($i=1; $i < 13; $i++){
-				$this->campos->parcelas[$i]['id']=$i;
-				$this->campos->parcelas[$i]['value']=$i;
+				$this->parcelas[$i]['id']=$i;
+				$this->parcelas[$i]['value']=$i;
 			}
 			
-			$this->campos->meioPag[0]['id']=1;
-			$this->campos->meioPag[0]['value']="Boleto";
+			$this->meioPag[0]['id']=1;
+			$this->meioPag[0]['value']="Boleto";
 			
-			$this->campos->meioPag[1]['id']=2;
-			$this->campos->meioPag[1]['value']="Cartão";
+			$this->meioPag[1]['id']=2;
+			$this->meioPag[1]['value']="Cartão";
 			
-			$this->campos->meioPag[2]['id']=3;
-			$this->campos->meioPag[2]['value']="Cheque";
+			$this->meioPag[2]['id']=3;
+			$this->meioPag[2]['value']="Cheque";
 			
-			$this->campos->meioPag[3]['id']=4;	
-			$this->campos->meioPag[3]['value']="Dinheiro";
+			$this->meioPag[3]['id']=4;	
+			$this->meioPag[3]['value']="Dinheiro";
 			
-			$this->campos->meioPag[4]['id']=5;
-			$this->campos->meioPag[4]['value']="Nota promissória";
-			$this->campos->pagamento = array();
+			$this->meioPag[4]['id']=5;
+			$this->meioPag[4]['value']="Nota promissória";
 		}
 
 		public function setData($post)
 		{
+			
 			$this->campos->valorTotal=$post["valor_total"];
-			$this->formaPagPost=$post['forma_pag'];
-			$this->parcelasPost=$post["parcelas"];
-			$this->meioPagPost=$post["meio_pag"];
+			$this->campos->pagamento = array();
+			
+			if(!isset($post['form'])){
+				$this->campos->formaPag=$post['forma_pag'];
+				$this->campos->parcelas=$post["parcelas"];
+				$this->campos->meioPag=$post["meio_pag"];
+			}
+			
 			$this->campos->fornecedor_id=$post["fornecedor_id"];
-			$this->campos->produtosInput = $post['produtos'];
+			$this->campos->produtos = $post['produtos'];
 			$this->produtos = explode("/", $post['produtos']);
+			
 			foreach ($this->produtos as $key => $value) {
 				$this->produtos[$key]= explode("-", $value);
 			}
 
 			$data = new \DateTime();
-			$valorParcela = round($this->campos->valorTotal/$this->parcelasPost,2);
-			$resto = $this->campos->valorTotal - ($valorParcela * $this->parcelasPost);
+			$valorParcela = round($this->campos->valorTotal/$this->campos->parcelas,2);
+			$resto = $this->campos->valorTotal - ($valorParcela * $this->campos->parcelas);
 			
-			if($this->formaPagPost==1){
-				for($i=1; $i <= $post["parcelas"];$i++){
+			if($this->campos->formaPag==1){
+				for($i=1; $i <= $this->campos->parcelas;$i++){
 					$this->campos->pagamento[$i]["parcelas"]=$i+1;
 					$this->campos->pagamento[$i]["dataVenci"]=$data->format('d/m/Y');
 					$this->campos->pagamento[$i]["valor"]=$valorParcela;
@@ -73,7 +81,7 @@
 					$this->campos->pagamento[$i]["parcelas"]=$i+1;
 					$this->campos->pagamento[$i]["dataVenci"]=$data->format('d/m/Y');
 					$this->campos->pagamento[$i]["valor"]=$valorParcela;
-					if($i==$this->parcelasPost)
+					if($i==$this->campos->parcelas)
 						$this->campos->pagamento[$i]["valor"]=$valorParcela+$resto;
 					else
 						$this->campos->pagamento[$i]["valor"]=$valorParcela;
@@ -81,10 +89,13 @@
 			}
 		}
 
-		public function isValid()
+		public function isValid($post)
 		{
+			$this->campos->fornecedor_id=$post["fornecedor_id"];
+			$this->campos->produtos = $post['produtos'];
 			return $this->inputFilter->isValid($this->campos);		 
 		}
+
 
 		public function renderPagamento(){
 			$masterView = new MasterView(MASTERVIEW::RENDER_ALL);
@@ -103,7 +114,7 @@
 		}
 
 		function __destruct(){
-							
+						
 		}
 	}
 

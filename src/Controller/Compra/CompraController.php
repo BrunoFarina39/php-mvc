@@ -6,9 +6,12 @@
 	use View\Compra\compraFormPag;
 	use Model\Compra\Compra;
 	use Model\Compra\CompraDao;
-
+	use View\Compra\Instancia;
 	class CompraController extends AbstractController{
 
+		private $compra;
+		private $compraDao;
+		
 		function __construct(){
 			$this->compra = new Compra();
 			$this->compraDao = new CompraDao();
@@ -18,23 +21,29 @@
 		{
 			$acao = "add";
 			$compraForm = new CompraForm($acao);
+			$compraForm->render();
 		}
 
 		public function ActionAdd($post){
-			$this->compraFormPag = new CompraFormPag();
-			$this->compraFormPag->setInputFilter($this->compra->getInputFilter());
-			$this->compraFormPag->setData($post);
-			if($this->compraFormPag->isValid()){
-				if($post['finalizar']){
-					$this->compraFormPag->renderConclusao(true);
-				}else{
-					$this->compraFormPag->renderPagamento();
-				}
+			$this->compraForm= new CompraForm("add");
+			$this->compraForm->setInputFilter($this->compra->getInputFilter());
+			$this->compraForm->setData($post);
+			if($this->compraForm->isValid()){
+				$compraFormPag = new CompraFormPag();
+				$compraFormPag->setData($post);
+				$compraFormPag->renderPagamento();
 			}else{
-				$compraForm = new CompraForm("add");
-				$compraForm->setInputFilter($this->compra->getInputFilter());
-				$compraForm->setData($post);
-				$compraForm->isValid();
+				$this->compraForm->render();
+			}
+		}
+
+		public function ActionAddPag($post){
+			$compraFormPag = new CompraFormPag();
+			$compraFormPag->setData($post);
+			if($post['finalizar']){
+				$compraFormPag->renderConclusao(true);
+			}else{
+				$compraFormPag->renderPagamento();
 			}
 		}
 

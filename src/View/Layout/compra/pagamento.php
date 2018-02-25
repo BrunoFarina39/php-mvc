@@ -1,6 +1,6 @@
 <h1>Concluir Compra</h1>
-<form class="form-horizontal" id="compra_form" method="post" action="compra/add">
-  <input type="hidden" id="produtos" name="produtos" value="<?php echo $this->campos->produtosInput ?>"/>
+<form class="form-horizontal" id="compra_form" method="post" action="compra/add/pag">
+  <input type="hidden" id="produtos" name="produtos" value="<?php echo $this->campos->produtos ?>"/>
   <input type="hidden" id="valor_total" name="valor_total" value="<?php echo $this->campos->valorTotal ?>"/>
   <input type="hidden" id="fornecedor_id" name="fornecedor_id" value="<?php echo $this->campos->fornecedor_id ?>"/>
   <input type="hidden" id="finalizar" name="finalizar" />
@@ -9,8 +9,8 @@
     <div class="col-sm-10">
       <select id="forma_pag" name="forma_pag">
         <?php 
-          foreach ($this->campos->formaPag as $value) {
-            if($this->formaPagPost == $value['id']){
+          foreach ($this->formaPag as $value) {
+            if($this->campos->formaPag == $value['id']){
               echo "<option value='".$value['id']."' selected >".$value['value']."</option>";
             }else{
               echo "<option value='".$value['id']."'>".$value['value']."</option>";
@@ -25,8 +25,8 @@
     <div class="col-sm-10">
       <select id="parcelas" name="parcelas">
         <?php 
-          foreach ($this->campos->parcelas as $value) {
-            if($this->parcelasPost == $value["id"]){
+          foreach ($this->parcelas as $value) {
+            if($this->campos->parcelas == $value["id"]){
               echo "<option value='".$value['id']."' selected >".$value['value']."</option>";
             }else{
               echo "<option value='".$value['id']."'>".$value['value']."</option>";
@@ -41,8 +41,8 @@
     <div class="col-sm-10">
       <select id="meio_pag" name="meio_pag">
         <?php 
-          foreach ($this->campos->meioPag as $value) {
-            if($this->meioPagPost == $value["id"]){
+          foreach ($this->meioPag as $value) {
+            if($this->campos->meioPag == $value["id"]){
               echo "<option value='".$value['id']."' selected>".$value['value']."</option>";
             }else{
               echo "<option value='".$value['id']."'>".$value['value']."</option>";

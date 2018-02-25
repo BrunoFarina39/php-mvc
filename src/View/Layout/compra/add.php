@@ -50,7 +50,7 @@
        <button type="button" class="btn btn-default">Orçamento</button>
        <button type="submit" id="avancar" name="avancar" class="btn btn-default">Avançar</button>
        <input type="hidden" id="valor_total" name="valor_total" value="<?php echo $this->campos->valor_total ?>"/>
-       <label id="lvtotal" name="lvtotal"></label>
+       <label id="lvtotal" name="lvtotal"><?php echo $this->formataMoeda($this->campos->valor_total) ?></label>
     </div>
   </div>
   <table class="table table-striped" class="display" id="tabela_compra" width="100%">
@@ -73,8 +73,6 @@
   </table>
   </table>
   <input type="hidden" id="produtos" name="produtos" value="<?php echo $this->campos->produtos ?>" />
-  <input type="hidden" id="parcelas" name="parcelas" value="1" />
-  <input type="hidden" id="forma_pag" name="forma_pag" value="1" />
-  <input type="hidden" id="meio_pag" name="meio_pag" value="4" />
+  <input type="hidden" id="form" name="form" />
   <input type="hidden" id="finalizar" name="finalizar" />
 </form>

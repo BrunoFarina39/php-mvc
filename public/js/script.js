@@ -464,7 +464,6 @@ $("#preco").mask("R$");
   $("#concluir").click(function(){
     $("#finalizar").val(true);
   });
-  $("#lvtotal").text(formataMoeda(parseFloat($("#valor_total").val()).toFixed(2)));
 });
 //-------------------------------Document Jquery Fim------------------------------------------------------------------- 
 

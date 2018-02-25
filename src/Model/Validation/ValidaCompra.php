@@ -17,7 +17,7 @@
                		$retorno = false;
 				}
 
-				if(empty($campos->produtosInput)){
+				if(empty($campos->produtos)){
 					$this->inputFilter->setMessage("produtos","Por favor adicione pelo menos um produto");
                		$retorno = false;
 				}
