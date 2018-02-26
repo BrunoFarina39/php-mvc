@@ -21,6 +21,12 @@
     </div>
   </div>
   <div class="form-group">
+    <label for="entrada" class="col-sm-2 control-label">Entrada:</label>
+    <div class="col-sm-10">
+      <input type="text" id="entrada" name="entrada" value="<?php echo $this->campos->entrada ?>" />
+    </div>
+  </div>
+  <div class="form-group">
     <label for="parcelas" class="col-sm-2 control-label">Número de Parcelas:</label>
     <div class="col-sm-10">
       <select id="parcelas" name="parcelas">
@@ -50,6 +56,12 @@
           }
         ?>
       </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="carencia" class="col-sm-2 control-label">Carência(Dias):</label>
+    <div class="col-sm-10">
+      <input type="text" id="carencia" name="carencia" value="<?php echo $this->campos->carencia ?>" min="0" />
     </div>
   </div>
   <table class="table table-striped" class="display" id="tabela_parcelas">

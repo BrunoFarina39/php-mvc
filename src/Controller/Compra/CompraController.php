@@ -19,13 +19,12 @@
 
 		public function actionIndex()
 		{
-			$acao = "add";
-			$compraForm = new CompraForm($acao);
+			$compraForm = new CompraForm();
 			$compraForm->render();
 		}
 
 		public function ActionAdd($post){
-			$this->compraForm= new CompraForm("add");
+			$this->compraForm= new CompraForm();
 			$this->compraForm->setInputFilter($this->compra->getInputFilter());
 			$this->compraForm->setData($post);
 			if($this->compraForm->isValid()){
@@ -38,12 +37,17 @@
 		}
 
 		public function ActionAddPag($post){
-			$compraFormPag = new CompraFormPag();
-			$compraFormPag->setData($post);
-			if($post['finalizar']){
-				$compraFormPag->renderConclusao(true);
+			if($this->isPost()){
+				$compraFormPag = new CompraFormPag();
+				$compraFormPag->setData($post);
+				if($post['finalizar']){
+					$compraFormPag->renderConclusao(true);
+				}else{
+					$compraFormPag->renderPagamento();
+				}
 			}else{
-				$compraFormPag->renderPagamento();
+				$this->compraForm= new CompraForm();
+				$this->compraForm->render();
 			}
 		}
 

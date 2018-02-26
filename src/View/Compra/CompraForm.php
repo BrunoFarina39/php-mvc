@@ -9,9 +9,8 @@
 		private $campos;
 		private $produtos;
 		
-		function __construct($acao){
+		function __construct(){
 			parent::__construct();
-			$this->acao = $acao;
 			$this->inputFilter = new InputFilter();
 			$this->campos = new \stdClass();
 			$this->campos->id = null;
@@ -42,11 +41,7 @@
 
 		public function render(){
 			$masterView = new MasterView(MASTERVIEW::RENDER_ALL);
-			if($this->acao  == "add"){
-				include 'src/View/Layout/compra/add.php';
-			}else{
-				include 'src/View/Layout/compra/edit.php';
-			}		
+			include 'src/View/Layout/compra/add.php';		
 		}
 
 		function __destruct(){

@@ -5,7 +5,6 @@
 	use Util\MasterView;
 
 	class CompraFormPag extends AbstractForm{
-		private $acao;
 		private $campos;
 		private $formaPag;
 		private $parcelas;
@@ -18,6 +17,8 @@
 			$this->campos->formaPag=1;
 			$this->campos->parcelas=1;
 			$this->campos->meioPag=4;
+			$this->campos->carencia=0;
+			$this->campos->entrada=$this->formataMoeda(0);
 			
 			$this->formaPag[0]['id']="1";
 			$this->formaPag[0]['value']="À vista";
@@ -50,11 +51,19 @@
 			
 			$this->campos->valorTotal=$post["valor_total"];
 			$this->campos->pagamento = array();
-			
+				$data = new \DateTime();
+
 			if(!isset($post['form'])){
 				$this->campos->formaPag=$post['forma_pag'];
 				$this->campos->parcelas=$post["parcelas"];
 				$this->campos->meioPag=$post["meio_pag"];
+				$this->campos->carencia=$post["carencia"];
+				$this->campos->entrada=$post["entrada"];
+				$i=0;
+				while($i < $post["carencia"]){
+					$data->modify('+1 day');
+					$i++;
+				}
 			}
 			
 			$this->campos->fornecedor_id=$post["fornecedor_id"];
@@ -64,11 +73,9 @@
 			foreach ($this->produtos as $key => $value) {
 				$this->produtos[$key]= explode("-", $value);
 			}
+			$valorParcela = round(($this->campos->valorTotal-$this->formataMoedaBD($this->campos->entrada))/$this->campos->parcelas,2);
+			$resto = ($this->campos->valorTotal-$this->formataMoedaBD($this->campos->entrada)) - ($valorParcela * $this->campos->parcelas);
 
-			$data = new \DateTime();
-			$valorParcela = round($this->campos->valorTotal/$this->campos->parcelas,2);
-			$resto = $this->campos->valorTotal - ($valorParcela * $this->campos->parcelas);
-			
 			if($this->campos->formaPag==1){
 				for($i=1; $i <= $this->campos->parcelas;$i++){
 					$this->campos->pagamento[$i]["parcelas"]=$i+1;
@@ -77,15 +84,18 @@
 				}
 			}else{
 				for($i=1; $i <= $post["parcelas"];$i++){
-					$data->modify('+1 month');
-					$this->campos->pagamento[$i]["parcelas"]=$i+1;
-					$this->campos->pagamento[$i]["dataVenci"]=$data->format('d/m/Y');
-					$this->campos->pagamento[$i]["valor"]=$valorParcela;
-					if($i==$this->campos->parcelas)
-						$this->campos->pagamento[$i]["valor"]=$valorParcela+$resto;
-					else
+						if($i != 1){
+							$data->modify('+1 month');
+						}
+						
+						$this->campos->pagamento[$i]["parcelas"]=$i+1;
+						$this->campos->pagamento[$i]["dataVenci"]=$data->format('d/m/Y');
 						$this->campos->pagamento[$i]["valor"]=$valorParcela;
-				}
+						if($i==$this->campos->parcelas)
+							$this->campos->pagamento[$i]["valor"]=$valorParcela+$resto;
+						else
+							$this->campos->pagamento[$i]["valor"]=$valorParcela;
+					}
 			}
 		}
 

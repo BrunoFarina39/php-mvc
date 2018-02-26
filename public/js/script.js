@@ -25,7 +25,7 @@ $(document).ready(function(){
         	}
  	}); 
   $(function(){
-    $('#preco_compra,#preco_venda,#preco,#salario').priceFormat({
+    $('#preco_compra,#preco_venda,#preco,#salario,#entrada').priceFormat({
       prefix: 'R$ ',
       centsSeparator: ',',
       thousandsSeparator: '.'
@@ -331,7 +331,6 @@ $("#marca_form").validate({
   
 //-------------------------------Produto Fim---------------------------------------------------------------------------
 //---------------------------------Serviço-----------------------------------------------------------------------------
-$("#preco").mask("R$");
 //-------------------------------Movimentação de Compra----------------------------------------------------------------
   $("#carregar_fornecedor").html("<img src='public/imagens/load.gif'/>&nbsp;<span>Carregando Fornecedores</span>");
   $("#fornecedor").attr("disabled", true);
@@ -463,6 +462,31 @@ $("#preco").mask("R$");
   });
   $("#concluir").click(function(){
     $("#finalizar").val(true);
+  });
+
+  $("#carencia").blur(function(){
+    if($(this).val()!=1){
+       $("#forma_pag").val(2);
+     }else{
+      $("#forma_pag").val(1);
+     }
+    $("#compra_form").submit();
+  });
+  $("#concluir").click(function(){
+    $("#finalizar").val(true);
+  });
+
+  $("#entrada").blur(function(){
+    $("#compra_form").submit();
+  });
+
+  $("#carencia").keypress(function(event){
+    if(event.which >= 48 && event.which <=57 || event.which == 8){
+      return true;
+    }else{
+      return false;
+
+    }
   });
 });
 //-------------------------------Document Jquery Fim------------------------------------------------------------------- 

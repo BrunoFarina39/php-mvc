@@ -129,7 +129,7 @@
 		public function formataMoeda($valor)
 		{
 			if(empty($valor))
-				return "";
+				return "R$ 0,00";
 			
 			$valor = join("", explode("R$",$valor));
 			$valor = join("",explode(" ", $valor));
