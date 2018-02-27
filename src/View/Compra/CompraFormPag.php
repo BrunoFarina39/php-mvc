@@ -49,23 +49,13 @@
 		public function setData($post)
 		{
 			
+			$valorTotal = 0;
+			$valorParcela=0;
+			$entradaFormatada;
 			$this->campos->valorTotal=$post["valor_total"];
 			$this->campos->pagamento = array();
-				$data = new \DateTime();
+			$data = new \DateTime();
 
-			if(!isset($post['form'])){
-				$this->campos->formaPag=$post['forma_pag'];
-				$this->campos->parcelas=$post["parcelas"];
-				$this->campos->meioPag=$post["meio_pag"];
-				$this->campos->carencia=$post["carencia"];
-				$this->campos->entrada=$post["entrada"];
-				$i=0;
-				while($i < $post["carencia"]){
-					$data->modify('+1 day');
-					$i++;
-				}
-			}
-			
 			$this->campos->fornecedor_id=$post["fornecedor_id"];
 			$this->campos->produtos = $post['produtos'];
 			$this->produtos = explode("/", $post['produtos']);
@@ -73,8 +63,31 @@
 			foreach ($this->produtos as $key => $value) {
 				$this->produtos[$key]= explode("-", $value);
 			}
-			$valorParcela = round(($this->campos->valorTotal-$this->formataMoedaBD($this->campos->entrada))/$this->campos->parcelas,2);
-			$resto = ($this->campos->valorTotal-$this->formataMoedaBD($this->campos->entrada)) - ($valorParcela * $this->campos->parcelas);
+
+			if(!isset($post['form'])){
+				$this->campos->formaPag=$post['forma_pag'];
+				$this->campos->parcelas=$post["parcelas"];
+				$this->campos->meioPag=$post["meio_pag"];
+				$this->campos->carencia=$post["carencia"];
+				$this->campos->entrada=$post["entrada"];
+				
+				$i=0;
+				while($i < $post["carencia"]){
+					$data->modify('+1 day');
+					$i++;
+				}
+			}
+			
+			$entradaFormatada = $this->formataMoedaBD($this->campos->entrada);
+			if($this->campos->valorTotal >= $entradaFormatada){
+				$valorTotal = $this->campos->valorTotal - $entradaFormatada;
+			}else{
+				$valorTotal = $this->campos->valorTotal;
+				echo "<script>alert('Valor de entrada maior do que o valor total')</script>";
+			}
+	
+			$valorParcela = round($valorTotal / $this->campos->parcelas,2);
+			$resto = $valorTotal - ($valorParcela * $this->campos->parcelas);
 
 			if($this->campos->formaPag==1){
 				for($i=1; $i <= $this->campos->parcelas;$i++){
@@ -84,18 +97,18 @@
 				}
 			}else{
 				for($i=1; $i <= $post["parcelas"];$i++){
-						if($i != 1){
-							$data->modify('+1 month');
-						}
-						
-						$this->campos->pagamento[$i]["parcelas"]=$i+1;
-						$this->campos->pagamento[$i]["dataVenci"]=$data->format('d/m/Y');
-						$this->campos->pagamento[$i]["valor"]=$valorParcela;
-						if($i==$this->campos->parcelas)
-							$this->campos->pagamento[$i]["valor"]=$valorParcela+$resto;
-						else
-							$this->campos->pagamento[$i]["valor"]=$valorParcela;
+					if($i != 1){
+						$data->modify('+1 month');
 					}
+						
+					$this->campos->pagamento[$i]["parcelas"]=$i+1;
+					$this->campos->pagamento[$i]["dataVenci"]=$data->format('d/m/Y');
+					$this->campos->pagamento[$i]["valor"]=$valorParcela;
+					if($i==$this->campos->parcelas)
+						$this->campos->pagamento[$i]["valor"]=$valorParcela+$resto;
+					else
+						$this->campos->pagamento[$i]["valor"]=$valorParcela;
+				}
 			}
 		}
 

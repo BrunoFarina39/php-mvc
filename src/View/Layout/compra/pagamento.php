@@ -23,7 +23,7 @@
   <div class="form-group">
     <label for="entrada" class="col-sm-2 control-label">Entrada:</label>
     <div class="col-sm-10">
-      <input type="text" id="entrada" name="entrada" value="<?php echo $this->campos->entrada ?>" />
+      <input type="text" id="entrada" name="entrada" value="<?php echo $this->campos->entrada ?>" <?php echo $this->campos->formaPag == 1 ? "readonly":"";   ?> />
     </div>
   </div>
   <div class="form-group">
@@ -62,6 +62,11 @@
     <label for="carencia" class="col-sm-2 control-label">Carência(Dias):</label>
     <div class="col-sm-10">
       <input type="text" id="carencia" name="carencia" value="<?php echo $this->campos->carencia ?>" min="0" />
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-10">
+      <input type="submit" id="atualizar" name="atualizar" value="Atualizar" />
     </div>
   </div>
   <table class="table table-striped" class="display" id="tabela_parcelas">

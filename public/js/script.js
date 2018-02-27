@@ -447,7 +447,7 @@ $("#marca_form").validate({
     if($(this).val()==1){
       $("#parcelas").val(1);
     }else{
-      $("#parcelas").val(2)
+      $("#parcelas").val(2);
     }
     $("#compra_form").submit();
   });
