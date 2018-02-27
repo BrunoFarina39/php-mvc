@@ -443,34 +443,35 @@ $("#marca_form").validate({
     }
   });
   
-  $("#forma_pag").change(function(){
+  $("#forma_pag").click(function(){
     if($(this).val()==1){
-      $("#parcelas").val(1);
+      $("#parcelas").html("<option value='1'>1</option>");
+      $("#carencia").val("");
     }else{
-      $("#parcelas").val(2);
+      $("#parcelas").html("<option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value=''>5</option>"+
+        "<option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option>"+
+        "<option value='10'>10</option><option value='11'>11</option><option value='12'>12</option>");
     }
-    $("#compra_form").submit();
   });
 
-  $("#parcelas").change(function(){
-    if($(this).val()!=1){
-       $("#forma_pag").val(2);
-     }else{
+  $("#parcelas").click(function(){
+    if($(this).val()==1 && $("#carencia").val()==0){
       $("#forma_pag").val(1);
-     }
-    $("#compra_form").submit();
+    }else{
+      $("#forma_pag").val(2);
+    }
   });
+  
   $("#concluir").click(function(){
     $("#finalizar").val(true);
   });
 
   $("#carencia").blur(function(){
-    if($(this).val()!=1){
-       $("#forma_pag").val(2);
+    if($(this).val()==0 && $("#parcelas").val() == 1){
+        $("#forma_pag").val(1);
      }else{
-      $("#forma_pag").val(1);
+      $("#forma_pag").val(2);
      }
-    $("#compra_form").submit();
   });
   $("#concluir").click(function(){
     $("#finalizar").val(true);
