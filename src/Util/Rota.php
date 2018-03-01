@@ -265,7 +265,10 @@
 					$compraController->buscaPrecoCompra(@$param[2]);break;	
 				case 'visualizaCompraPorId':
 					$compraController = new CompraController();
-					$compraController->visualizaCompraPorId(@$param[2]);break;	
+					$compraController->visualizaCompraPorId(@$param[2]);break;
+				case 'tabela':
+					$compraController = new CompraController();
+					$compraController->getTabela($_POST);break;		
 			}	
 		}
 	}	

@@ -447,10 +447,13 @@ $("#marca_form").validate({
     if($(this).val()==1){
       $("#parcelas").html("<option value='1'>1</option>");
       $("#carencia").val("");
+      $("#entrada").val("R$ 0,00");
+      $("#entrada").attr("readonly",true);
     }else{
       $("#parcelas").html("<option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value=''>5</option>"+
         "<option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option>"+
         "<option value='10'>10</option><option value='11'>11</option><option value='12'>12</option>");
+       $("#entrada").attr("readonly",false);
     }
   });
 
@@ -469,8 +472,11 @@ $("#marca_form").validate({
   $("#carencia").blur(function(){
     if($(this).val()==0 && $("#parcelas").val() == 1){
         $("#forma_pag").val(1);
+        $("#entrada").val("R$ 0,00");
+        $("#entrada").attr("readonly",true);
      }else{
       $("#forma_pag").val(2);
+      $("#entrada").attr("readonly",false);
      }
   });
   $("#concluir").click(function(){
@@ -478,7 +484,7 @@ $("#marca_form").validate({
   });
 
   $("#entrada").blur(function(){
-    $("#compra_form").submit();
+  
   });
 
   $("#carencia").keypress(function(event){
@@ -488,6 +494,28 @@ $("#marca_form").validate({
       return false;
 
     }
+  });
+  $("#atualizar").click(function(){
+    /*$.ajax({
+        url: "tabela.html",
+      type: "get",
+      dataType: 'html',
+      success: function(data) {
+          $("section").html(data);
+      }
+    });*/
+    //$.ajax("tabela.html",{dataType: 'html'}).done(function(data){
+      //$("section").html(data);
+    //});
+    $.ajax({
+        url: "http://localhost/compra/tabela",
+        method: 'POST',
+        data: { forma_pag: $("#forma_pag").val(), entrada: $("#entrada").val(), parcelas: $("#parcelas").val(), meio_pag: $("#meio_pag").val(), carencia: $("#carencia").val(), valor_total: $("#valor_total").val(),
+        dataType: 'html'
+        }
+    }).done(function(data) {
+        $("#div_tabela").html(data);
+    });
   });
 });
 //-------------------------------Document Jquery Fim------------------------------------------------------------------- 

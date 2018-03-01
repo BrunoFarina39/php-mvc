@@ -51,6 +51,11 @@
 			}
 		}
 
+		public function getTabela($post){
+			$compraFormPag = new CompraFormPag();
+			$compraFormPag->renderTabela($post);
+		}
+
 		public function listarFornecedores(){
 			header('Content-Type: application/json; charset=utf-8');
 			echo json_encode($this->compraDao->listarFornecedores());

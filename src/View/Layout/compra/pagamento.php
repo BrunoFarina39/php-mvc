@@ -23,7 +23,7 @@
   <div class="form-group">
     <label for="entrada" class="col-sm-2 control-label">Entrada:</label>
     <div class="col-sm-10">
-      <input type="text" id="entrada" name="entrada" value="<?php echo $this->campos->entrada ?>" <?php echo $this->campos->formaPag == 1 ? "readonly":"";   ?> />
+      <input type="text" id="entrada" name="entrada" value="<?php echo $this->campos->entrada ?>" readonly />
     </div>
   </div>
   <div class="form-group">
@@ -32,7 +32,7 @@
       <select id="parcelas" name="parcelas">
         <?php 
           if($this->campos->formaPag != 1){
-            foreach ($this->parcelas as $value) {
+            foreach ($this->parcelas as $value) { 
               if($this->campos->parcelas == $value["id"]){
                 echo "<option value='".$value['id']."' selected >".$value['value']."</option>";
               }else{
@@ -71,21 +71,12 @@
   </div>
   <div class="form-group">
     <div class="col-sm-10">
-      <input type="submit" id="atualizar" name="atualizar" value="Atualizar" />
+      <input type="button" id="atualizar" name="atualizar" value="Atualizar" />
     </div>
   </div>
-  <table class="table table-striped" class="display" id="tabela_parcelas">
-    <thead>
-      <th>Parcela</th>
-      <th>Vencimento</th>
-      <th>Valor</th>
-    </thead>
-    <?php 
-      foreach ($this->campos->pagamento as $value) {
-        echo "<tbody><tr><td>".($value["parcelas"]-1)."</td><td>".$value["dataVenci"]."</td><td>".$this->formataMoeda($value["valor"])."</td></tr></tbody>";
-      }
-    ?>
-  </table>
+  <div id="div_tabela">
+    
+  </div>
   <input type="submit" id="concluir" name="concluir" value="Concluir" />
   <!--<table class="table table-striped" class="display" id="tabela_compra">
     <thead>
