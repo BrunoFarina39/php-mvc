@@ -19,8 +19,8 @@
 			$this->campos->produto_id = null;
 			$this->campos->qtde = 1;
 			$this->campos->desconto = 0;
-			$this->campos->produtos="";
-			$this->campos->valor_total=0;
+			$this->campos->produtos = "";
+			$this->campos->valor_total = 0;
 			$this->produtos = array();
 		}
 
@@ -35,7 +35,7 @@
 			if(!empty($data["produtos"]))
 				$this->produtos = explode("/", $data['produtos']);
 			foreach ($this->produtos as $key => $value) {
-				$this->produtos[$key]= explode("-", $value);
+				$this->produtos[$key] = explode("-", $value);
 			}
 		}
 

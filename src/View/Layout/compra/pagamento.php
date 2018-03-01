@@ -1,5 +1,5 @@
 <h1>Concluir Compra</h1>
-<form class="form-horizontal" id="compra_form" method="post" action="compra/add/pag">
+<form class="form-horizontal" id="compra_form_pag" method="post" action="compra/add/pag">
   <input type="hidden" id="produtos" name="produtos" value="<?php echo $this->campos->produtos ?>"/>
   <input type="hidden" id="valor_total" name="valor_total" value="<?php echo $this->campos->valorTotal ?>"/>
   <input type="hidden" id="fornecedor_id" name="fornecedor_id" value="<?php echo $this->campos->fornecedor_id ?>"/>
@@ -31,18 +31,13 @@
     <div class="col-sm-10">
       <select id="parcelas" name="parcelas">
         <?php 
-          if($this->campos->formaPag != 1){
-            foreach ($this->parcelas as $value) { 
-              if($this->campos->parcelas == $value["id"]){
-                echo "<option value='".$value['id']."' selected >".$value['value']."</option>";
-              }else{
-                echo "<option value='".$value['id']."'>".$value['value']."</option>";
-              }
+          foreach ($this->parcelas as $value) { 
+            if($this->campos->parcelas == $value["id"]){
+              echo "<option value='".$value['id']."' selected >".$value['value']."</option>";
+            }else{
+              echo "<option value='".$value['id']."'>".$value['value']."</option>";
             }
-          }else{
-            echo "<option value='1'>1</option>";
-          }
-          
+          }      
         ?>
       </select>
     </div>
@@ -71,7 +66,7 @@
   </div>
   <div class="form-group">
     <div class="col-sm-10">
-      <input type="button" id="atualizar" name="atualizar" value="Atualizar" />
+      <input type="button" id="atualizar" name="atualizar" value="Atualizar Tabela" />
     </div>
   </div>
   <div id="div_tabela">

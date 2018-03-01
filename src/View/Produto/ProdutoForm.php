@@ -72,7 +72,6 @@
 		function __destruct()
 		{
 			$this->campos->preco_compra = $this->formataMoeda($this->campos->preco_compra);
-			echo $this->campos->preco_compra;
 			$this->campos->preco_venda = $this->formataMoeda($this->campos->preco_venda);
 			$masterView = new MasterView(MASTERVIEW::RENDER_ALL);
 			echo $this->msgSucesso;

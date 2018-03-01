@@ -450,7 +450,7 @@ $("#marca_form").validate({
       $("#entrada").val("R$ 0,00");
       $("#entrada").attr("readonly",true);
     }else{
-      $("#parcelas").html("<option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value=''>5</option>"+
+      $("#parcelas").html("<option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option>"+
         "<option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option>"+
         "<option value='10'>10</option><option value='11'>11</option><option value='12'>12</option>");
        $("#entrada").attr("readonly",false);
@@ -460,8 +460,11 @@ $("#marca_form").validate({
   $("#parcelas").click(function(){
     if($(this).val()==1 && $("#carencia").val()==0){
       $("#forma_pag").val(1);
+      $("#entrada").val("R$ 0,00");
+      $("#entrada").attr("readonly",true);
     }else{
       $("#forma_pag").val(2);
+       $("#entrada").attr("readonly",false);
     }
   });
   
@@ -510,7 +513,19 @@ $("#marca_form").validate({
     $.ajax({
         url: "http://localhost/compra/tabela",
         method: 'POST',
-        data: { forma_pag: $("#forma_pag").val(), entrada: $("#entrada").val(), parcelas: $("#parcelas").val(), meio_pag: $("#meio_pag").val(), carencia: $("#carencia").val(), valor_total: $("#valor_total").val(),
+        data: { forma_pag: $("#forma_pag").val(), entrada: formataMoedaBD($("#entrada").val()), parcelas: $("#parcelas").val(), meio_pag: $("#meio_pag").val(), carencia: $("#carencia").val(), valor_total: $("#valor_total").val(),
+        dataType: 'html'
+        }
+    }).done(function(data) {
+        $("#div_tabela").html(data);
+    });
+  });
+
+  $("#compra_form_pag").ready(function(){
+    $.ajax({
+        url: "http://localhost/compra/tabela",
+        method: 'POST',
+        data: { forma_pag: $("#forma_pag").val(), entrada: formataMoedaBD($("#entrada").val()), parcelas: $("#parcelas").val(), meio_pag: $("#meio_pag").val(), carencia: $("#carencia").val(), valor_total: $("#valor_total").val(),
         dataType: 'html'
         }
     }).done(function(data) {
@@ -777,8 +792,9 @@ function formataFone(fone){
 
 function formataMoeda(valor)
 {
-  if(valor == "")
-    return "";
+  if(valor == null || valor == ""){
+    return "R$ 0,00"
+  }
   if(typeof valor === 'number'){
     valor=String(valor);
   }
@@ -807,6 +823,9 @@ function formataMoeda(valor)
 }
 
 function formataMoedaBD(valor){
+  if(valor == null || valor == ""){
+    return 0.00
+  }
   valor = valor.split("R$").join("");
   valor = valor.split(" ").join("");
   valor = valor.split(".").join("");

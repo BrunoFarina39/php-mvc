@@ -6,7 +6,7 @@
     </thead>
     <?php 
       foreach ($this->campos->pagamento as $value) {
-        echo "<tbody><tr><td>".($value["parcelas"]-1)."</td><td>".$value["dataVenci"]."</td><td>".$this->formataMoeda($value["valor"])."</td></tr></tbody>";
+        echo "<tbody><tr><td>".($value["parcelas"])."</td><td>".$value["dataVenci"]."</td><td>".$this->formataMoeda($value["valor"])."</td></tr></tbody>";
       }
     ?>
   </table>

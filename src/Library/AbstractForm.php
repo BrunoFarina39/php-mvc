@@ -69,6 +69,9 @@
 
 		public function formataCpfCnpj($insc)
 		{	   	
+		   	if(!isset($insc) || empty($insc))
+				return "";
+
 		   	$insc = join("", explode(".",$insc));
 		   	$insc = join("", explode("-",$insc));
 		   	$insc = join("", explode("/",$insc));
@@ -93,6 +96,9 @@
   
   		public function formataCep($cep)
   		{
+  			if(!isset($cep) || empty($cep))
+				return "";
+
   			$cep = $this->remCaracEspecial($cep);
   			$tamanho = strlen($cep);
   			if($tamanho == 8){
@@ -107,6 +113,9 @@
 
   		public function formataFone($fone)
   		{
+			if(!isset($fone) || empty($fone))
+				return "";
+
 			$fone = $this->remCaracEspecial($fone);
 			$tamanho = strlen($fone);
 			 if($tamanho == 10){
@@ -128,7 +137,7 @@
 
 		public function formataMoeda($valor)
 		{
-			if(empty($valor))
+			if(!isset($valor) || empty($valor))
 				return "R$ 0,00";
 			
 			$valor = join("", explode("R$",$valor));
@@ -161,9 +170,11 @@
 			return "R$ ".number_format(floatval($valor),2,",",".");
 		}	
 		public function formataMoedaBD($valor){
+		  if(!isset($valor) || empty($valor))
+			return 0.00;
+
 		  $valor = join("",explode("R$", $valor));
-		  $valor = join("",explode(" ", $valor));
-		  $valor = join("",explode(".", $valor));  
+		  $valor = join("",explode(" ", $valor)); 
 		  $valor = str_replace(",", ".", $valor);
 		  $valor = floatval($valor);
 		  return number_format($valor,2,".","");

@@ -24,16 +24,22 @@
 		}
 
 		public function ActionAdd($post){
-			$this->compraForm= new CompraForm();
+			$this->compraForm = new CompraForm();
 			$this->compraForm->setInputFilter($this->compra->getInputFilter());
 			$this->compraForm->setData($post);
-			if($this->compraForm->isValid()){
-				$compraFormPag = new CompraFormPag();
-				$compraFormPag->setData($post);
-				$compraFormPag->renderPagamento();
+			if($this->isPost()){
+				if($this->compraForm->isValid()){
+					$compraFormPag = new CompraFormPag();
+					$compraFormPag->setData($post);
+					$compraFormPag->renderPagamento();
+				}else{
+					$this->compraForm->render();
+				}
 			}else{
+				$this->compraForm = new CompraForm();
 				$this->compraForm->render();
 			}
+			
 		}
 
 		public function ActionAddPag($post){
@@ -46,7 +52,7 @@
 					$compraFormPag->renderPagamento();
 				}
 			}else{
-				$this->compraForm= new CompraForm();
+				$this->compraForm = new CompraForm();
 				$this->compraForm->render();
 			}
 		}
