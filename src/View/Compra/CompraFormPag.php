@@ -24,10 +24,9 @@
 			$this->formaPag[1]['id'] = "2";
 			$this->formaPag[1]['value'] = "À prazo";
 			
-			for($i=1; $i < 13; $i++){
-				$this->parcelas[$i]['id'] = $i;
-				$this->parcelas[$i]['value'] = $i;
-			}
+		
+			$this->parcelas['id'] = 1;
+			$this->parcelas['value'] = 1;
 			
 			$this->meioPag[0]['id'] = 1;
 			$this->meioPag[0]['value'] = "Boleto";

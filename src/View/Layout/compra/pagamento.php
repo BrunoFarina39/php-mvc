@@ -31,13 +31,7 @@
     <div class="col-sm-10">
       <select id="parcelas" name="parcelas">
         <?php 
-          foreach ($this->parcelas as $value) { 
-            if($this->campos->parcelas == $value["id"]){
-              echo "<option value='".$value['id']."' selected >".$value['value']."</option>";
-            }else{
-              echo "<option value='".$value['id']."'>".$value['value']."</option>";
-            }
-          }      
+          echo "<option value='".$this->parcelas['id']."' selected >".$this->parcelas['value']."</option>";   
         ?>
       </select>
     </div>

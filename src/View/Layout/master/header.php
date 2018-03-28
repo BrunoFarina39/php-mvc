@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<base href="<?php echo "http://". $_SERVER["HTTP_HOST"].$_SERVER["SCRIPT_NAME"]; ?>">
+	<base href="<?php echo "http://". $_SERVER["HTTP_HOST"] ?>">
   <meta charset="UTF-8">
   <meta name="viewport" content="width:device-width,initial-scale:1.0">
   <title>Sistema</title>

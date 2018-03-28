@@ -8,7 +8,7 @@
 		public function __construct(int $value)
 		{
 			if($value == 0)
-				include "src/View/Layout/master/header.html";
+				include "src/View/Layout/master/header.php";
 			else
 				include "src/View/Layout/master/scriptCss.html";
 		}

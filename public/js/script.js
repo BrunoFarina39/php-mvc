@@ -368,7 +368,16 @@ $("#marca_form").validate({
           disabled:false, //autocomplete habilitado
           select: function(event, ui) {
             event.preventDefault()
-            $("#produto_id").val(ui.item.value);  
+            $("#produto_id").val(ui.item.value);
+            $("#carregar_produto_preco").html("<img src='public/imagens/load.gif'/>&nbsp;<span>Carregando Produtos</span>");
+            $("#compra_form button").attr("disabled", true);
+            $.get("http://localhost/compra/buscaPrecoCompra/"+$("#produto_id").val(),
+            function(dados){
+              $("#preco_compra").val(formataMoeda(dados.preco));
+              $("#compra_form button").attr("disabled", false);
+              $("#carregar_produto_preco").html("");    
+            },"json");
+            $("#preco_compra").attr("disabled", false);  
           },
           focus: function(event, ui) {
             event.preventDefault();
@@ -382,18 +391,6 @@ $("#marca_form").validate({
 
   $("#estado").change(function(){
     $("#cidade").val("");
-  });
-
-  $("#produto").blur(function(){
-    $("#carregar_produto_preco").html("<img src='public/imagens/load.gif'/>&nbsp;<span>Carregando Produtos</span>");
-    $("#compra_form button").attr("disabled", true);
-    $.get("http://localhost/compra/buscaPrecoCompra/"+$("#produto_id").val(),
-      function(dados){
-        $("#preco_compra").val(formataMoeda(dados.preco));
-        $("#compra_form button").attr("disabled", false);
-        $("#carregar_produto_preco").html("");    
-    },"json");
-    $("#preco_compra").attr("disabled", false);
   });
 
   var vTotalCompa=0;
@@ -443,13 +440,13 @@ $("#marca_form").validate({
     }
   });
   
-  $("#forma_pag").click(function(){
+  $("#forma_pag").change(function(){
     if($(this).val()==1){
       $("#parcelas").html("<option value='1'>1</option>");
       $("#carencia").val("");
       $("#entrada").val("R$ 0,00");
       $("#entrada").attr("readonly",true);
-    }else{
+    }else{    
       $("#parcelas").html("<option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option>"+
         "<option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option>"+
         "<option value='10'>10</option><option value='11'>11</option><option value='12'>12</option>");
@@ -457,7 +454,7 @@ $("#marca_form").validate({
     }
   });
 
-  $("#parcelas").click(function(){
+  /*$("#parcelas").click(function(){
     if($(this).val()==1 && $("#carencia").val()==0){
       $("#forma_pag").val(1);
       $("#entrada").val("R$ 0,00");
@@ -466,7 +463,7 @@ $("#marca_form").validate({
       $("#forma_pag").val(2);
        $("#entrada").attr("readonly",false);
     }
-  });
+  });*/
   
   $("#concluir").click(function(){
     $("#finalizar").val(true);
