@@ -3,7 +3,6 @@
   <input type="hidden" id="produtos" name="produtos" value="<?php echo $this->campos->produtos ?>"/>
   <input type="hidden" id="valor_total" name="valor_total" value="<?php echo $this->campos->valorTotal ?>"/>
   <input type="hidden" id="fornecedor_id" name="fornecedor_id" value="<?php echo $this->campos->fornecedor_id ?>"/>
-  <input type="hidden" id="finalizar" name="finalizar" />
   <div class="form-group">
     <label for="forma_pag" class="col-sm-2 control-label">Forma de pagamento:</label>
     <div class="col-sm-10">
@@ -55,7 +54,7 @@
   <div class="form-group">
     <label for="carencia" class="col-sm-2 control-label">Carência(Dias):</label>
     <div class="col-sm-10">
-      <input type="text" id="carencia" name="carencia" value="<?php echo $this->campos->carencia ?>" min="0" />
+      <input type="text" id="carencia" name="carencia" readonly="true" value="<?php echo $this->campos->carencia ?>" min="0" />
     </div>
   </div>
   <div class="form-group">

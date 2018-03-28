@@ -46,11 +46,7 @@
 			if($this->isPost()){
 				$compraFormPag = new CompraFormPag();
 				$compraFormPag->setData($post);
-				if($post['finalizar']){
-					$compraFormPag->renderConclusao(true);
-				}else{
-					$compraFormPag->renderPagamento();
-				}
+				$compraFormPag->renderConclusao(true);			
 			}else{
 				$this->compraForm = new CompraForm();
 				$this->compraForm->render();

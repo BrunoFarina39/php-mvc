@@ -116,7 +116,7 @@ $(document).ready(function(){
           obs:{maxlength:"<span class='obrigatorio'>Obs. não pode ter mais de 100 caracteres</span>"}
         } 
     });*/
-   /* $("#compra_form").validate({
+    $("#compra_form").validate({
       rules:{
       fornecedor:"required",
       produto:"required",
@@ -131,7 +131,7 @@ $(document).ready(function(){
       qtde:{required:"<span class='obrigatorio'>Digite a qtde</span>",number:"<span class='obrigatorio'>Digite apenas números</span>"},
       desconto:{required:"<span class='obrigatorio'>Digite a porcentagem de desconto</span>",number:"<span class='obrigatorio'>Digite apenas números</span>"},
       }
-    });*/
+    });
 //-------------------------------Fornecedor Fim------------------------------------------------------------------------  
 //-------------------------------Cliente e Fornecedor------------------------------------------------------------------
   $("#cep").mask("99.999-999");
@@ -415,6 +415,7 @@ $("#marca_form").validate({
      $("#produto").val("");
      $("#preco_compra").val("");
   });
+  
   $("#avancar").click(function(){
     var i=0;
     var produtos = new String();
@@ -427,66 +428,33 @@ $("#marca_form").validate({
       });
       produtos=produtos.substr(0,produtos.length-1)+"/";
     });
-  
-    if(i==0){
-      //alert("Por Favor adicione pelo menos um produto");
-     // $("#compra_form").submit(function(){
-        //return false;
-      //});
-    }else{
-      //retira o ultimo / da string
-      produtos=produtos.substr(0,produtos.length-1)
-      $("#produtos").val(produtos);
-    }
+    
+    //retira o ultimo / da string
+    produtos=produtos.substr(0,produtos.length-1)
+    $("#produtos").val(produtos);
+    
   });
   
   $("#forma_pag").change(function(){
     if($(this).val()==1){
       $("#parcelas").html("<option value='1'>1</option>");
-      $("#carencia").val("");
-      $("#entrada").val("R$ 0,00");
-      $("#entrada").attr("readonly",true);
+      $("#entrada").val("R$ 0,00").attr("readonly",true);
+      $("#carencia").val(0).attr("readonly",true);
     }else{    
       $("#parcelas").html("<option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option>"+
         "<option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option>"+
         "<option value='10'>10</option><option value='11'>11</option><option value='12'>12</option>");
        $("#entrada").attr("readonly",false);
+       $("#carencia").attr("readonly",false);
     }
-  });
-
-  /*$("#parcelas").click(function(){
-    if($(this).val()==1 && $("#carencia").val()==0){
-      $("#forma_pag").val(1);
-      $("#entrada").val("R$ 0,00");
-      $("#entrada").attr("readonly",true);
-    }else{
-      $("#forma_pag").val(2);
-       $("#entrada").attr("readonly",false);
-    }
-  });*/
-  
-  $("#concluir").click(function(){
-    $("#finalizar").val(true);
   });
 
   $("#carencia").blur(function(){
-    if($(this).val()==0 && $("#parcelas").val() == 1){
-        $("#forma_pag").val(1);
-        $("#entrada").val("R$ 0,00");
-        $("#entrada").attr("readonly",true);
-     }else{
-      $("#forma_pag").val(2);
-      $("#entrada").attr("readonly",false);
-     }
+    if($(this).val() == ""){
+      $(this).val(0);
+    }
   });
-  $("#concluir").click(function(){
-    $("#finalizar").val(true);
-  });
-
-  $("#entrada").blur(function(){
   
-  });
-
   $("#carencia").keypress(function(event){
     if(event.which >= 48 && event.which <=57 || event.which == 8){
       return true;
