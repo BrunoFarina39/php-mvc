@@ -406,10 +406,10 @@ $("#marca_form").validate({
       vTotalCompa +=  valorTotal; 
       $("#valor_total").val(vTotalCompa.toFixed(2));
       $("#lvtotal").text(formataMoeda(vTotalCompa.toFixed(2)));
-      $("#tabela_compra").append("<tbody><tr><td>"+produto_id+"</td>"+"<td>"+produto+"</td>"+
-      "<td>"+$("#qtde").val()+"</td>"+"<td>"+$("#preco_compra").val()+"</td>"+
-      "<td>"+desconto+"</td>"+"<td><a onclick='excluirProd(this)' href='javascript:void(0)'><span class='glyphicon glyphicon-trash'></span></a></td>"+
-      "<td>"+formataMoeda(valorTotal.toFixed(2))+"</td></tr></tbody>");
+      $("#tabela_compra").append("<tbody><tr><td class='id'>"+produto_id+"</td>"+"<td class='produto'>"+produto+"</td>"+
+      "<td class='qtde'>"+$("#qtde").val()+"</td>"+"<td class='preco_compra'>"+$("#preco_compra").val()+"</td>"+
+      "<td class='desconto'>"+desconto+"</td>"+"<td><a onclick='excluirProd(this)' href='javascript:void(0)'><span class='glyphicon glyphicon-trash'></span></a></td>"+
+      "<td class='valor_total'>"+formataMoeda(valorTotal.toFixed(2))+"</td></tr></tbody>");
      }
      $("#qtde").val(1);
      $("#produto").val("");
@@ -418,19 +418,25 @@ $("#marca_form").validate({
   
   $("#avancar").click(function(){
     var i=0;
-    var produtos = new String();
+     produtos = new String();
     $("#compra_form").unbind("submit");
     $("#tabela_compra > tbody").find('tr').each(function(indicex){
       i=+indicex+1;
-      $(this).find('td').each(function(indicey){
-        if(indicey != 5)
-          produtos+=$(this).text()+"-";
-      });
-      produtos=produtos.substr(0,produtos.length-1)+"/";
+     //$(this).find('td').each(function(indicey){
+        //if(indicey != 5)
+         // produtos+=$(this).text()+"-";
+      //});
+         
+        //produtos.push({id:6,produto:6,qtde:6,preco_compra:6,
+        //desconto:6,valor_total:6});
+        produtos='{&quotid&quot:&quot'+$(this).find(".id").text()+'&quot,&quotproduto&quot:&quot'+$(this).find(".produto").text()+'&quot,&quotqtde&quot:&quot'+$(this).find(".qtde").text()+'&quot,&quotpreco_compra&quot:&quot'+$(this).find(".preco_compra").text()+'&quot,&quotdesconto&quot:&quot'+$(this).find(".desconto").text()+'&quot,&quotvalor_total&quot:&quot'+$(this).find(".valor_total").text()+'&quot}';
+        //produtos.push({id:$(this).find(".id").text(),produto:$(this).find(".produto").text(),qtde:$(this).find(".qtde").text(),preco_compra:$(this).find(".preco_compra").text(),
+        //desconto:$(this).find(".desconto").text(),valor_total:$(this).find(".valor_total").text()});
+
     });
     
     //retira o ultimo / da string
-    produtos=produtos.substr(0,produtos.length-1)
+   //produtos=produtos.substr(0,produtos.length-1)
     $("#produtos").val(produtos);
     
   });

@@ -24,6 +24,8 @@
 		}
 
 		public function ActionAdd($post){
+			print_r(json_decode($post["produtos"],true));	
+			echo $post["produtos"];
 			$this->compraForm = new CompraForm();
 			$this->compraForm->setInputFilter($this->compra->getInputFilter());
 			$this->compraForm->setData($post);
@@ -46,7 +48,7 @@
 			if($this->isPost()){
 				$compraFormPag = new CompraFormPag();
 				$compraFormPag->setData($post);
-				$compraFormPag->renderConclusao(true);			
+				$compraFormPag->renderConclusao(true);		
 			}else{
 				$this->compraForm = new CompraForm();
 				$this->compraForm->render();
