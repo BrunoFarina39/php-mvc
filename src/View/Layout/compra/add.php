@@ -66,13 +66,12 @@
      </thead>
       <?php
         foreach ($this->produtos as $value) {
-          echo "<tbody><tr><td>".$value[0]."</td><td>".$value[1]."</td><td>".$value[2]."</td><td>".$value[3].
-          "</td><td>".$value[4]."</td><td><a onclick='excluirProd(this)' href='javascript:void(0)'><span class='glyphicon glyphicon-trash'></span></a></td><td>".$value[5]."</td></tbody>";
+          echo "<tbody><tr><td class='id'>".$value["id"]."</td><td class='produto'>".$value["produto"]."</td><td class='qtde'>".$value["qtde"]."</td><td class='preco_compra'>".$value["preco_compra"]."</td><td class='desconto'>".$value["desconto"]."</td><td><a onclick='excluirProd(this)' href='javascript:void(0)'><span class='glyphicon glyphicon-trash'></span></a></td><td class='valor_total'>".$value["valor_total"]."</td></tbody>";
         }
       ?>
   </table>
   </table>
-  <input type="hidden" id="produtos" name="produtos" value="<?php echo $this->campos->produtos ?>" />
+  <input type="hidden" id="produtos" name="produtos" value='<?php echo $this->campos->produtos ?>' />
   <input type="hidden" id="form" name="form" />
   <input type="hidden" id="finalizar" name="finalizar" />
 </form>

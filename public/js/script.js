@@ -116,7 +116,7 @@ $(document).ready(function(){
           obs:{maxlength:"<span class='obrigatorio'>Obs. não pode ter mais de 100 caracteres</span>"}
         } 
     });*/
-    $("#compra_form").validate({
+   /* $("#compra_form").validate({
       rules:{
       fornecedor:"required",
       produto:"required",
@@ -131,7 +131,7 @@ $(document).ready(function(){
       qtde:{required:"<span class='obrigatorio'>Digite a qtde</span>",number:"<span class='obrigatorio'>Digite apenas números</span>"},
       desconto:{required:"<span class='obrigatorio'>Digite a porcentagem de desconto</span>",number:"<span class='obrigatorio'>Digite apenas números</span>"},
       }
-    });
+    });*/
 //-------------------------------Fornecedor Fim------------------------------------------------------------------------  
 //-------------------------------Cliente e Fornecedor------------------------------------------------------------------
   $("#cep").mask("99.999-999");
@@ -417,27 +417,13 @@ $("#marca_form").validate({
   });
   
   $("#avancar").click(function(){
-    var i=0;
-     produtos = new String();
+     produtos = Array();
     $("#compra_form").unbind("submit");
     $("#tabela_compra > tbody").find('tr').each(function(indicex){
-      i=+indicex+1;
-     //$(this).find('td').each(function(indicey){
-        //if(indicey != 5)
-         // produtos+=$(this).text()+"-";
-      //});
-         
-        //produtos.push({id:6,produto:6,qtde:6,preco_compra:6,
-        //desconto:6,valor_total:6});
-        produtos='{&quotid&quot:&quot'+$(this).find(".id").text()+'&quot,&quotproduto&quot:&quot'+$(this).find(".produto").text()+'&quot,&quotqtde&quot:&quot'+$(this).find(".qtde").text()+'&quot,&quotpreco_compra&quot:&quot'+$(this).find(".preco_compra").text()+'&quot,&quotdesconto&quot:&quot'+$(this).find(".desconto").text()+'&quot,&quotvalor_total&quot:&quot'+$(this).find(".valor_total").text()+'&quot}';
-        //produtos.push({id:$(this).find(".id").text(),produto:$(this).find(".produto").text(),qtde:$(this).find(".qtde").text(),preco_compra:$(this).find(".preco_compra").text(),
-        //desconto:$(this).find(".desconto").text(),valor_total:$(this).find(".valor_total").text()});
-
+    	produtos.push({id:$(this).find(".id").text(),produto:$(this).find(".produto").text(),qtde:$(this).find(".qtde").text(),preco_compra:$(this).find(".preco_compra").text(),
+       	desconto:$(this).find(".desconto").text(),valor_total:$(this).find(".valor_total").text()});
     });
-    
-    //retira o ultimo / da string
-   //produtos=produtos.substr(0,produtos.length-1)
-    $("#produtos").val(produtos);
+    $("#produtos").val(JSON.stringify(produtos));
     
   });
   

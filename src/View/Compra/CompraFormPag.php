@@ -18,6 +18,7 @@
 			$this->campos->meioPag = 4;
 			$this->campos->carencia = 0;
 			$this->campos->entrada = $this->formataMoeda(0);
+			$this->campos->produtos = "";
 			
 			$this->formaPag[0]['id'] = "1";
 			$this->formaPag[0]['value'] = "À vista";
@@ -49,11 +50,7 @@
 			$this->campos->valorTotal = $post["valor_total"];
 			$this->campos->fornecedor_id = $post["fornecedor_id"];
 			$this->campos->produtos = $post['produtos'];
-			/*$this->produtos = explode("/", $post['produtos']);
-			
-			foreach ($this->produtos as $key => $value) {
-				$this->produtos[$key]= explode("-", $value);
-			}*/
+			$this->produtos = json_decode($post["produtos"], true);
 
 			if(!isset($post['form'])){
 				$this->campos->formaPag = $post['forma_pag'];
@@ -64,10 +61,8 @@
 			}
 		}
 
-		public function isValid($post)
+		public function isValid()
 		{
-			$this->campos->fornecedor_id = $post["fornecedor_id"];
-			$this->campos->produtos = $post['produtos'];
 			return $this->inputFilter->isValid($this->campos);		 
 		}
 

@@ -32,11 +32,7 @@
 		public function setData($data)
 		{
 			$this->campos = (Object) $data;
-			if(!empty($data["produtos"]))
-				$this->produtos = explode("/", $data['produtos']);
-			foreach ($this->produtos as $key => $value) {
-				$this->produtos[$key] = explode("-", $value);
-			}
+			$this->produtos = json_decode($data["produtos"], true);
 		}
 
 		public function render(){

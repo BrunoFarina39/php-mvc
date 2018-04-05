@@ -1,6 +1,6 @@
 <h1>Concluir Compra</h1>
 <form class="form-horizontal" id="compra_form_pag" method="post" action="compra/add/pag">
-  <input type="hidden" id="produtos" name="produtos" value="<?php echo $this->campos->produtos ?>"/>
+  <input type="hidden" id="produtos" name="produtos" value='<?php echo $this->campos->produtos ?>'/>
   <input type="hidden" id="valor_total" name="valor_total" value="<?php echo $this->campos->valorTotal ?>"/>
   <input type="hidden" id="fornecedor_id" name="fornecedor_id" value="<?php echo $this->campos->fornecedor_id ?>"/>
   <div class="form-group">
@@ -66,7 +66,7 @@
     
   </div>
   <input type="submit" id="concluir" name="concluir" value="Concluir" />
-  <!--<table class="table table-striped" class="display" id="tabela_compra">
+  <table class="table table-striped" class="display" id="tabela_compra">
     <thead>
       <th>Código</th>
       <th>Descrição</th>
@@ -76,12 +76,12 @@
       <th>Valor Total</th>
      </thead>
       <?php
-       // foreach ($this->produtos as $value) {
-          //echo "<tbody><tr><td>".$value[0]."</td><td>".$value[1]."</td><td>".$value[2]."</td><td>".$value[3].
-          //"</td><td>".$value[4]."</td><td>".$value[5]."</td></tbody>";
-        //}
+       foreach ($this->produtos as $value) {
+          echo "<tbody><tr><td>".$value["id"]."</td><td>".$value["produto"]."</td><td>".$value["qtde"]."</td><td>".$value["preco_compra"].
+          "</td><td>".$value["desconto"]."</td><td><a onclick='excluirProd(this)' href='javascript:void(0)'><span class='glyphicon glyphicon-trash'></span></a></td><td>".$value["valor_total"]."</td></tbody>";
+        }
       ?>
-  </table>-->
+  </table>
   <div class="form-group">
     <label for="valor_total" class="col-sm-2 control-label">Valor Total:</label>
     <div class="col-sm-10">
