@@ -9,7 +9,6 @@
 		private $formaPag;
 		private $parcelas;
 		private $meioPag;
-		private $produtos;
 		
 		function __construct(){
 			$this->campos = new \stdClass();			
@@ -49,8 +48,7 @@
 		{
 			$this->campos->valorTotal = $post["valor_total"];
 			$this->campos->fornecedor_id = $post["fornecedor_id"];
-			$this->campos->produtos = $post['produtos'];
-			$this->produtos = json_decode($post["produtos"], true);
+			$this->campos->produtos = json_decode($post["produtos"], true);
 
 			if(!isset($post['form'])){
 				$this->campos->formaPag = $post['forma_pag'];
@@ -59,6 +57,12 @@
 				$this->campos->carencia = $post["carencia"];
 				$this->campos->entrada = $post["entrada"];				
 			}
+		}
+
+		public function getData()
+		{
+			$array = get_object_vars($this->campos);
+			return $array;
 		}
 
 		public function isValid()

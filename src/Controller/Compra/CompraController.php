@@ -46,11 +46,14 @@
 			if($this->isPost()){
 				$compraFormPag = new CompraFormPag();
 				$compraFormPag->setData($post);
-				$compraFormPag->renderConclusao(true);					
+				$this->compra->hidratar($compraFormPag->getData());
+				$compraFormPag->renderConclusao($this->compraDao->gravar($this->compra));					
 			}else{
 				$this->compraForm = new CompraForm();
 				$this->compraForm->render();
 			}
+			//print_r($post);
+			
 		}
 
 		public function getTabela($post){

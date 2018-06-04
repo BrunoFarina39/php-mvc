@@ -9,6 +9,11 @@
 			parent::__construct();
 		}
 
+		public function gravar(Compra $compra){
+			//$stmt = $this->con->getStmt("");
+			//print_r(json_decode($compra->getProduto()));
+		} 
+
 		public function listarFornecedores(){
 			$array = Array();
 			$i = 0;

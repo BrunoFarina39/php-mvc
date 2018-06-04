@@ -35,6 +35,12 @@
 			$this->produtos = json_decode($data["produtos"], true);
 		}
 
+		public function getData()
+		{
+			$array = get_object_vars($this->campos);
+			return $array;
+		}
+
 		public function render(){
 			$masterView = new MasterView(MASTERVIEW::RENDER_ALL);
 			include 'src/View/Layout/compra/add.php';		

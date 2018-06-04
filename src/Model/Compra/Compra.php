@@ -7,6 +7,7 @@
 	class Compra extends AbstractModel{
 		private $fornecedor;
 		private $produto;
+		private $preco_compra;
 		private $qtde;
 		private $desconto;
 		private $valorTotal;
@@ -37,6 +38,14 @@
 
 		public function getProduto(){
 			return $this->produto;
+		}
+
+		public function setPrecoCompra($preco_compra){
+			$this->preco_compra = $preco_compra;
+		}
+
+		public function getPrecoCompra(){
+			return $this->preco_compra;
 		}
 
 		public function setQtde($qtde){

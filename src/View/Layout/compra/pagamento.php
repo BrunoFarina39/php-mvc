@@ -76,7 +76,7 @@
       <th>Valor Total</th>
      </thead>
       <?php
-       foreach ($this->produtos as $value) {
+       foreach ($this->campos->produtos as $value) {
           echo "<tbody><tr><td>".$value["id"]."</td><td>".$value["produto"]."</td><td>".$value["qtde"]."</td><td>".$value["preco_compra"].
           "</td><td>".$value["desconto"]."</td><td><a onclick='excluirProd(this)' href='javascript:void(0)'><span class='glyphicon glyphicon-trash'></span></a></td><td>".$value["valor_total"]."</td></tbody>";
         }
