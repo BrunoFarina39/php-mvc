@@ -10,7 +10,7 @@
   <div class="form-group">
     <label for="fornecedor" class="col-sm-2 control-label">Fornecedor:</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="fornecedor" name="fornecedor" value="<?php echo $this->campos->fornecedor ?>" />
+      <input type="text" class="form-control" id="fornecedor" name="fornecedor" value="<?php echo $this->fornecedor ?>" />
       <input type="hidden" id="fornecedor_id" name="fornecedor_id" value="<?php echo $this->campos->fornecedor_id; ?>" />
       <span class="obrigatorio"><?php echo $this->inputFilter->getMessage("fornecedor"); ?></span>
     </div>
@@ -20,7 +20,7 @@
     <label for="produto" class="col-sm-2 control-label">Produto:</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="produto" name="produto" value="" />
-      <input type="hidden" id="produto_id" name="produto_id" value="<?php echo $this->campos->produto_id; ?>" />
+      <input type="hidden" id="produto_id" name="produto_id" value="<?php echo $this->produto_id; ?>" />
       <span class="obrigatorio"><?php echo $this->inputFilter->getMessage("produtos"); ?></span>
     </div>
     <span id="carregar_produto_preco"></span>
@@ -34,13 +34,13 @@
   <div class="form-group">
     <label for="qtde" class="col-sm-2 control-label">Qtde.:</label>
     <div class="col-sm-10">
-      <input type="number" class="form-control" id="qtde" name="qtde" value="<?php echo $this->campos->qtde ?>" />
+      <input type="number" class="form-control" id="qtde" name="qtde" value="<?php echo $this->qtde ?>" />
     </div>
   </div>
   <div class="form-group">
     <label for="desconto" class="col-sm-2 control-label">Desconto:</label>
     <div class="col-sm-10">
-      <input type="number" class="form-control" id="desconto" name="desconto" min="0" max="100" value="<?php echo $this->campos->desconto ?>" />
+      <input type="number" class="form-control" id="desconto" name="desconto" min="0" max="100" value="<?php echo $this->desconto ?>" />
     </div>
   </div>
   <div class="form-group">
@@ -65,13 +65,13 @@
      
      </thead>
       <?php
-        foreach ($this->produtos as $value) {
+        foreach ($this->campos->produtos as $value) {
           echo "<tbody><tr><td class='id'>".$value["id"]."</td><td class='produto'>".$value["produto"]."</td><td class='qtde'>".$value["qtde"]."</td><td class='preco_compra'>".$value["preco_compra"]."</td><td class='desconto'>".$value["desconto"]."</td><td><a onclick='excluirProd(this)' href='javascript:void(0)'><span class='glyphicon glyphicon-trash'></span></a></td><td class='valor_total'>".$value["valor_total"]."</td></tbody>";
         }
       ?>
   </table>
   </table>
-  <input type="hidden" id="produtos" name="produtos" value='<?php echo $this->campos->produtos ?>' />
+  <input type="hidden" id="produtos" name="produtos" value="" />
   <input type="hidden" id="form" name="form" />
   <input type="hidden" id="finalizar" name="finalizar" />
 </form>

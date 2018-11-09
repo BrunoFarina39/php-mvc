@@ -10,8 +10,14 @@
 		}
 
 		public function gravar(Compra $compra){
-			//$stmt = $this->con->getStmt("");
-			//print_r(json_decode($compra->getProduto()));
+			$stmt = $this->con->getStmt("insert into pedido_compra(id_fornecedor,data_inclusao,valor_pedido,status)values(:id_fornecedor,:data_inclusao,:valor_pedido,:status)");
+			$stmt->bindValue(":id_fornecedor",$compra->getFornecedor()->getId(),\PDO::PARAM_INT);
+			$stmt->bindValue(":data_inclusao",date("Y-m-d H:i:s"));
+			$stmt->bindValue(":valor_pedido",$compra->getValorTotal(),\PDO::PARAM_INT);
+			$stmt->bindValue(":status","FECHADO",\PDO::PARAM_STR);
+			return $stmt->execute();
+				
+		
 		} 
 
 		public function listarFornecedores(){

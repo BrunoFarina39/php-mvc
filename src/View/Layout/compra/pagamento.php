@@ -1,6 +1,6 @@
 <h1>Concluir Compra</h1>
 <form class="form-horizontal" id="compra_form_pag" method="post" action="compra/add/pag">
-  <input type="hidden" id="produtos" name="produtos" value='<?php echo $this->campos->produtos ?>'/>
+  <input type="hidden" id="produtos" name="produtos" value='<?php echo $this->produtosStr ?>'/>
   <input type="hidden" id="valor_total" name="valor_total" value="<?php echo $this->campos->valorTotal ?>"/>
   <input type="hidden" id="fornecedor_id" name="fornecedor_id" value="<?php echo $this->campos->fornecedor_id ?>"/>
   <div class="form-group">
@@ -78,7 +78,7 @@
       <?php
        foreach ($this->campos->produtos as $value) {
           echo "<tbody><tr><td>".$value["id"]."</td><td>".$value["produto"]."</td><td>".$value["qtde"]."</td><td>".$value["preco_compra"].
-          "</td><td>".$value["desconto"]."</td><td><a onclick='excluirProd(this)' href='javascript:void(0)'><span class='glyphicon glyphicon-trash'></span></a></td><td>".$value["valor_total"]."</td></tbody>";
+          "</td><td>".$value["desconto"]."</td><td>".$value["valor_total"]."</td></tbody>";
         }
       ?>
   </table>

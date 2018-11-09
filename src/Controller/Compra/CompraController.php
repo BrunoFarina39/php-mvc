@@ -46,7 +46,7 @@
 			if($this->isPost()){
 				$compraFormPag = new CompraFormPag();
 				$compraFormPag->setData($post);
-				$this->compra->hidratar($compraFormPag->getData());
+				 $this->compra->hidratar($compraFormPag->getData());
 				$compraFormPag->renderConclusao($this->compraDao->gravar($this->compra));					
 			}else{
 				$this->compraForm = new CompraForm();

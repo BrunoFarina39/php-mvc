@@ -424,7 +424,13 @@ $("#marca_form").validate({
        	desconto:$(this).find(".desconto").text(),valor_total:$(this).find(".valor_total").text()});
     });
     $("#produtos").val(JSON.stringify(produtos));
-    
+     
+  });
+
+  $("#fornecedor").keypress(function(event){
+    if(event.which == 8){
+      $("#fornecedor_id").val("");
+    }
   });
   
   $("#forma_pag").change(function(){

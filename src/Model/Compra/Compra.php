@@ -6,14 +6,12 @@
 
 	class Compra extends AbstractModel{
 		private $fornecedor;
-		private $produto;
-		private $preco_compra;
-		private $qtde;
-		private $desconto;
 		private $valorTotal;
+		private $itensCompra;
 
 		public function __construct(){
-			$fornecedor = new Fornecedor();
+			$this->fornecedor = new Fornecedor();
+			//$this->itensCompra = new array();
 		}
 
 		public function setId($id){
@@ -32,44 +30,20 @@
 			return $this->fornecedor;
 		}
 
-		public function setProduto($produto){
-			$this->produto = $produto;
-		}
-
-		public function getProduto(){
-			return $this->produto;
-		}
-
-		public function setPrecoCompra($preco_compra){
-			$this->preco_compra = $preco_compra;
-		}
-
-		public function getPrecoCompra(){
-			return $this->preco_compra;
-		}
-
-		public function setQtde($qtde){
-			$this->qtde = $qtde;
-		}
-
-		public function getQtde(){
-			return $this->qtde;
-		}
-
-		public function setDesconto($desconto){
-			$this->desconto = $desconto;
-		}
-
-		public function getDesconto(){
-			return $this->desconto;
-		}
-
 		public function setValorTotal($valorTotal){
 			$this->valorTotal = $valorTotal;
 		}
 
 		public function getValorTotal(){
 			return $this->valorTotal;
+		}
+
+		public function setItensCompra($itensCompra){
+			$this->itensCompra = $itensCompra;
+		}
+
+		public function getItensCompra(){
+			return $this->itensCompra;
 		}
 
 		use \Library\Hydrator;

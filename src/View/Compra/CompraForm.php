@@ -14,14 +14,13 @@
 			$this->inputFilter = new InputFilter();
 			$this->campos = new \stdClass();
 			$this->campos->id = null;
-			$this->campos->fornecedor = "";
+			$this->fornecedor = "";
 			$this->campos->fornecedor_id = null;
-			$this->campos->produto_id = null;
-			$this->campos->qtde = 1;
-			$this->campos->desconto = 0;
-			$this->campos->produtos = "";
+			$this->produto_id = null;
+			$this->qtde = 1;
+			$this->desconto = 0;
 			$this->campos->valor_total = 0;
-			$this->produtos = array();
+			$this->campos->produtos = array();
 		}
 
 		public function isValid()
@@ -31,13 +30,15 @@
 
 		public function setData($data)
 		{
-			$this->campos = (Object) $data;
-			$this->produtos = json_decode($data["produtos"], true);
+			$this->campos->id = $data['id'];
+			$this->campos->fornecedor_id = $data['fornecedor_id'];
+			$this->campos->produtos = json_decode($data["produtos"], true);
+			$this->campos->valor_total = $data['valor_total'];
 		}
 
 		public function getData()
 		{
-			$array = get_object_vars($this->campos);
+			$array = ['id'=>$this->campos->id,'fornecedor_id'=>$this->campos->fornecedor_id,'produtos'=>$this->campos->produtos];
 			return $array;
 		}
 
