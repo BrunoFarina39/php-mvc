@@ -38,7 +38,7 @@
 
 		public function getData()
 		{
-			$array = ['id'=>$this->campos->id,'fornecedor_id'=>$this->campos->fornecedor_id,'produtos'=>$this->campos->produtos];
+			$array = ['id'=>$this->campos->id,'fornecedor_id'=>$this->campos->fornecedor_id,'produtos'=>$this->campos->produtos];;
 			return $array;
 		}
 

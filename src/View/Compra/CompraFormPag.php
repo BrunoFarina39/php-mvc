@@ -43,7 +43,7 @@
 			$this->meioPag[3]['value'] = "Dinheiro";
 			
 			$this->meioPag[4]['id']=5;
-			$this->meioPag[4]['value'] = "Nota promissória";
+			$this->meioPag[4]['value'] = "Nota promissória";;
 		}
 
 		public function setData($post)

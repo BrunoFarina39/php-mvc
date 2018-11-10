@@ -33,7 +33,7 @@
 					$compraFormPag->setData($post);
 					$compraFormPag->renderPagamento();
 				}else{
-					$this->compraForm->render();
+					$this->compraForm->render();;
 				}
 			}else{
 				$this->compraForm = new CompraForm();
