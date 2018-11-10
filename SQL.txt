@@ -103,7 +103,7 @@ id_fornecedor integer not null,
 data_inclusao date not null, 
 data_baixa date, 
 valor_pedido numeric(9,2) not null, 
-status varchar(9) not null, 
+status boolean not null, 
 foreign key(id_fornecedor)references fornecedor); 
 
 create table itens_compra(id serial not null primary key, 

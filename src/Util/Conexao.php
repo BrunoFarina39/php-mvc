@@ -27,5 +27,9 @@
 		{
 			return $this->dbh->prepare($sql);
 		}
+
+		public function getDbh(){
+			return $this->dbh;
+		}
 	}
 ?>

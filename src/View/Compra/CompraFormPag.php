@@ -4,6 +4,7 @@
 	use Library\InputFilter;
 	use Model\Compra\ItensCompra;
 	use Model\Fornecedor\Fornecedor;
+	use Model\Produto\Produto;
 	use Util\MasterView;
 
 	class CompraFormPag extends AbstractForm{
@@ -66,8 +67,11 @@
 			$array = get_object_vars($this->campos);		
 			$itensCompra;
 			foreach ($this->campos->produtos as $key => $value) {
+				$produto = new Produto();
+				$produto->setId($value['id']);
+				$produto->setDescricao($value['produto']);
 				$itensCompra[$key] = new ItensCompra();
-				$itensCompra[$key]->setProduto($value['produto']);
+				$itensCompra[$key]->setProduto($produto);
 				$itensCompra[$key]->setQtde($value['qtde']);
 				$itensCompra[$key]->setValorUnitario($value['preco_compra']);
 				$itensCompra[$key]->setDesconto($value['desconto']);

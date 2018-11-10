@@ -10,14 +10,31 @@
 		}
 
 		public function gravar(Compra $compra){
+			$retorno;
+			$idCompra;
+			$this->con->getDbh()->beginTransaction();
 			$stmt = $this->con->getStmt("insert into pedido_compra(id_fornecedor,data_inclusao,valor_pedido,status)values(:id_fornecedor,:data_inclusao,:valor_pedido,:status)");
 			$stmt->bindValue(":id_fornecedor",$compra->getFornecedor()->getId(),\PDO::PARAM_INT);
 			$stmt->bindValue(":data_inclusao",date("Y-m-d H:i:s"));
 			$stmt->bindValue(":valor_pedido",$compra->getValorTotal(),\PDO::PARAM_INT);
-			$stmt->bindValue(":status","FECHADO",\PDO::PARAM_STR);
-			return $stmt->execute();
-				
-		
+			$stmt->bindValue(":status",true,\PDO::PARAM_STR);
+			
+			$retorno = $stmt->execute();
+			$idCompra = $this->con->getDbh()->lastInsertId(); 
+			foreach ($compra->getItensCompra() as $key => $value) {
+				$stmt = $this->con->getStmt("insert into itens_compra(quantidade,valor_unitario,valor_total,bonificacao,id_pedidocompra,id_produto) 
+					values(:quantidade,:valor_unitario,:valor_total,:bonificacao,:id_pedidocompra,:id_produto)");
+					$stmt->bindValue(":quantidade",$value->getQtde(),\PDO::PARAM_INT);
+					$stmt->bindValue(":valor_unitario",20);	
+					$stmt->bindValue(":valor_total",20);
+					$stmt->bindValue(":bonificacao",true,\PDO::PARAM_STR);	
+					$stmt->bindValue(":id_pedidocompra",$idCompra,\PDO::PARAM_INT);
+					$stmt->bindValue(":id_produto",$value->getProduto()->getId(),\PDO::PARAM_INT);	
+					$stmt->execute();
+					//print_r($stmt->errorInfo());	
+			}
+			$this->con->getDbh()->commit();
+			return $retorno;	
 		} 
 
 		public function listarFornecedores(){
