@@ -95,7 +95,21 @@
 			return $this->qtdEst;
 		}
 
-		use \Library\Hydrator;
+		public function hidratar($data){
+
+			if(is_object($data)){
+				$data = get_object_vars($data);
+			}
+
+			$this->id = (isset($data['id'])) ? $data['id'] : null;
+			$this->codBarra = (isset($data['cod_barra'])) ? $data['cod_barra'] : null;
+			$this->descricao = (isset($data['descricao'])) ? $data['descricao'] : null;
+			$this->marca->setId((isset($data['marca_id'])) ? $data['marca_id'] : null);
+			$this->marca->setNome((isset($data['marca'])) ? $data['marca'] : null);
+			$this->precoCompra = (isset($data['preco_compra'])) ? $data['preco_compra'] : null;
+			$this->precoVenda = (isset($data['preco_venda'])) ? $data['preco_venda'] : null;
+			$this->qtdEst = (isset($data['qtde_est'])) ? $data['qtde_est'] : 0;
+		}
 
 		public function getInputFilter()
 		{

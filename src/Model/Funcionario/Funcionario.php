@@ -148,7 +148,26 @@
 			return $this->salario;
 		}
 
-		use \Library\Hydrator;
+		public function hidratar($data){
+			
+			if(is_object($data)){
+				$data = get_object_vars($data);
+			}
+
+			$this->id = (isset($data['id'])) ? $data['id'] : null ;
+			$this->nome = (isset($data['nome'])) ? $data['nome'] : null ;
+			$this->rg = (isset($data['rg'])) ? $data['rg'] : null ;
+			$this->cpf = (isset($data['cpf'])) ? $data['cpf'] : null ;
+			$this->pis = (isset($data['pis'])) ? $data['pis'] : null ;
+			$this->endereco = (isset($data['endereco'])) ? $data['endereco'] : null ;
+			$this->numero = (isset($data['numero'])) ? $data['numero'] : null ;
+			$this->bairro = (isset($data['bairro'])) ? $data['bairro'] : null ;
+			$this->cep = (isset($data['cep'])) ? $data['cep'] : null ;
+			$this->cidade->setId((isset($data['cidade_id'])) ? $data['cidade_id'] : null);
+			$this->cidade->setNome((isset($data['cidade'])) ? $data['cidade'] : null);
+			$this->fone = (isset($data['fone'])) ? $data['fone'] : null ;
+			$this->salario = (isset($data['salario'])) ? $data['salario'] : null ;
+		}
 
 		public function getInputFilter()
 		{

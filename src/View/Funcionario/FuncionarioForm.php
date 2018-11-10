@@ -3,7 +3,6 @@
 	use Library\AbstractForm;
 	use Library\InputFilter;
 	use Model\Funcionario\Funcionario;
-	use Model\Cidade\Cidade;
 	use Util\MasterView;
 	
 	class FuncionarioForm extends AbstractForm{
@@ -44,12 +43,7 @@
 		
 		public function getData()
 		{
-			$array = get_object_vars($this->campos);
-			$array['cidade'] = new Cidade();
-			$array['cidade']->getEstado()->setId($this->campos->estado);
-			$array['cidade']->setId($this->campos->cidade_id);
-			$array['cidade']->setNome($this->campos->cidade);
-			return $array;
+			return get_object_vars($this->campos);
 		}
 
 		public function setEstados(Array $estados){

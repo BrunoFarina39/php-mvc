@@ -176,7 +176,29 @@
 			return $this->obs;
 		}
 
-		use \Library\Hydrator;
+		public function hidratar($data)
+		{
+			if(is_object($data)){
+				$data = get_object_vars($data);
+			}
+			
+			$this->id = (isset($data['id'])) ? $data['id'] : null;
+			$this->nomeFantasia = (isset($data['nome_fantasia'])) ? $data['nome_fantasia'] : null;
+			$this->razaoSocial = (isset($data['razao_social'])) ? $data['razao_social'] : null;
+			$this->rgIe = (isset($data['rg_ie'])) ? $data['rg_ie'] : null;
+			$this->cpfCnpj = (isset($data['cpf_cnpj'])) ? $data['cpf_cnpj'] : null;
+			$this->endereco = (isset($data['endereco'])) ? $data['endereco'] : null;
+			$this->numero = (isset($data['numero'])) ? $data['numero'] : null;
+			$this->bairro = (isset($data['bairro'])) ? $data['bairro'] : null;
+			$this->cep = (isset($data['cep'])) ? $data['cep'] : null;
+			$this->cidade->setId((isset($data['cidade_id'])) ? $data['cidade_id'] : null);
+			$this->cidade->setNome((isset($data['cidade'])) ? $data['cidade'] : null);
+			$this->fone = (isset($data['fone'])) ? $data['fone'] : null;
+			$this->fone2 = (isset($data['fone2'])) ? $data['fone2'] : null;
+			$this->email = (isset($data['email'])) ? $data['email'] : null;
+			$this->homePage = (isset($data['home_page'])) ? $data['home_page'] : null;
+			$this->obs = (isset($data['obs'])) ? $data['obs'] : null;
+		}
 
 		public function getInputFilter()
 		{

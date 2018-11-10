@@ -69,13 +69,12 @@
 			foreach ($this->campos->produtos as $key => $value) {
 				$produto = new Produto();
 				$produto->setId($value['id']);
-				$produto->setDescricao($value['produto']);
 				$itensCompra[$key] = new ItensCompra();
 				$itensCompra[$key]->setProduto($produto);
 				$itensCompra[$key]->setQtde($value['qtde']);
-				$itensCompra[$key]->setValorUnitario($value['preco_compra']);
+				$itensCompra[$key]->setValorUnitario($this->formataMoedaBD($value['preco_compra']));
 				$itensCompra[$key]->setDesconto($value['desconto']);
-				$itensCompra[$key]->setValorTotal($value['valor_total']);
+				$itensCompra[$key]->setValorTotal($this->formataMoedaBD($value['valor_total']));
 			}
 			
 			$fornecedor = new Fornecedor();

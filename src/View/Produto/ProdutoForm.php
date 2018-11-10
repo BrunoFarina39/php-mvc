@@ -3,7 +3,6 @@
 	use Library\AbstractForm;
 	use Library\InputFilter;
 	use Model\Produto\Produto;
-	use Model\Marca\Marca;
 	use Util\MasterView;
 	
 	class ProdutoForm extends AbstractForm{
@@ -24,6 +23,7 @@
 			$this->campos->marca_id = null;
 			$this->campos->preco_compra = 0;
 			$this->campos->preco_venda = 0;
+			$this->qtde_est = 0;
 		}
 
 		public function isValid()
@@ -34,16 +34,11 @@
 		public function setData($data)
 		{
 			$this->campos = (Object) $data;
-			$this->campos->qtde_est=0;
 		}
 		
 		public function getData()
 		{
-			$array = get_object_vars($this->campos);
-			$array['marca'] = new Marca();
-			$array['marca']->setId($this->campos->marca_id);
-			$array['marca']->setNome($this->campos->marca);	
-			return $array;
+			return get_object_vars($this->campos);
 		}
 
 		public function bind(Produto $produto)
