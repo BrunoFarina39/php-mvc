@@ -11,7 +11,7 @@
     <label for="fornecedor" class="col-sm-2 control-label">Fornecedor:</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="fornecedor" name="fornecedor" value="<?php echo $this->fornecedor ?>" />
-      <input type="hidden" id="fornecedor_id" name="fornecedor_id" value="<?php echo $this->campos->fornecedor_id; ?>" />;
+      <input type="hidden" id="fornecedor_id" name="fornecedor_id" value="<?php echo $this->campos->fornecedor_id; ?>" />
       <span class="obrigatorio"><?php echo $this->inputFilter->getMessage("fornecedor"); ?></span>
     </div>
     <span id="carregar_produto"></span>

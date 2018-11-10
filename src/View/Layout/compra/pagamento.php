@@ -54,7 +54,7 @@
   <div class="form-group">
     <label for="carencia" class="col-sm-2 control-label">Carência(Dias):</label>
     <div class="col-sm-10">
-      <input type="text" id="carencia" name="carencia" readonly="true" value="<?php echo $this->campos->carencia ?>" min="0" />;
+      <input type="text" id="carencia" name="carencia" readonly="true" value="<?php echo $this->campos->carencia ?>" min="0" />
     </div>
   </div>
   <div class="form-group">

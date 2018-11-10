@@ -51,7 +51,7 @@
 		public function getInputFilter()
 		{
 			$validator = new ValidaCompra();
-			return $validator->getInputCompra();;
+			return $validator->getInputCompra();
 		}
 
 		public function limpaCampos(){

@@ -15,7 +15,7 @@
 			$stmt->bindValue(":data_inclusao",date("Y-m-d H:i:s"));
 			$stmt->bindValue(":valor_pedido",$compra->getValorTotal(),\PDO::PARAM_INT);
 			$stmt->bindValue(":status","FECHADO",\PDO::PARAM_STR);
-			return $stmt->execute();;
+			return $stmt->execute();
 				
 		
 		} 
