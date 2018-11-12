@@ -6,7 +6,10 @@
 
 	class Compra extends AbstractModel{
 		private $fornecedor;
+		private $dataInclusao;
+		private $dataBaixa;
 		private $valorTotal;
+		private $status;
 		private $itensCompra;
 
 		public function __construct(){
@@ -30,12 +33,37 @@
 			return $this->fornecedor;
 		}
 
+		public function setDataInclusao($dataInclusao){
+			$this->dataInclusao = $dataInclusao;
+		}
+
+		public function getDataInclusao(){
+			return $this->dataInclusao;
+		}
+
+		public function setDataBaixa($dataBaixa){
+			$this->dataBaixa = $dataBaixa;
+		}
+
+		public function getDataBaixa(){
+			return $this->dataBaixa;
+		}
+
+
 		public function setValorTotal($valorTotal){
 			$this->valorTotal = $valorTotal;
 		}
 
 		public function getValorTotal(){
 			return $this->valorTotal;
+		}
+
+		public function setStatus($status){
+			$this->status = $status;
+		}
+
+		public function getStatus(){
+			return $this->status;
 		}
 
 		public function setItensCompra($itensCompra){

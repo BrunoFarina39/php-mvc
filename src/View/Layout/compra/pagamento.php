@@ -3,6 +3,7 @@
   <input type="hidden" id="produtos" name="produtos" value='<?php echo $this->produtosStr ?>'/>
   <input type="hidden" id="valor_total" name="valor_total" value="<?php echo $this->campos->valorTotal ?>"/>
   <input type="hidden" id="fornecedor_id" name="fornecedor_id" value="<?php echo $this->campos->fornecedor_id ?>"/>
+   <input type="hidden" id="fornecedor_id" name="fornecedor" value="<?php echo $this->campos->fornecedor ?>"/>
   <div class="form-group">
     <label for="forma_pag" class="col-sm-2 control-label">Forma de pagamento:</label>
     <div class="col-sm-10">

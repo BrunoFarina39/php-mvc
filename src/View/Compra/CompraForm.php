@@ -14,7 +14,7 @@
 			$this->inputFilter = new InputFilter();
 			$this->campos = new \stdClass();
 			$this->campos->id = null;
-			$this->fornecedor = "";
+			$this->campos->fornecedor = "";
 			$this->campos->fornecedor_id = null;
 			$this->produto_id = null;
 			$this->qtde = 1;
@@ -32,6 +32,7 @@
 		{
 			$this->campos->id = $data['id'];
 			$this->campos->fornecedor_id = $data['fornecedor_id'];
+			$this->campos->fornecedor = $data['fornecedor'];
 			$this->campos->produtos = json_decode($data["produtos"], true);
 			$this->campos->valor_total = $data['valor_total'];
 		}

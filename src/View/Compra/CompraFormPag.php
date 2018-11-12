@@ -2,9 +2,6 @@
 	namespace View\Compra;
 	use Library\AbstractForm;
 	use Library\InputFilter;
-	use Model\Compra\ItensCompra;
-	use Model\Fornecedor\Fornecedor;
-	use Model\Produto\Produto;
 	use Util\MasterView;
 
 	class CompraFormPag extends AbstractForm{
@@ -49,8 +46,9 @@
 
 		public function setData($post)
 		{
-			$this->campos->valorTotal = $post["valor_total"];
 			$this->campos->fornecedor_id = $post["fornecedor_id"];
+			$this->campos->fornecedor = $post["fornecedor"];
+			$this->campos->valorTotal = $post["valor_total"];
 			$this->campos->produtos = json_decode($post["produtos"], true);
 			$this->produtosStr = $post["produtos"];
 			if(!isset($post['form'])){
@@ -64,24 +62,7 @@
 
 		public function getData()
 		{
-			$array = get_object_vars($this->campos);		
-			$itensCompra;
-			foreach ($this->campos->produtos as $key => $value) {
-				$produto = new Produto();
-				$produto->setId($value['id']);
-				$itensCompra[$key] = new ItensCompra();
-				$itensCompra[$key]->setProduto($produto);
-				$itensCompra[$key]->setQtde($value['qtde']);
-				$itensCompra[$key]->setValorUnitario($this->formataMoedaBD($value['preco_compra']));
-				$itensCompra[$key]->setDesconto($value['desconto']);
-				$itensCompra[$key]->setValorTotal($this->formataMoedaBD($value['valor_total']));
-			}
-			
-			$fornecedor = new Fornecedor();
-			$fornecedor->setId($this->campos->fornecedor_id);
-			$array['fornecedor']= $fornecedor;
-			$array['itensCompra'] = $itensCompra;
-			return $array;
+			return get_object_vars($this->campos);		
 		}
 
 		public function isValid()
