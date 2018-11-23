@@ -60,6 +60,7 @@
 				$this->contasPagar->getCompra()->setId($this->compra->getId());
 				$this->contasPagar->getFornecedor()->setId($this->compra->getFornecedor()->getId());	
 				$this->contasPagarDao->gravar($this->contasPagar);
+				$this->formaPag->hidratar($compraFormPag->getData());
 				$this->formaPag->getCompra()->setId($this->compra->getId());
 				$this->formaPag->getContasPagar()->setId($this->contasPagar->getId());
 				$compraFormPag->renderConclusao($this->formaPagDao->gravar($this->formaPag));	

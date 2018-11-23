@@ -72,6 +72,12 @@
 		}
 
 		public function getEntrada(){
+			$this->entrada = join("", explode("R$",$this->entrada));
+			$this->entrada = join("", explode(".",$this->entrada));
+			$this->entrada = join("", explode(",",$this->entrada));
+			$moeda = substr($this->entrada, 0,-2).".";
+			$moeda .= substr($this->entrada, -2,2);			
+			$this->entrada = $moeda;
 			return $this->entrada;
 		}
 
@@ -81,6 +87,23 @@
 
 		public function getCarencia(){
 			return $this->carencia;
+		}
+
+		public function hidratar($data)
+		{
+			
+			print_r($data);
+			if(is_object($data)){
+				$data = get_object_vars($data);
+			}
+			$this->id = (isset($data['id'])) ? $data['id'] : null;
+			//$this->compra = (isset($data['compras'])) ? $data['compras'] : null;
+			//$this->contasPagar = (isset($data['contas_pagar'])) ? $data['contas_pagar'] : null;
+			$this->formaPag = (isset($data['formaPag'])) ? $data['formaPag'] : null;
+			$this->nParcelas = (isset($data['parcelas'])) ? $data['parcelas'] : null;
+			$this->intervalo = (isset($data['intervalo'])) ? $data['intervalo'] : null;
+			$this->entrada = (isset($data['entrada'])) ? $data['entrada'] : null;
+			$this->carecia = (isset($data['carencia'])) ? $data['carencia'] : null;
 		}
 	}
 ?>
