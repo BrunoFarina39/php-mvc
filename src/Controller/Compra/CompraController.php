@@ -6,15 +6,20 @@
 	use View\Compra\compraFormPag;
 	use Model\Compra\Compra;
 	use Model\Compra\CompraDao;
+	use Model\ContasPagar\ContasPagar;
+	use Model\ContasPagar\ContasPagarDao;
 	use View\Compra\Instancia;
 	class CompraController extends AbstractController{
 
 		private $compra;
+		private $contasPagar;
 		private $compraDao;
 		
 		function __construct(){
 			$this->compra = new Compra();
 			$this->compraDao = new CompraDao();
+			$this->contasPagar = new ContasPagar();
+			$this->contasPagarDao = new ContasPagarDao();
 		}
 
 		public function actionIndex()
@@ -46,8 +51,12 @@
 			if($this->isPost()){
 				$compraFormPag = new CompraFormPag();
 				$compraFormPag->setData($post);
-				 $this->compra->hidratar($compraFormPag->getData());
-				$compraFormPag->renderConclusao($this->compraDao->gravar($this->compra));					
+				$this->compra->hidratar($compraFormPag->getData());
+				$this->compraDao->gravar($this->compra);
+				$this->contasPagar->getCompra()->setId($this->compra->getId());
+				$this->contasPagar->getFornecedor()->setId($this->compra->getFornecedor()->getId());	
+				$this->compra->getFornecedor()->getId();
+				$compraFormPag->renderConclusao($this->contasPagarDao->gravar($this->contasPagar));		
 			}else{
 				$this->compraForm = new CompraForm();
 				$this->compraForm->render();

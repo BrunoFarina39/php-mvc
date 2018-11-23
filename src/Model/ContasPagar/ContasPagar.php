@@ -1,12 +1,11 @@
 <?php 
-	namespace Model\CotasPagar;
-	use Model\Compra;
-	use Model\Fornecedor;
+	namespace Model\ContasPagar;
+	use Model\Compra\Compra;
+	use Model\Fornecedor\Fornecedor;
 	use Library\AbstractModel;
 
 	class ContasPagar extends AbstractModel{
 		
-		private $id;
 		private $compra;
 		private $fornecedor;
 		private $dataInclusao;
@@ -55,14 +54,6 @@
 
 		public function getStatus(){
 			return $this->status;
-		}
-
-		public function hidrator(Object $itens){
-			$this->set($itens->produto);
-			$this->setQtde($itens->qtde);
-			$this->setValorUnitario($itens->valorUnitario);
-			$this->setDesconto($itens->desconto);
-			$this->setValorTotal($itens->valorTotal);
 		}
 	}
 ?>
