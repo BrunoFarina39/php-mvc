@@ -17,9 +17,8 @@
 			$stmt->bindValue(":id_fornecedor",$contasPagar->getFornecedor()->getId(),\PDO::PARAM_INT);
 			$stmt->bindValue(":data_inclusao",date("Y-m-d H:i:s"));
 			$stmt->bindValue(":status","false");	
-			$retorno = $stmt->execute();
-			$this->con->getDbh()->commit();
-			return $retorno;	
+			$stmt->execute();
+			$contasPagar->setId($this->con->getDbh()->lastInsertId()); 
 		}
 
 	}
