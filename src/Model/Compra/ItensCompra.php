@@ -2,6 +2,7 @@
 	namespace Model\Compra;
 	use Library\AbstractModel;
 	use Model\Validation\ValidaCompra;
+	use Model\Produto\Produto;
 
 	class ItensCompra extends AbstractModel{
 		
@@ -12,7 +13,7 @@
 		private $valorTotal;
 		
 		public function __construct(){
-	
+			$this->produto = new Produto();
 		}
 
 		public function setId($id){
@@ -44,6 +45,12 @@
 		}
 
 		public function getValorUnitario(){
+			$this->valorUnitario = join("", explode("R$",$this->valorUnitario));
+			$this->valorUnitario = join("", explode(".",$this->valorUnitario));
+			$this->valorUnitario = join("", explode(",",$this->valorUnitario));
+			$moeda = substr($this->valorUnitario, 0,-2).".";
+			$moeda .= substr($this->valorUnitario, -2,2);			
+			$this->valorUnitario = $moeda;
 			return $this->valorUnitario;
 		}
 
@@ -60,16 +67,16 @@
 		}
 
 		public function getValorTotal(){
+			$this->valorTotal = join("", explode("R$",$this->valorTotal));
+			$this->valorTotal = join("", explode(".",$this->valorTotal));
+			$this->valorTotal = join("", explode(",",$this->valorTotal));
+			$moeda = substr($this->valorTotal, 0,-2).".";
+			$moeda .= substr($this->valorTotal, -2,2);			
+			$this->valorTotal = $moeda;
 			return $this->valorTotal;
 		}
 
-		public function hidrator(Object $itens){
-			$this->setProduto($itens->produto);
-			$this->setQtde($itens->qtde);
-			$this->setValorUnitario($itens->valorUnitario);
-			$this->setDesconto($itens->desconto);
-			$this->setValorTotal($itens->valorTotal);
-		}
+		use \Library\Hydrator;
 
 		public function getInputFilter()
 		{

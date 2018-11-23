@@ -51,6 +51,8 @@
 			$this->campos->valorTotal = $post["valor_total"];
 			$this->campos->produtos = json_decode($post["produtos"], true);
 			$this->produtosStr = $post["produtos"];
+			$this->campos->dataInclusao = date("Y-m-d H:i:s");
+			$this->campos->status = "false";
 			if(!isset($post['form'])){
 				$this->campos->formaPag = $post['forma_pag'];
 				$this->campos->parcelas = $post["parcelas"];

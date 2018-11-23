@@ -74,7 +74,28 @@
 			return $this->itensCompra;
 		}
 
-		use \Library\Hydrator;
+		public function hidratar($data)
+		{
+			
+			if(is_object($data)){
+				$data = get_object_vars($data);
+			}
+			$this->id = (isset($data['id'])) ? $data['id'] : null;
+			$this->fornecedor->setId((isset($data['fornecedor_id'])) ? $data['fornecedor_id'] : null);
+			$this->dataInclusao = (isset($data['dataInclusao'])) ? $data['dataInclusao'] : null;
+			$this->valorTotal = (isset($data['valorTotal'])) ? $data['valorTotal'] : null;
+			$this->status = (isset($data['status'])) ? $data['status'] : null;
+			
+			foreach ($data['produtos'] as $key => $value) {
+				$this->itensCompra[$key] = new ItensCompra();
+				$this->itensCompra[$key]->getProduto()->setId($value['id']);
+				$this->itensCompra[$key]->getProduto()->setDescricao($value['produto']);
+				$this->itensCompra[$key]->setQtde($value['qtde']);
+				$this->itensCompra[$key]->setValorUnitario($value['preco_compra']);
+				$this->itensCompra[$key]->setDesconto($value['desconto']);
+				$this->itensCompra[$key]->setValorTotal($value['valor_total']);
+			}
+		}
 
 		public function getInputFilter()
 		{

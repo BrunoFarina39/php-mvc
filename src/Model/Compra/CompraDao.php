@@ -15,9 +15,9 @@
 			$this->con->getDbh()->beginTransaction();
 			$stmt = $this->con->getStmt("insert into pedido_compra(id_fornecedor,data_inclusao,valor_pedido,status)values(:id_fornecedor,:data_inclusao,:valor_pedido,:status)");
 			$stmt->bindValue(":id_fornecedor",$compra->getFornecedor()->getId(),\PDO::PARAM_INT);
-			$stmt->bindValue(":data_inclusao",date("Y-m-d H:i:s"));
+			$stmt->bindValue(":data_inclusao",$compra->getDataInclusao());
 			$stmt->bindValue(":valor_pedido",$compra->getValorTotal());
-			$stmt->bindValue(":status",true);
+			$stmt->bindValue(":status",$compra->getStatus());
 			
 			$retorno = $stmt->execute();
 			$idCompra = $this->con->getDbh()->lastInsertId(); 
@@ -31,15 +31,14 @@
 					$stmt->bindValue(":id_pedidocompra",$idCompra,\PDO::PARAM_INT);
 					$stmt->bindValue(":id_produto",$value->getProduto()->getId(),\PDO::PARAM_INT);	
 					$stmt->execute();
-					//print_r($stmt->errorInfo());	
 			}
-			$stmt = $this->con->getStmt("insert into contas_pagar(id_pedidocompra,id_fornecedor,data_inclusao,status)values
+			/*$stmt = $this->con->getStmt("insert into contas_pagar(id_pedidocompra,id_fornecedor,data_inclusao,status)values
 				(:id_pedidocompra,:id_fornecedor,:data_inclusao,:status)");
 			$stmt->bindValue(":id_pedidocompra",$idCompra,\PDO::PARAM_INT);
 			$stmt->bindValue(":id_fornecedor",$compra->getFornecedor()->getId(),\PDO::PARAM_INT);
 			$stmt->bindValue(":data_inclusao",date("Y-m-d H:i:s"));
 			$stmt->bindValue(":status","false");	
-			$stmt->execute();
+			$stmt->execute();*/
 			$this->con->getDbh()->commit();
 			return $retorno;	
 		} 
