@@ -1,4 +1,4 @@
-create table estado(id serial not null primary key,
+create table estado(id serial not null primary key,s
 nome varchar(50) not null,
 uf char(2) not null); 
 
