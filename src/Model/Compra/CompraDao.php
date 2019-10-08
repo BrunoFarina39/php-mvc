@@ -30,6 +30,7 @@
 					$stmt->bindValue(":id_pedidocompra",$compra->getId(),\PDO::PARAM_INT);
 					$stmt->bindValue(":id_produto",$value->getProduto()->getId(),\PDO::PARAM_INT);	
 					$stmt->execute();
+					print_r($stmt->errorInfo());
 			}
 		} 
 

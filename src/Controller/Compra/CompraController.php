@@ -38,6 +38,7 @@
 			$this->compraForm->setData($post);
 			if($this->isPost()){
 				if($this->compraForm->isValid()){
+					print_r($post);
 					$compraFormPag = new CompraFormPag();
 					$compraFormPag->setData($post);
 					$compraFormPag->renderPagamento();
@@ -52,6 +53,7 @@
 		}
 
 		public function ActionAddPag($post){
+			//print_r($post);
 			if($this->isPost()){
 				$compraFormPag = new CompraFormPag();
 				$compraFormPag->setData($post);
@@ -68,7 +70,7 @@
 				$this->compraForm = new CompraForm();
 				$this->compraForm->render();
 			}
-			//print_r($post);
+			print_r($post);
 			
 		}
 

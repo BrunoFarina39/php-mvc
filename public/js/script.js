@@ -445,6 +445,39 @@ $("#marca_form").validate({
        $("#entrada").attr("readonly",false);
        $("#carencia").attr("readonly",false);
     }
+    $.ajax({
+        url: "http://localhost/compra/tabela",
+        method: 'POST',
+        data: { forma_pag: $("#forma_pag").val(), entrada: formataMoedaBD($("#entrada").val()), parcelas: $("#parcelas").val(), meio_pag: $("#meio_pag").val(), carencia: $("#carencia").val(), valor_total: $("#valor_total").val(),
+        dataType: 'html'
+        }
+    }).done(function(data) {
+        $("#div_tabela").html(data);
+    });
+  });
+
+  $("#entrada").keyup(function(){
+    $.ajax({
+        url: "http://localhost/compra/tabela",
+        method: 'POST',
+        data: { forma_pag: $("#forma_pag").val(), entrada: formataMoedaBD($("#entrada").val()), parcelas: $("#parcelas").val(), meio_pag: $("#meio_pag").val(), carencia: $("#carencia").val(), valor_total: $("#valor_total").val(),
+        dataType: 'html'
+        }
+    }).done(function(data) {
+        $("#div_tabela").html(data);
+    });
+  });
+
+  $("#parcelas").change(function(){
+    $.ajax({
+        url: "http://localhost/compra/tabela",
+        method: 'POST',
+        data: { forma_pag: $("#forma_pag").val(), entrada: formataMoedaBD($("#entrada").val()), parcelas: $("#parcelas").val(), meio_pag: $("#meio_pag").val(), carencia: $("#carencia").val(), valor_total: $("#valor_total").val(),
+        dataType: 'html'
+        }
+    }).done(function(data) {
+        $("#div_tabela").html(data);
+    });
   });
 
   $("#carencia").blur(function(){
@@ -460,28 +493,6 @@ $("#marca_form").validate({
       return false;
 
     }
-  });
-  $("#atualizar").click(function(){
-    /*$.ajax({
-        url: "tabela.html",
-      type: "get",
-      dataType: 'html',
-      success: function(data) {
-          $("section").html(data);
-      }
-    });*/
-    //$.ajax("tabela.html",{dataType: 'html'}).done(function(data){
-      //$("section").html(data);
-    //});
-    $.ajax({
-        url: "http://localhost/compra/tabela",
-        method: 'POST',
-        data: { forma_pag: $("#forma_pag").val(), entrada: formataMoedaBD($("#entrada").val()), parcelas: $("#parcelas").val(), meio_pag: $("#meio_pag").val(), carencia: $("#carencia").val(), valor_total: $("#valor_total").val(),
-        dataType: 'html'
-        }
-    }).done(function(data) {
-        $("#div_tabela").html(data);
-    });
   });
 
   $("#compra_form_pag").ready(function(){

@@ -58,11 +58,6 @@
       <input type="text" id="carencia" name="carencia" readonly="true" value="<?php echo $this->campos->carencia ?>" min="0" />
     </div>
   </div>
-  <div class="form-group">
-    <div class="col-sm-10">
-      <input type="button" id="atualizar" name="atualizar" value="Atualizar Tabela" />
-    </div>
-  </div>
   <div id="div_tabela">
     
   </div>
